@@ -3,6 +3,7 @@ import Banner from "./Banner";
 import Featured from "./Featured";
 import FeaturedClasses from "./FeaturedClasses";
 import LatestPosts from "./LatestPosts";
+import Newsletter from "./Newsletter";
 import Reviews from "./Reviews";
 
 
@@ -16,6 +17,7 @@ const Home = () => {
             <FeaturedClasses/>
             <Reviews/>
             <LatestPosts/>
+            <Newsletter/>
         </div>
     );
 };
