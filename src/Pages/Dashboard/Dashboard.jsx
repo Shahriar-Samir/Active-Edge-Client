@@ -5,12 +5,10 @@ import Footer from "./Footer";
 
 const Dashboard = () => {
     return (
-        <div>
-            <div className="flex">
+        <div className="w-full">
+            <div className="w-full flex">
                 <Navbar/>
-                <div className="w-full">
-                    <Outlet/>
-                </div>
+                <Outlet/>
             </div>
             <Footer/>
         </div>

@@ -13,12 +13,12 @@ const AuthProvider = ({children}) => {
     const githubProvider = new GithubAuthProvider()
 
     useEffect(()=>{
-        const unsubscribe = onAuthStateChanged(auth,currentUser=>{
+        
+        onAuthStateChanged(auth,currentUser=>{
                 setUser(currentUser)
                 setLoading(false)
         })
-        return unsubscribe()
-    })
+    },[])
 
     const signup = (email,password)=>{
         return createUserWithEmailAndPassword(auth,email,password)
