@@ -6,6 +6,7 @@ import useAxiosSecure from '../Hooks/useAxiosSecure';
 
 const Register = () => {
     const {signup,setLoading,updateUser} = useContext(AuthContext)
+    const axiosSecure = useAxiosSecure()
     const submit = (e)=>{
       e.preventDefault()
       const form = e.target
@@ -21,7 +22,9 @@ const Register = () => {
           .then(res=>{
             updateUser({photoURL:photoUrl,displayName:name})
             .then(()=>{
-              useAxiosSecure.post('/addUser',{name:'sdfds'})
+              const {uid,email,displayName,phoneNumber,photoURL} = res.user
+              const userData = {uid, email, displayName, photoURL, phoneNumber}
+              axiosSecure.post('/addUser',userData)
                 .then(()=>{
                   setLoading(false)
                   toast.success('You have created a new account successfully')

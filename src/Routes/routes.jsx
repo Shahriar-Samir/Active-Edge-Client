@@ -20,8 +20,12 @@ const routes = createBrowserRouter([{
         {
             path: '/signup',
             element: <Register/>
+        },
+        {
+            path: '/dashboard',
+            element: 
         }
-    ]
+    ],
 }])
 
 export default routes;
