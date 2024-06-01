@@ -15,6 +15,7 @@ import AddNewSlot from "../Pages/Dashboard/Pages/AddNewSlot";
 import AddNewForum from "../Pages/Dashboard/Pages/AddNewForum";
 import AddNewClass from "../Pages/Dashboard/Pages/AddNewClass";
 import ActivityLog from "../Pages/Dashboard/Pages/ActivityLog";
+import AllClasses from "../Pages/AllClasses";
 
 
 const routes = createBrowserRouter([
@@ -37,6 +38,10 @@ const routes = createBrowserRouter([
         {
             path: '/allTrainers',
             element: <AllTrainersPage/>
+        },
+        {
+            path: '/allClasses',
+            element: <AllClasses/>
         },
     ],
 },
