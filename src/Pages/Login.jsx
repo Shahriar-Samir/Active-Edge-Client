@@ -20,7 +20,7 @@ const Login = () => {
         })
     }
     const githubSignin = ()=>{
-        googleAuth()
+        githubAuth()
         .then(()=>{
           setLoading(false)
           toast.success('You have logged in successfully')
@@ -31,7 +31,7 @@ const Login = () => {
         })
     }
     const facebookSignin = ()=>{
-        googleAuth()
+        githubAuth
         .then(()=>{
           setLoading(false)
           toast.success('You have logged in successfully')
