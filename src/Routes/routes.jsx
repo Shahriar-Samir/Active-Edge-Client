@@ -16,6 +16,7 @@ import AddNewForum from "../Pages/Dashboard/Pages/AddNewForum";
 import AddNewClass from "../Pages/Dashboard/Pages/AddNewClass";
 import ActivityLog from "../Pages/Dashboard/Pages/ActivityLog";
 import AllClasses from "../Pages/AllClasses";
+import Forum from "../Pages/Forum";
 
 
 const routes = createBrowserRouter([
@@ -42,6 +43,10 @@ const routes = createBrowserRouter([
         {
             path: '/allClasses',
             element: <AllClasses/>
+        },
+        {
+            path: '/forum',
+            element: <Forum/>
         },
     ],
 },
