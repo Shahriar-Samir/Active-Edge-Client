@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import {createUserWithEmailAndPassword, FacebookAuthProvider, getAuth, GithubAuthProvider, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut} from 'firebase/auth'
 import app from '../Firebase/firebase'
 
@@ -13,11 +13,11 @@ const AuthProvider = ({children}) => {
     const githubProvider = new GithubAuthProvider()
 
     useEffect(()=>{
-        const unsubscribe = onAuthStateChanged((auth,currentUser)=>{
+        const unsubscribe = onAuthStateChanged(auth,currentUser=>{
                 setUser(currentUser)
                 setLoading(false)
         })
-        return unsubscribe
+        return unsubscribe()
     })
 
     const signup = (email,password)=>{

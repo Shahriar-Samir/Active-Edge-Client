@@ -1,7 +1,9 @@
-
+import { useContext } from 'react';
+import {toast,ToastContainer} from 'react-toastify'
+import { AuthContext } from '../Providers/AuthProvider';
 
 const Register = () => {
-
+    const {signup,setLoading} = useContext(AuthContext)
     const submit = (e)=>{
       e.preventDefault()
       const form = e.target
@@ -9,12 +11,25 @@ const Register = () => {
       const email= form.email.value
       const photoUrl = form.photoUrl.value
       const password = form.password.value
-      console.log({name,email,photoUrl,password})
+      if(password.length < 6 || /[A-Z]/.test(password) === false || /[a-z]/.test(password) === false){
+        toast.error('Password must have an uppercase and lowercase letter with at least 6 characters')
+       }
+       else{
+          signup(email,password)
+          .then(res=>{
+            setLoading(false)
+            toast.success('You have created a new account successfully')
+          })
+          .catch(()=>{
+            setLoading(false)
+            console.log('Something went wrong')
+          })
+       }
     }
 
     return (
         <div>
-          
+          <ToastContainer/>
             <div className="hero min-h-screen bg-base-200">
   <div className="hero-content flex-col lg:flex-row-reverse">
     <div className="text-center lg:text-left">
