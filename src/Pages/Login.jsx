@@ -31,7 +31,7 @@ const Login = () => {
         })
     }
     const facebookSignin = ()=>{
-        githubAuth
+        facebookAuth()
         .then(()=>{
           setLoading(false)
           toast.success('You have logged in successfully')
