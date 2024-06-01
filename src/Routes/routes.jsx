@@ -9,6 +9,7 @@ import RecommendedClasses from "../Pages/Dashboard/Pages/RecommendedClasses";
 import Balance from "../Pages/Dashboard/Pages/Balance";
 import AppliedTrainer from "../Pages/Dashboard/Pages/AppliedTrainer";
 import AllTrainers from "../Pages/Dashboard/Pages/AllTrainers";
+import AllTrainersPage from "../Pages/AllTrainers";
 import AllNewsletterSubs from "../Pages/Dashboard/Pages/AllNewsletterSubs";
 import AddNewSlot from "../Pages/Dashboard/Pages/AddNewSlot";
 import AddNewForum from "../Pages/Dashboard/Pages/AddNewForum";
@@ -32,6 +33,10 @@ const routes = createBrowserRouter([
         {
             path: '/signup',
             element: <Register/>
+        },
+        {
+            path: '/allTrainers',
+            element: <AllTrainersPage/>
         },
     ],
 },
