@@ -1,18 +1,18 @@
 import { Outlet } from "react-router-dom";
-// import Navbar from "./navbar";
-// import Footer from "./Footer";
+import Navbar from "./Navbar";
+import Footer from "./Footer";
 
 
 const Dashboard = () => {
     return (
         <div>
             <div className="flex">
-                {/* <Navbar/> */}
+                <Navbar/>
                 <div className="w-full">
                     <Outlet/>
                 </div>
             </div>
-            {/* <Footer/> */}
+            <Footer/>
         </div>
     );
 };

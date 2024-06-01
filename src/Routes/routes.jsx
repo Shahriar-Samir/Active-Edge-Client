@@ -13,6 +13,7 @@ import AllNewsletterSubs from "../Pages/Dashboard/Pages/AllNewsletterSubs";
 import AddNewSlot from "../Pages/Dashboard/Pages/AddNewSlot";
 import AddNewForum from "../Pages/Dashboard/Pages/AddNewForum";
 import AddNewClass from "../Pages/Dashboard/Pages/AddNewClass";
+import ActivityLog from "../Pages/Dashboard/Pages/ActivityLog";
 
 
 const routes = createBrowserRouter([
@@ -44,7 +45,7 @@ const routes = createBrowserRouter([
             element: <Profile/>
         },
         {
-            path: 'recommendation',
+            path: 'recommendedClasses',
             element: <RecommendedClasses/>
         },
         {
@@ -74,6 +75,10 @@ const routes = createBrowserRouter([
         {
             path: 'balance',
             element: <Balance/>
+        },
+        {
+            path: 'activityLog',
+            element: <ActivityLog/>
         },
     ]
 }
