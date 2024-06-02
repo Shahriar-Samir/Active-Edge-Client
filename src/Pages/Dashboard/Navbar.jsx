@@ -37,7 +37,7 @@ const Admin = ()=>{
     return(
       <>
        <li><NavLink to='/dashboard/newsletterSubscribers'>All Newsletter Subscribers</NavLink></li>
-      <li><NavLink to='/dashboard/activityLog'>All Trainers</NavLink></li>
+      <li><NavLink to='/dashboard/allTrainers'>All Trainers</NavLink></li>
       <li><NavLink to='/dashboard/recommendedClasses'>Applied Trainer</NavLink></li>
       <li><NavLink to='/dashboard/recommendedClasses'>Balance</NavLink></li>
       <li><NavLink to='/dashboard/recommendedClasses'>Add new Class</NavLink></li>
