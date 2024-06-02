@@ -14,6 +14,7 @@ const Register = () => {
       const email= form.email.value
       const photoUrl = form.photoUrl.value
       const password = form.password.value
+      const role = 'member'
       if(password.length < 6 || /[A-Z]/.test(password) === false || /[a-z]/.test(password) === false){
         toast.error('Password must have an uppercase and lowercase letter with at least 6 characters')
        }
@@ -23,7 +24,7 @@ const Register = () => {
             updateUser({photoURL:photoUrl,displayName:name})
             .then(()=>{
               const {uid,email,displayName,phoneNumber,photoURL} = res.user
-              const userData = {uid, email, displayName, photoURL, phoneNumber}
+              const userData = {uid, email, displayName, photoURL, phoneNumber, role}
               axiosSecure.post('/addUser',userData)
                 .then(()=>{
                   setLoading(false)
