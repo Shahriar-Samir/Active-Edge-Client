@@ -7,7 +7,7 @@ import useAxiosSecure from '../Hooks/useAxiosSecure';
 export const AuthContext = createContext(null)
 
 const AuthProvider = ({children}) => {
-    const axioSecure = useAxiosSecure()
+    const axiosSecure = useAxiosSecure()
     const auth = getAuth(app)
     const [user,setUser] = useState(null)
     const [loading,setLoading] = useState(true)
@@ -19,7 +19,7 @@ const AuthProvider = ({children}) => {
         
         onAuthStateChanged(auth,currentUser=>{
                 if(currentUser){
-                    axioSecure.get(`/user/${currentUser?.uid}`)
+                    axiosSecure.get(`/user/${currentUser?.uid}`)
                     .then(res=>{
                         const role = res.data.role
                         currentUser.role = role
@@ -41,6 +41,7 @@ const AuthProvider = ({children}) => {
         return updateProfile(auth.currentUser,data)
     }
     const signout = ()=>{
+        setUser(null)
         return signOut(auth)
     }
     const googleAuth = ()=>{

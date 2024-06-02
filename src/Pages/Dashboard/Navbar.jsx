@@ -20,23 +20,14 @@ const Navbar = () => {
   }
 
     return (
-        <div className="drawer lg:drawer-open w-1/3">
-  <input id="my-drawer-2" type="checkbox" className="drawer-toggle w-full" />
-  <div className="drawer-content flex flex-col items-center justify-center">
-    {/* Page content here */}
-    <label htmlFor="my-drawer-2" className="btn drawer-button lg:hidden"><RxHamburgerMenu /></label>
-  
-  </div> 
-  <div className="drawer-side relative w-full">
-    <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label> 
-    <ul className="menu p-4 fixed h-full bg-base-200 text-base-content gap-3 w-[250px] z-10">
-      {
-        navLinks()
-      }
+      <div className='w-1/4 h-[100vh]  bg-gray-200 fixed'>
+        <div className='p-5'>
+        <ul className="menu flex flex-col gap-5"> 
+        {navLinks()}
     </ul>
-  
-  </div>
-</div>
+      </div>
+      </div>
+
     );
 };
 
@@ -45,7 +36,7 @@ export default Navbar;
 const Admin = ()=>{
     return(
       <>
-       <li><NavLink to='/dashboard/profile'>All Newsletter Subscribers</NavLink></li>
+       <li><NavLink to='/dashboard/newsletterSubscribers'>All Newsletter Subscribers</NavLink></li>
       <li><NavLink to='/dashboard/activityLog'>All Trainers</NavLink></li>
       <li><NavLink to='/dashboard/recommendedClasses'>Applied Trainer</NavLink></li>
       <li><NavLink to='/dashboard/recommendedClasses'>Balance</NavLink></li>
