@@ -1,10 +1,13 @@
 import { createContext, useEffect, useState } from 'react';
 import {createUserWithEmailAndPassword, FacebookAuthProvider, getAuth, GithubAuthProvider, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateCurrentUser, updateProfile} from 'firebase/auth'
 import app from '../Firebase/firebase'
+import axios from 'axios';
+import useAxiosSecure from '../Hooks/useAxiosSecure';
 
 export const AuthContext = createContext(null)
 
 const AuthProvider = ({children}) => {
+    const axioSecure = useAxiosSecure()
     const auth = getAuth(app)
     const [user,setUser] = useState(null)
     const [loading,setLoading] = useState(true)
@@ -15,8 +18,16 @@ const AuthProvider = ({children}) => {
     useEffect(()=>{
         
         onAuthStateChanged(auth,currentUser=>{
-                setUser(currentUser)
-                setLoading(false)
+                if(currentUser){
+                    axioSecure.get(`/user/${currentUser?.uid}`)
+                    .then(res=>{
+                        const role = res.data.role
+                        currentUser.role = role
+                        console.log(currentUser)
+                        setUser(currentUser)
+                        setLoading(false)
+                    })
+                }
         })
     },[])
 

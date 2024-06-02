@@ -4,15 +4,22 @@ import { AuthContext } from '../Providers/AuthProvider';
 import { FcGoogle } from "react-icons/fc";
 import { GrFacebookOption } from "react-icons/gr";
 import { FaGithub } from "react-icons/fa";
+import useAxiosSecure from '../Hooks/useAxiosSecure';
 
 const Login = () => {
+    const axiosSecure = useAxiosSecure()
     const {signin,setLoading,googleAuth,facebookAuth,githubAuth} = useContext(AuthContext)
 
     const googleSignin = ()=>{
         googleAuth()
-        .then(()=>{
-          setLoading(false)
-          toast.success('You have logged in successfully')
+        .then(res=>{
+          const {uid,email,displayName,phoneNumber,photoURL} = res.user
+          const userData = {uid, email, displayName, photoURL, phoneNumber, role:'member'}
+          axiosSecure.post('/addUser',userData)
+            .then(()=>{
+              setLoading(false)
+              toast.success('You have logged in successfully')
+            })
         })
         .catch(()=>{
           setLoading(false)
