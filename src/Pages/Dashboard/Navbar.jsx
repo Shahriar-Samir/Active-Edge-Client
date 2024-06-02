@@ -47,9 +47,9 @@ const Admin = ()=>{
 const Trainer = ()=>{
     return(
       <>
-       <li><NavLink to='/dashboard/profile'>Manage Slots</NavLink></li>
-      <li><NavLink to='/dashboard/activityLog'>Add New Slot</NavLink></li>
-      <li><NavLink to='/dashboard/recommendedClasses'>Add new Forum</NavLink></li>
+       <li><NavLink to='/dashboard/manageSlots'>Manage Slots</NavLink></li>
+      <li><NavLink to='/dashboard/addNewSlot'>Add New Slot</NavLink></li>
+      <li><NavLink to='/dashboard/addNewForum'>Add new Forum</NavLink></li>
       </>
     )
 }
