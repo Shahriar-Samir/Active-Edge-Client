@@ -15,11 +15,20 @@ const Login = () => {
         .then(res=>{
           const {uid,email,displayName,phoneNumber,photoURL} = res.user
           const userData = {uid, email, displayName, photoURL, phoneNumber, role:'member'}
-          axiosSecure.post('/addUser',userData)
-            .then(()=>{
-              setLoading(false)
-              toast.success('You have logged in successfully')
-            })
+          axiosSecure.get(`/user/${uid}`)
+          .then(res=>{
+              if(res.data){
+                setLoading(false)
+                toast.success('You have logged in successfully')
+              }
+              else{
+                axiosSecure.post('/addUser',userData)
+                .then(()=>{
+                  setLoading(false)
+                  toast.success('You have logged in successfully')
+                })
+              }
+          })
         })
         .catch(()=>{
           setLoading(false)
