@@ -11,7 +11,8 @@ const AddNewClass = () => {
         const className = form.className.value
         const image = form.imageURL.value
         const details = form.details.value
-        axiosSecure.post('/addClass',{className,image,details})
+        const bookings = 0
+        axiosSecure.post('/addClass',{className,image,details,bookings})
         .then(()=>{
             toast.success('New Class Created Successfully')
         })
