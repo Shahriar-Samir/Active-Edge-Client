@@ -1,16 +1,22 @@
+import { useContext } from "react";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import {toast, ToastContainer} from 'react-toastify'
+import { AuthContext } from '../../../Providers/AuthProvider';
+
 
 const AddNewForum = () => {
       const axiosSecure = useAxiosSecure()
       const presentTime = new Date();
+      const {user} = useContext(AuthContext)
+
 
   const postSubmit = (e)=>{
         e.preventDefault()
         const form = e.target 
         const title = form.title.value
         const texts = form.texts.value
-       axiosSecure.post('/addForumPost',{title,texts, date:presentTime.toLocaleString()})
+        const {uid, email, photoURL, displayName,role} = user
+       axiosSecure.post('/addForumPost',{title,texts, date:presentTime.toLocaleString(),uid,email,photoURL,displayName,role})
        .then(res=>{
             toast.success('Post submitted successfully!')
        })

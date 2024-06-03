@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {useQuery} from '@tanstack/react-query'
 import useAxiosSecure from '../Hooks/useAxiosSecure';
 import { formatDistanceToNow } from 'date-fns';
+
 
 const Forum = () => {
     const axiosSecure = useAxiosSecure()
@@ -28,8 +29,14 @@ const Forum = () => {
 export default Forum;
 
 const Post = ({post})=>{
-    const {texts,title,date} = post
-    const timeAgo = formatDistanceToNow(new Date(date), { addSuffix: true });
+    const {texts,title,date,displayName,photoURL,role} = post
+    const [timeAgo,setTimeAgo] = useState(formatDistanceToNow(new Date(date), { addSuffix: true }))
+
+    useEffect(()=>{
+        setInterval(()=>{
+                setTimeAgo(formatDistanceToNow(new Date(date), { addSuffix: true }))
+        },1000)
+    },[])
 
     return(
         <article className="p-6 bg-white rounded-lg border border-gray-200 shadow-md">
@@ -37,15 +44,16 @@ const Post = ({post})=>{
         <div className="flex justify-between items-center mb-5 text-gray-500">
         <div className="flex justify-between items-center">
             <div className="flex items-center space-x-4">
-                <img className="w-7 h-7 rounded-full" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png" alt="Jese Leos avatar" />
+                <img className="w-12 h-12 rounded-full object-cover" src={photoURL} alt={displayName} />
                 <span className="font-medium ">
-                    Jese Leos
+                    {displayName}
                 </span>
+                <p>Role: {role}</p>
             </div>
         </div>
             <span className="text-sm">{timeAgo}</span>
         </div>
-        <h2 className="mb-2 text-lg font-bold "><a href="#">{title}</a></h2>
+        <h2 className="mb-2 text-lg font-bold "><p>{title}</p></h2>
         <p className="mb-5 font-light text-gray-500 dark:text-gray-400">{texts}</p>
     </article>
     )
