@@ -18,6 +18,40 @@ const AppliedTrainer = () => {
   console.log(data)
     return (
         <div className='w-full'>
+          <dialog id="my_modal_3" className="modal">
+  <div className="modal-box">
+    <form method="dialog">
+      {/* if there is a button in form, it will close the modal */}
+      <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+    </form>
+    <div>
+    <div className="w-full flex gap-5">
+        <img className="w-[150px] h-[150px]"/>
+        <div>
+        <h1>Full Name : Shahriar Samir</h1>
+        <h1>Email : Shahriar Samir</h1>
+        <h1>Age: 21 years</h1>
+        <h1>Skills: 
+          <span> Hoem,</span>
+          <span> Hoem,</span>
+          <span> Hoem,</span>
+        </h1>
+        <h1>Available Days: 
+          <span> Sun,</span>
+          <span> Mon,</span>
+          <span> Tues,</span>
+        </h1>
+        <h1>Available Time: <span> 20am-20pm</span>
+        </h1>
+        </div>
+    </div>
+    <div className="flex gap-5 mt-4 justify-end">
+        <button className="btn">Confirm</button>
+        <button className="btn">Reject</button>
+    </div>
+    </div>
+  </div>
+</dialog>
               <h1 className='text-2xl font-bold text-center border-b pb-3'>All the applications</h1>
               {
                 okay?
@@ -34,7 +68,7 @@ const AppliedTrainer = () => {
                               <p><span className="font-bold">Email:</span> {item.email}</p>
                               </div>
                               <div className="card-actions justify-end">
-                                <button className="btn"><FaEye/></button>
+                                <button className="btn" onClick={()=>document.getElementById('my_modal_3').showModal()}><FaEye/></button>
                             </div>
                           </div>
                         })}
