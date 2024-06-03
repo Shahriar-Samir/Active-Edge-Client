@@ -1,3 +1,4 @@
+import { ToastContainer } from "react-toastify";
 import About from "./About";
 import Banner from "./Banner";
 import Featured from "./Featured";
@@ -12,6 +13,7 @@ import Team from "./Team";
 const Home = () => {
     return (
         <div>
+            <ToastContainer/>
             <Banner/>
             <Featured/>
             <About/>
