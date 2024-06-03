@@ -18,6 +18,7 @@ import ActivityLog from "../Pages/Dashboard/Pages/ActivityLog";
 import AllClasses from "../Pages/AllClasses";
 import Forum from "../Pages/Forum";
 import TrainerDetails from "../Pages/TrainerDetails";
+import TrainerApplication from "../Pages/TrainerApplication";
 
 
 const routes = createBrowserRouter([
@@ -52,6 +53,10 @@ const routes = createBrowserRouter([
         {
             path: '/profile/:id',
             element: <TrainerDetails/>
+        },
+        {
+            path: '/trainerApplication',
+            element: <TrainerApplication/>
         },
     ],
 },
