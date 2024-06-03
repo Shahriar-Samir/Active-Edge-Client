@@ -2,9 +2,11 @@ import React, { useContext, useState } from 'react';
 import { AuthContext } from '../Providers/AuthProvider';
 import Select from 'react-select'
 import { toast, ToastContainer } from 'react-toastify';
+import useAxiosSecure from '../Hooks/useAxiosSecure';
 
 const TrainerApplication = () => {
     const {user} = useContext(AuthContext)
+    const axiosSecure = useAxiosSecure()
 
     const daysOptions = [
         { value: 'Sun', label: 'Sunday' },
@@ -52,15 +54,25 @@ const TrainerApplication = () => {
 
       const submitApplication = (e)=>{
         e.preventDefault()
+        const presentTime = new Date()
         const form = e.target
         const fullName = form.fullName.value
         const image = form.image.value
         const age = form.age.value
+        const email = user?.email
+        const uid = user?.uid
+        const applyDate= presentTime.toLocaleString()
         if(skills.length < 1 || time==='' || days.length < 1){
             toast.error('You need to fill up the form')
         }
         else{
-            console.log(fullName, image, age, skills, time, days)
+            axiosSecure.post('/trainerApply', {fullName, email, uid, image, age, skills, time, days, applyDate})
+            .then(()=>{
+                toast.success("Your application has been submitted successfully!")
+            })
+            .catch(()=>{
+                toast.error('Something went wrong')
+            })
         }
       }
 
