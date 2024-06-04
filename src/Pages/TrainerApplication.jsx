@@ -130,7 +130,7 @@ const TrainerApplication = () => {
           </div> :
           <div className='w-full flex justify-center items-center flex-col'>
             <h1 className='text-xl font-semibold'>Your have already submitted an application</h1>
-            <button className='bg-gray-300 p-3 font-semibold text-sm rounded-lg mt-5'>Application status : <span className='text-success'>Pending</span></button>
+            <button className='bg-gray-300 p-3 font-semibold text-sm rounded-lg mt-5 cursor-default'>Application status : <span className='text-success'>Pending</span></button>
           </div>
         }
     </div>
