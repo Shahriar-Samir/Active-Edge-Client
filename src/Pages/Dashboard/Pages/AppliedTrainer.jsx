@@ -32,10 +32,10 @@ const AppliedTrainer = () => {
         })
   }
 
-  const rejectApplication = (_id)=>{
-        axiosSecure.delete(`/deleteApplication/${_id}`)
-        .then(res=>{
-          document.getElementById(_id).style.display = 'none'
+  const rejectApplication = (application)=>{
+        axiosSecure.put(`/rejectApplication`,application)
+        .then(()=>{
+          document.getElementById(application._id).style.display = 'none'
           toast.success('Application has been rejected')
         })
         .catch(()=>{
@@ -57,7 +57,8 @@ const AppliedTrainer = () => {
                 :
                 <div className='grid grid-cols-2 gap-5 px-10 mt-5'>
                         {data?.map((item,index)=>{
-                            return <div id={item._id} key={item._id} className="flex justify-between items-center bg-base-100 shadow-xl gap-5 p-4">
+                            if(item.status === 'pending'){
+                              return <div id={item._id} key={item._id} className="flex justify-between items-center bg-base-100 shadow-xl gap-5 p-4">
                                 <img src={item.image} className='w-[50px] h-[50px]'/>
                               <div>
                               <p><span className="font-bold">Full name:</span> {item.fullName}</p>
@@ -109,7 +110,7 @@ const AppliedTrainer = () => {
         <button className="btn"onClick={()=> confirmApplication(item)}>Confirm</button>
     </form>     
         <form method="dialog">
-        <button className="btn" onClick={()=> rejectApplication(item._id)}>Reject</button>
+        <button className="btn" onClick={()=> rejectApplication(item)}>Reject</button>
     </form>
     </div>
     </div>
@@ -117,6 +118,7 @@ const AppliedTrainer = () => {
 </dialog>
                             </div>
                           </div>
+                            }
                         })}
                 </div>
               }
