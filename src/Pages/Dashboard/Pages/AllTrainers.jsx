@@ -29,8 +29,7 @@ const AllTrainers = () => {
                   <thead>
                     <tr>
                       <th>Name</th>
-                      <th>Job</th>
-                      <th>Favorite Color</th>
+                      <th>Skills and available days</th>
                       <th></th>
                     </tr>
                   </thead>
@@ -48,19 +47,26 @@ const AllTrainers = () => {
                           </div>
                           <div>
                             <div className="font-bold">{item.displayName}</div>
-                            <div className="text-sm opacity-50">{item.email}</div>
+                            <div className="text-sm opacity-50 font-semibold">{item.email}</div>
+                            <div className="text-sm opacity-50 font-semibold">{item.time}</div>
                           </div>
                         </div>
                       </td>
                       <td>
-                        Zemlak, Daniel and Leannon
-                        <br/>
-                        <span className="badge badge-ghost badge-sm">Desktop Support Technician</span>
+                        <div className='grid grid-cols-5 gap-2'>
+                        {item?.skills?.map(skill=>{
+                          return <button className='text-xs cursor-text py-[2px] px-[3px] rounded-lg bg-gray-100' key={skill}>{skill}</button>
+                        })}
+                        </div>
+                        <div className='grid grid-cols-7 gap-2 mt-3'>
+                        {item?.days?.map(day=>{
+                          return <button className='text-xs cursor-text py-[2px] px-[3px] rounded-lg bg-gray-100 font-semibold' key={day}>{day}</button>
+                        })}
+                        </div>
                       </td>
-                      <td>Purple</td>
-                      <th>
-                        <button className="btn btn-ghost btn-xs">details</button>
-                      </th>
+                      <td className=''>
+                        <button className="btn p-2 text-xs bg-red-500 text-white" onClick={()=>{}}>Remove</button>
+                      </td>
                     </tr>)
                   })}
                   </tbody>
