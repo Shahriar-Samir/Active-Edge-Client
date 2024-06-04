@@ -1,7 +1,19 @@
 import React from 'react';
+import useAxiosSecure from '../../../Hooks/useAxiosSecure';
+import { useQuery } from '@tanstack/react-query';
 
 const AllTrainers = () => {
     const okay = false
+    const axiosSecure = useAxiosSecure()
+    const {data} = useQuery({
+        queryKey:["posts"],
+        queryFn: ()=>
+            axiosSecure.get('/trainers')
+            .then(res=>{
+                return res.data
+            })
+    })
+
     return (
         <div className='w-full'>
             <h1 className='text-2xl font-bold text-center border-b pb-3'>All the Trainers</h1>
@@ -24,18 +36,19 @@ const AllTrainers = () => {
                   </thead>
                   <tbody>
                     {/* row 1 */}
-                    <tr>
+                  {data?.map(item=>{
+                    return (  <tr key={item._id} >
                      
                       <td>
                         <div className="flex items-center gap-3">
                           <div className="avatar">
                             <div className="mask mask-squircle w-12 h-12">
-                              <img src="https://img.daisyui.com/tailwind-css-component-profile-2@56w.png" alt="Avatar Tailwind CSS Component" />
+                              <img src={item.photoURL} />
                             </div>
                           </div>
                           <div>
-                            <div className="font-bold">Hart Hagerty</div>
-                            <div className="text-sm opacity-50">United States</div>
+                            <div className="font-bold">{item.displayName}</div>
+                            <div className="text-sm opacity-50">{item.email}</div>
                           </div>
                         </div>
                       </td>
@@ -48,7 +61,8 @@ const AllTrainers = () => {
                       <th>
                         <button className="btn btn-ghost btn-xs">details</button>
                       </th>
-                    </tr>
+                    </tr>)
+                  })}
                   </tbody>
                 </table>
               </div>

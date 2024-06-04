@@ -16,8 +16,20 @@ const AppliedTrainer = () => {
           })
   })
 
-  const confirmApplication = ()=>{
-    
+  const confirmApplication = (applicantData)=>{
+    const presentTime = new Date()
+          applicantData.startedDate = presentTime.toLocaleString()
+         axiosSecure.post('/confirmApplication', {applicantData})
+        .then(()=>{
+          axiosSecure.delete(`/deleteApplication/${applicantData._id}`)
+          .then(()=>{
+            toast.success(`Trainer application confirmed for ${applicantData.fullName}!`)
+            document.getElementById(applicantData._id).style.display = 'none'
+          })
+        })
+        .catch(()=>{
+            toast.error('Something went wrong!')
+        })
   }
 
   const rejectApplication = (_id)=>{
@@ -93,7 +105,9 @@ const AppliedTrainer = () => {
         </h1>
         <h1 className="mt-2 flex gap-4 items-center"><span className="font-bold">Available time:</span><span className="text-sm font-semibold">{item?.time}</span></h1>
     <div className="flex gap-5 mt-4 justify-end">
-        <button className="btn">Confirm</button>
+    <form method="dialog">
+        <button className="btn"onClick={()=> confirmApplication(item)}>Confirm</button>
+    </form>     
         <form method="dialog">
         <button className="btn" onClick={()=> rejectApplication(item._id)}>Reject</button>
     </form>
