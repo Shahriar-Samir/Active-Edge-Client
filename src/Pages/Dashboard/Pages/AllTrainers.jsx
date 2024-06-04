@@ -1,6 +1,7 @@
 import React from 'react';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
+import { toast } from 'react-toastify';
 
 const AllTrainers = () => {
     const okay = false
@@ -13,6 +14,19 @@ const AllTrainers = () => {
                 return res.data
             })
     })
+
+
+    const removeAsTrainer = (user)=>{
+      axiosSecure.put('/removeTrainer',user)
+      .then(()=>{
+          toast.success(`${user.displayName} has been removed from trainer role`)
+          document.getElementById(user._id).style.display = 'none'
+      })
+      .catch(()=>{
+          toast.error('Something went wrong')
+      })
+      return 
+    }
 
     return (
         <div className='w-full'>
@@ -36,7 +50,7 @@ const AllTrainers = () => {
                   <tbody>
                     {/* row 1 */}
                   {data?.map(item=>{
-                    return (  <tr key={item._id} >
+                    return (  <tr key={item._id} id={item._id} >
                      
                       <td>
                         <div className="flex items-center gap-3">
@@ -65,7 +79,7 @@ const AllTrainers = () => {
                         </div>
                       </td>
                       <td className=''>
-                        <button className="btn p-2 text-xs bg-red-500 text-white" onClick={()=>{}}>Remove</button>
+                        <button className="btn p-2 text-xs bg-red-500 text-white" onClick={()=>{removeAsTrainer(item)}}>Remove</button>
                       </td>
                     </tr>)
                   })}
