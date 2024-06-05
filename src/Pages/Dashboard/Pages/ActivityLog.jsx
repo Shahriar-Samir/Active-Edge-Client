@@ -9,63 +9,84 @@ const ActivityLog = () => {
     const {user} = useContext(AuthContext)
     
     const axiosSecure = useAxiosSecure()
-    const {data:application} = useQuery({
+    const {data:applications} = useQuery({
         queryKey:["applicationStatus"],
         queryFn: ()=>
-            axiosSecure.get(`/application/${user?.uid}`)
+            axiosSecure.get(`/userApplications`, {params:{uid:user?.uid}})
             .then(res=>{
                 return res.data
             }),
         enabled: !!user
     })
 
+    const {data:application} = useQuery({
+        queryKey:["application"],
+        queryFn: ()=>
+            axiosSecure.get(`/application`, {params:{uid:user?.uid}})
+            .then(res=>{
+                return res.data
+            }),
+        enabled: !!user
+    })
 
+    console.log(application)
     return (
         <div className='w-full'>
-            <h1 className='mt-5 font-bold text-3xl text-center'>Activity Log</h1>
-                {
-                    application? <div className='w-full flex justify-center mt-6'>
-                        <div className='w-[500px] flex flex-col items-center gap-3'>
-                             <div className='flex w-full items-center justify-center'>
-                             <h1 className="font-semibold text-xl w-full">Status: {application.status === 'pending'? <span className='text-orange-400 text-lg'>Pending</span> : <span className='text-red-500 text-lg'>Rejected</span>}</h1>
-                             {application.status === 'rejected'? <FaEye onClick={''}/> : ''}
-                             </div>
-                        <img className="w-[120px] h-[120px] object-cover" src={application.image}/>
-                        <div>
-                        <h1 className="text-sm "><span className="font-semibold">Application Id:</span> {application._id}</h1>
-                        <h1 className="text-lg mt-4"><span className="font-bold">Full Name:</span> {application.fullName}</h1>
-                        <h1 className="text-lg"><span className="font-bold text-lg">Email:</span> {application.email ? application.email : 'Unknown'}</h1>
-                        <h1 className="text-lg"><span className="font-bold">Age:</span>  {application.age} years</h1>
-                        <h1 className="text-lg"><span className="font-bold">Apply Date:</span><span> {application.applyDate}</span>
-                        </h1>
-                        </div>
-                    <h1 className="mt-3 text-center"><span className="font-bold ">Skills:</span> 
-                          <div className="flex gap-4 mt-2">
-                          {
-                            application?.skills.map(skill=>{
-                              return <button className="cursor-default p-2 rounded-lg bg-gray-200 font-semibold text-xs">{skill}</button>
-                            })
-                          }
-                          </div>
-                        </h1>
-                    <h1 className="mt-4 flex flex-col items-center gap-2">
-                      <span className="font-bold text-center">Available days:</span>
-                          <div className="flex gap-2 ">
-                          {
-                            application?.days.map(day=>{
-                              return <button className="cursor-default p-1 rounded-lg bg-gray-100 font-semibold text-xs">{day}</button>
-                            })
-                          }
-                          </div>
-                        </h1>
-                        <h1 className="mt-2 flex items-center gap-3 applications-center"><span className="font-bold">Available time:</span><span className="text-sm font-semibold">{application?.time}</span></h1>
-                    <div className="flex gap-5 mt-4 justify-end">
-  
-                    </div>
+            {    applications?  
+                <div className=''>
+                    <h1 className='text-2xl text-center mt-5 font-bold'>Activity Log</h1>
+                    <div className='grid grid-cols-1 gap-3 mt-4'>
 
-                    </div>
-                    
-                    </div>
+                    {
+                       application? <div key={application._id} className=" bg-base-100 shadow-xl ps-4 w-10/12 mx-auto flex items-center justify-between p-3">
+                       <div className='flex items-center gap-4'>
+                       <img src={application.image} className='w-[80px] h-[80px]'/>
+                       <div>
+                       <h1 className=''><span className='font-bold'>Full Name</span>: {application.fullName}</h1>
+                       <h1 className='text-sm mt-2'><span className='font-bold'>ApplicationID:</span> {application._id}</h1>
+                       <h1 className='text-sm mt-2'><span className='font-bold'>Apply Date:</span> {application.applyDate}</h1>
+                       </div>
+                       </div>
+                       <div className='flex flex-col justify-between h-full'>
+                       <h1 className='text-sm text-gray-400 font-semibold'>{application.applyDate}</h1>
+                       {
+                          application.status === 'rejected'?  <div className='mt-3 flex items-center gap-2'>
+                           <h1 className='text'>Status: <span className='text-red-600 font-bold'>Rejected</span></h1>
+                           <button className=''><FaEye/></button>
+                          </div> : <h1 className=''>Status: <span className='text-warning font-bold'>Pending</span></h1> 
+                       }
+                       </div>
+                     </div>
+                     :
+                     ''
+                    }
+
+
+                    {
+                        applications.map(item=>{
+                            return <div key={item._id} className=" bg-base-100 shadow-xl ps-4 w-10/12 mx-auto flex items-center justify-between p-3">
+                            <div className='flex items-center gap-4'>
+                            <img src={item.image} className='w-[80px] h-[80px]'/>
+                            <div>
+                            <h1 className=''><span className='font-bold'>Full Name</span>: {item.fullName}</h1>
+                            <h1 className='text-sm mt-2'><span className='font-bold'>ApplicationID:</span> {item._id}</h1>
+                            <h1 className='text-sm mt-2'><span className='font-bold'>Apply Date:</span> {item.applyDate}</h1>
+                            </div>
+                            </div>
+                            <div className='flex flex-col justify-between h-full'>
+                            <h1 className='text-sm text-gray-400 font-semibold'>{item.applyDate}</h1>
+                            {
+                               item.status === 'rejected'?  <div className='mt-3 flex items-center gap-2'>
+                                <h1 className='text'>Status: <span className='text-red-600 font-bold'>Rejected</span></h1>
+                                <button className=''><FaEye/></button>
+                               </div> : <h1 className=''>Status: <span className='text-warning font-bold'>Pending</span></h1> 
+                            }
+                            </div>
+                          </div>
+                        })
+                    }
+                </div>
+                </div>
                     :
                     <div>
                         <h1 className='text-center mt-5'>There are no applications you have applied</h1>
