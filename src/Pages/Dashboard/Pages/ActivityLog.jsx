@@ -78,10 +78,25 @@ const ActivityLog = () => {
                             {
                                item.status === 'rejected'?  <div className='mt-3 flex items-center gap-2'>
                                 <h1 className='text'>Status: <span className='text-red-600 font-bold'>Rejected</span></h1>
-                                <button className=''><FaEye/></button>
+                                <button className="btn" onClick={()=>document.getElementById(item._id).showModal()}><button className=''><FaEye/></button></button>
                                </div> : <h1 className=''>Status: <span className='text-warning font-bold'>Pending</span></h1> 
                             }
                             </div>
+                            <dialog id={item._id} className="modal">
+  <div className="modal-box">
+    <form method="dialog">
+      <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+    </form>
+    <h3 className="font-bold text-lg text-red-600">Your application has been rejected!</h3>
+    <div>
+        <p className="mt-3"><span className='font-bold'>Admin's feedback: </span>{item.feedback}</p>
+    </div>
+    <form method="dialog" className='flex justify-end'>
+      <button className="py-2 px-5 bg-red-600 text-white mt-4 rounded">Close</button>
+    </form>
+  </div>
+  
+</dialog>
                           </div>
                         })
                     }

@@ -32,16 +32,19 @@ const AppliedTrainer = () => {
         })
   }
 
-  const rejectApplication = (application)=>{
-        axiosSecure.put(`/rejectApplication`,application)
-        .then(()=>{
-          document.getElementById(application._id).style.display = 'none'
-          toast.success('Application has been rejected')
-        })
-        .catch(()=>{
-          toast.error('Something went wrong')
-        })
-      
+  const rejectApplication = (e,application)=>{
+            e.preventDefault()
+            const feedback = e.target.feedback.value
+            application.feedback = feedback
+            axiosSecure.put(`/rejectApplication`,application)
+            .then(()=>{
+              document.getElementById(application._id).style.display = 'none'
+              toast.success('Application has been rejected')
+            })
+            .catch(()=>{
+              toast.error('Something went wrong')
+            })
+       
   }
 
 
@@ -66,6 +69,24 @@ const AppliedTrainer = () => {
                               </div>
                               <div className="card-actions justify-end">
                                 <button className="btn" onClick={()=>document.getElementById("modal_"+item._id).showModal()}><FaEye/></button>
+                                <dialog id={'reject_'+item.id} className="modal">
+  <div className="modal-box">
+    <form method="dialog">
+      {/* if there is a button in form, it will close the modal */}
+      <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+    </form>
+    <h3 className="font-bold text-lg">Are you sure you want to reject this application?</h3>
+    <form onSubmit={(e)=>{rejectApplication(e,item)}}>
+    <textarea name="feedback" placeholder="write a feedback" required className="w-full border border-gray-400 rounded-lg p-1 mt-3 min-h-[15vh] focus:outline-none max-h-[15vh] h-[15vh] "></textarea>
+<button className="btn bg-red-600 text-white mt-2">Reject</button>
+    </form>
+    <form method="dialog">
+      {/* if there is a button in form, it will close the modal */}
+      <button className="btn absolute left-[22%] bottom-6">Cancel</button>
+    </form>
+   
+  </div>
+</dialog>
   <dialog id={"modal_"+item._id} className="modal">
   <div className="modal-box">
     <form method="dialog">
@@ -110,7 +131,7 @@ const AppliedTrainer = () => {
         <button className="btn"onClick={()=> confirmApplication(item)}>Confirm</button>
     </form>     
         <form method="dialog">
-        <button className="btn" onClick={()=> rejectApplication(item)}>Reject</button>
+        <button className="btn" onClick={()=>document.getElementById('reject_'+item.id).showModal()}>Reject</button>
     </form>
     </div>
     </div>
