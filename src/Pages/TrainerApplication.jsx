@@ -84,7 +84,7 @@ const TrainerApplication = () => {
         const {data:application} = useQuery({
           queryKey: ['application'],
           queryFn: ()=>
-                    axiosSecure.get(`/application/${user?.uid}`)
+                    axiosSecure.get(`/application`, {params:user?.uid})
                     .then(res=>{
                         return res.data
                   }),
@@ -92,15 +92,6 @@ const TrainerApplication = () => {
      
       })
 
-      const newApplication = (id)=>{
-          axiosSecure.delete(`/deleteApplication/${id}`)
-          .then(()=>{
-            setStatus(false)
-          })
-          .catch(()=>{
-            toast.error('Something went wrong')
-          })
-      }
 
       const [status,setStatus] = useState('')
 
@@ -123,16 +114,10 @@ const TrainerApplication = () => {
     </div>
     {status === true?
     <div className='w-1/2'>
-        {
-          application.status==='rejected'? <div className='w-full flex justify-center items-center flex-col'>
-            <h1 className='text-xl font-semibold'>Your previous application has been rejected</h1>
-        <button className='btn bg-gray-300 mt-8' onClick={()=>newApplication(application._id)}>New Application</button>
-          </div> :
           <div className='w-full flex justify-center items-center flex-col'>
             <h1 className='text-xl font-semibold'>Your have already submitted an application</h1>
             <button className='bg-gray-300 p-3 font-semibold text-sm rounded-lg mt-5 cursor-default'>Application status : <span className='text-success'>Pending</span></button>
           </div>
-        }
     </div>
      : 
     <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
