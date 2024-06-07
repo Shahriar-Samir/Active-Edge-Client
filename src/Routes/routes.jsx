@@ -19,6 +19,7 @@ import AllClasses from "../Pages/AllClasses";
 import Forum from "../Pages/Forum";
 import TrainerDetails from "../Pages/TrainerDetails";
 import TrainerApplication from "../Pages/TrainerApplication";
+import ManageSlots from "../Pages/Dashboard/Pages/ManageSlots";
 
 
 const routes = createBrowserRouter([
@@ -104,6 +105,10 @@ const routes = createBrowserRouter([
         {
             path: 'activityLog',
             element: <ActivityLog/>
+        },
+        {
+            path: 'manageSlots',
+            element: <ManageSlots/>
         },
     ]
 }
