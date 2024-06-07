@@ -20,6 +20,7 @@ import Forum from "../Pages/Forum";
 import TrainerDetails from "../Pages/TrainerDetails";
 import TrainerApplication from "../Pages/TrainerApplication";
 import ManageSlots from "../Pages/Dashboard/Pages/ManageSlots";
+import TrainerBooking from "../Pages/TrainerBooking";
 
 
 const routes = createBrowserRouter([
@@ -58,6 +59,10 @@ const routes = createBrowserRouter([
         {
             path: '/trainerApplication',
             element: <TrainerApplication/>
+        },
+        {
+            path: '/trainerBooking/:slotId',
+            element: <TrainerBooking/>
         },
     ],
 },

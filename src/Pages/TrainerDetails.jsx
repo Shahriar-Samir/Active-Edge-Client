@@ -17,6 +17,18 @@ const TrainerDetails = () => {
             })
     })
 
+    const {data:slots} = useQuery({
+      queryKey:["slots"],
+      queryFn: ()=>
+          axiosSecure.get(`/trainerSlots/${id}`)
+          .then(res=>{
+              return res.data
+          }),
+      enabled: !!user
+  })
+  console.log(slots)
+
+
     return (
         <div>
             <div className="hero">
@@ -34,6 +46,19 @@ const TrainerDetails = () => {
 :
 ''
 }
+  </div>
+  <div>
+    <h1 className='text-center'>Available slots</h1>
+    {
+        slots?.map(item=>{
+          return <Link to={`/trainerBooking/${item._id}`} key={item._id} className="card w-96 bg-primary text-primary-content">
+          <div className="card-body">
+            <h2 className="card-title">{item.slotName}</h2>
+            <p>{item.slotTime}</p>
+          </div>
+        </Link>
+        })
+    }
   </div>
         </div>
     );
