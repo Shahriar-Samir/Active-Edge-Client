@@ -2,6 +2,7 @@ import { PieChart } from '@mui/x-charts/PieChart';
 
 
 const Balance = () => {
+  
     return (
         <div>
             <h1 className='text-center mt-5 text-4xl font-bold'>Admin's Balance</h1>
