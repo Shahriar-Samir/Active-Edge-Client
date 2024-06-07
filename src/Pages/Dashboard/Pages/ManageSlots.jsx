@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../../../Providers/AuthProvider';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
+import { toast, ToastContainer } from 'react-toastify';
 
 const ManageSlots = () => {
     const {user} = useContext(AuthContext)
@@ -17,8 +18,24 @@ const ManageSlots = () => {
     })
     console.log(slots)
     const okay =false
+
+
+    const deleteSlot = (id)=>{
+        console.log(id)
+        axiosSecure.delete(`/deleteSlot/${id}`)
+        .then(res=>{
+            document.getElementById(id).style.display = 'none'
+            toast.success("Slot deleted Successfully")
+        })
+        .catch(()=>{
+            toast.error('Something went wrong')
+        })
+    }
+
+
     return (
         <div>
+            <ToastContainer/>
              {
                 okay === true? 
                 <div className='text-center text-lg mt-4'>
@@ -38,8 +55,25 @@ const ManageSlots = () => {
                   <tbody>
                     {/* row 1 */}
                   {slots?.map(item=>{
-                    return (  <tr key={item._id} id={item._id} >
-                     
+                    return (  
+                    <>
+                          <dialog id={'modal'+item._id} className="modal">
+  <div className="modal-box">
+    <form method="dialog">
+      <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+    </form>
+    <h3 className="font-bold text-lg text-center">Are you sure you want to delete this slot ?</h3>
+    <div className='flex gap-5 mt-7 justify-center'>
+    <form method='dialog'>
+    <button className="btn  bg-red-500 text-white" onClick={()=>{deleteSlot(item._id)}}>Delete</button>
+    </form>
+    <form method='dialog'>
+    <button className="btn ">Cancel</button>
+    </form>
+    </div>
+  </div>
+</dialog>
+                    <tr key={item._id} id={item._id} >
                       <td>
                         <div className="flex items-center gap-3">
                           <div className="avatar">
@@ -67,10 +101,11 @@ const ManageSlots = () => {
                         </div>
                       </td>
                       <td className=''>
-                      <button className="btn" onClick={()=>document.getElementById(item._id).showModal()}>open modal</button>
-                        <button className="btn p-2 text-xs bg-red-500 text-white" onClick={()=>{removeAsTrainer(item)}}>Remove</button>
+                      <button className="btn p-2 text-xs bg-red-500 text-white" onClick={()=>document.getElementById('modal'+item._id).showModal()}>Remove</button>
                       </td>
-                    </tr>)
+                    </tr>
+                    </>
+                    )
                   })}
                   </tbody>
                 </table>
