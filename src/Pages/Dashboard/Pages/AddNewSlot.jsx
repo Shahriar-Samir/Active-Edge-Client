@@ -66,14 +66,19 @@ const AddNewSlot = () => {
     const slotName = form.slotName.value
     const slotTime = form.slotTime.value
     const {uid, email,displayName} = user
-//    axiosSecure.post('/addSlot',{date:presentTime.toLocaleString(),uid,email,photoURL,displayName,role})
-//    .then(res=>{
-//         toast.success('Post submitted successfully!')
-//    })
-//    .catch(()=>{
-//         toast.error('Something went wrong')
-//    })
-console.log(uid,displayName,email,selectedDays,slotName,slotTime,selectedClasses)
+
+    if(selectedDays.length < 1 || selectedClasses.length < 1){
+    toast.error('Please fill up the form')
+    }
+    else{
+        axiosSecure.post('/addSlot',{date:presentTime.toLocaleString(),uid,displayName,email,selectedDays,slotName,slotTime,selectedClasses})
+        .then(res=>{
+             toast.success('Added Slot Successfully!')
+        })
+        .catch(()=>{
+             toast.error('Something went wrong')
+        })
+    }
 }
 
 
