@@ -27,6 +27,7 @@ import PrivateRoute from "../Providers/PrivateRoute";
 import AdminRoute from "./AdminRoute";
 import MemberRoute from "./MemberRoute";
 import TrainerRoute from "./TrainerRoute";
+import CrossRoute from "./CrossRoute";
 
 
 const routes = createBrowserRouter([
@@ -96,7 +97,7 @@ const routes = createBrowserRouter([
         },
         {
             path: 'addNewForum',
-            element: <AddNewForum/>
+            element: <CrossRoute><AddNewForum/></CrossRoute>
         },
         {
             path: 'addNewSlot',
@@ -124,7 +125,7 @@ const routes = createBrowserRouter([
         },
         {
             path: 'manageSlots',
-            element: <ManageSlots/>
+            element: <TrainerRoute><ManageSlots/></TrainerRoute>
         },
     ]
 }
