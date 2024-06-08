@@ -64,15 +64,15 @@ const routes = createBrowserRouter([
         },
         {
             path: '/trainerApplication',
-            element: <PrivateRoute><TrainerApplication/></PrivateRoute>
+            element: <PrivateRoute><MemberRoute><TrainerApplication/></MemberRoute></PrivateRoute>
         },
         {
             path: '/trainerBooking/:slotId',
-            element: <PrivateRoute><TrainerBooking/></PrivateRoute>
+            element: <PrivateRoute><MemberRoute><TrainerBooking/></MemberRoute></PrivateRoute>
         },
         {
             path: '/payment',
-            element: <PrivateRoute><Payment/></PrivateRoute>
+            element: <PrivateRoute><MemberRoute><Payment/></MemberRoute></PrivateRoute>
         },
     ],
 },
@@ -87,7 +87,7 @@ const routes = createBrowserRouter([
         },
         {
             path: 'recommendedClasses',
-            element: <RecommendedClasses/>
+            element: <MemberRoute><RecommendedClasses/></MemberRoute>
         },
         {
             path: 'addNewClass',
@@ -119,7 +119,7 @@ const routes = createBrowserRouter([
         },
         {
             path: 'activityLog',
-            element: <ActivityLog/>
+            element: <MemberRoute><ActivityLog/></MemberRoute>
         },
         {
             path: 'manageSlots',
