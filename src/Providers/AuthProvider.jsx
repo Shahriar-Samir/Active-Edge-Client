@@ -3,11 +3,12 @@ import {createUserWithEmailAndPassword, FacebookAuthProvider, getAuth, GithubAut
 import app from '../Firebase/firebase'
 import axios from 'axios';
 import useAxiosSecure from '../Hooks/useAxiosSecure';
+import useAxiosPublic from '../Hooks/useAxiosPublic';
 
 export const AuthContext = createContext(null)
 
 const AuthProvider = ({children}) => {
-    const axiosSecure = useAxiosSecure()
+    const axiosPublic = useAxiosPublic()
     const auth = getAuth(app)
     const [user,setUser] = useState(null)
     const [loading,setLoading] = useState(true)
@@ -19,14 +20,14 @@ const AuthProvider = ({children}) => {
         
         onAuthStateChanged(auth,currentUser=>{
                 if(currentUser){
-                    axiosSecure.get(`/user/${currentUser?.uid}`)
+                    axiosPublic.get(`/user/${currentUser?.uid}`)
                     .then(res=>{
                         const role = res.data.role
                         currentUser.role = role
                         console.log(currentUser)
                         setUser(currentUser)
                         setLoading(false)
-                        axiosSecure.post('/jwt', {email:currentUser.email})
+                        axiosPublic.post('/jwt', {email:currentUser.email})
                         .then(res=>{
                             if(res.data){
                                 console.log(res.data)
