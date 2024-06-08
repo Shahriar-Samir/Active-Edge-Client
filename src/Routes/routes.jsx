@@ -26,6 +26,7 @@ import ErrorPage from "../Pages/ErrorPage";
 import PrivateRoute from "../Providers/PrivateRoute";
 import AdminRoute from "./AdminRoute";
 import MemberRoute from "./MemberRoute";
+import TrainerRoute from "./TrainerRoute";
 
 
 const routes = createBrowserRouter([
@@ -99,7 +100,7 @@ const routes = createBrowserRouter([
         },
         {
             path: 'addNewSlot',
-            element: <AddNewSlot/>
+            element: <TrainerRoute><AddNewSlot/></TrainerRoute>
         },
         {
             path: 'newsletterSubscribers',
