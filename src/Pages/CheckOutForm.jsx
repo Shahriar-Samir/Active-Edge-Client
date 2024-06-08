@@ -19,6 +19,7 @@ const CheckOutForm = () => {
     const axiosSecure = useAxiosSecure()
     const {user} = useContext(AuthContext)
     const [clientSecret,setClientSecret] = useState()
+    const [transactionId, setTransactionId] = useState()
 
     const {data:slot} = useQuery({
         queryKey:["slot"],
@@ -65,17 +66,29 @@ const CheckOutForm = () => {
             setCardError(error.message)
         }
         else{
+            console.log(paymentMethod)
             setCardError('')
         }
-
-        const {} = await stripe.confirmCardPayment(clientSecret, {
+        console.log(clientSecret)
+        const {paymentIntent,error:errorPayment} = await stripe.confirmCardPayment(clientSecret.clientSecret, {
             payment_method:{
                 card: card,
                 billing_details: {
-                    n
+                    email : user?.email || 'anon',
+                    name : user?.displayName || 'anon' 
                 }
             }
         })
+
+        if(errorPayment){
+            console.log(errorPayment.type)
+        }
+        else{
+            console.log(paymentIntent)
+            if(paymentIntent.status === 'succeeded'){
+                setTransactionId(paymentIntent.id)
+            }
+        }
     }
 
 
@@ -105,6 +118,7 @@ const CheckOutForm = () => {
       </button>
     </form>
     <p className='text-error'>{cardError}</p>
+    {transactionId && <p className='text-success'>{transactionId}</p>}
         </div>
 )
 }
