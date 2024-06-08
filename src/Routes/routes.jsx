@@ -24,6 +24,7 @@ import TrainerBooking from "../Pages/TrainerBooking";
 import Payment from "../Pages/Payment";
 import ErrorPage from "../Pages/ErrorPage";
 import PrivateRoute from "../Providers/PrivateRoute";
+import AdminRoute from "./AdminRoute";
 
 
 const routes = createBrowserRouter([
@@ -101,7 +102,7 @@ const routes = createBrowserRouter([
         },
         {
             path: 'newsletterSubscribers',
-            element: <AllNewsletterSubs/>
+            element: <AdminRoute><AllNewsletterSubs/></AdminRoute>
         },
         {
             path: 'allTrainers',
