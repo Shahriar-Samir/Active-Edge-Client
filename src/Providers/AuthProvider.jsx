@@ -1,8 +1,6 @@
 import { createContext, useEffect, useState } from 'react';
 import {createUserWithEmailAndPassword, FacebookAuthProvider, getAuth, GithubAuthProvider, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateCurrentUser, updateProfile} from 'firebase/auth'
 import app from '../Firebase/firebase'
-import axios from 'axios';
-import useAxiosSecure from '../Hooks/useAxiosSecure';
 import useAxiosPublic from '../Hooks/useAxiosPublic';
 
 export const AuthContext = createContext(null)
@@ -20,25 +18,23 @@ const AuthProvider = ({children}) => {
         
         onAuthStateChanged(auth,currentUser=>{
                 if(currentUser){
-                    axiosPublic.get(`/user/${currentUser?.uid}`)
+                    axiosPublic.post('/jwt', {email:currentUser.email})
                     .then(res=>{
-                        const role = res.data.role
+                        localStorage.setItem('access-token',res.data.token)
+                        axiosPublic.get(`/userRole/${currentUser?.uid}`)
+                        .then(res=>{
+                        const role = res.data
                         currentUser.role = role
                         console.log(currentUser)
                         setUser(currentUser)
                         setLoading(false)
-                        axiosPublic.post('/jwt', {email:currentUser.email})
-                        .then(res=>{
-                            if(res.data){
-                                console.log(res.data)
-                                localStorage.setItem('access-token',res.data.token)
-                            }
                         })
-                        .catch(err=> console.log(err))
                         })
+                    .catch(err=> console.log(err))
                         }
                 else{
                     localStorage.removeItem('access-token')
+                    setUser(null)
                     setLoading(false)
                 }
         })
