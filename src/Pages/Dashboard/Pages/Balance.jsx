@@ -35,7 +35,6 @@ const Balance = () => {
           }),
       enabled: !!user
   })
-    console.log(totalBalance)
 
   
     return (
@@ -49,8 +48,8 @@ const Balance = () => {
                    {payments?.map(item=>{
                         return <div key={item} className="card card-side bg-base-100 shadow-xl w-10/12 mx-auto gap-4">
                         <div className="">
-                          <h2 className="card-title"></h2>
-                          <p>Click the button to watch on Jetflix app.</p>
+                          <h2 className="card-title">{item.slotName}</h2>
+                          <p>Txd Id: {item.transactionId}</p>
                         </div>
                       </div>
                     })}
