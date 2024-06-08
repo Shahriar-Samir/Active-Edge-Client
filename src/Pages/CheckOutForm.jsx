@@ -9,7 +9,7 @@ import {
   CardElement,
   PaymentElement,
 } from '@stripe/react-stripe-js';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 
 const CheckOutForm = () => {
     const [searchParams,setSearchParams] = useSearchParams()
@@ -20,6 +20,7 @@ const CheckOutForm = () => {
     const {user} = useContext(AuthContext)
     const [clientSecret,setClientSecret] = useState()
     const [transactionId, setTransactionId] = useState()
+    const price = 400
 
     const {data:slot} = useQuery({
         queryKey:["slot"],
@@ -28,11 +29,11 @@ const CheckOutForm = () => {
             .then(res=>{
                 return res.data
             }),
-        enabled: !!user
+        enabled: !!slotId
     })
-
+    console.log(slot)
     useEffect(()=>{
-        axiosSecure.post(`/createPaymentIntent`, {price:4200})
+        axiosSecure.post(`/createPaymentIntent`, {price})
         .then(res=>{
             setClientSecret(res.data)
         })
@@ -84,9 +85,23 @@ const CheckOutForm = () => {
             console.log(errorPayment.type)
         }
         else{
-            console.log(paymentIntent)
             if(paymentIntent.status === 'succeeded'){
                 setTransactionId(paymentIntent.id)
+                const transactionId = paymentIntent.id
+                const trainerName = slot.displayName
+                const packageName = type
+                const trainerUid = slot.uid
+                const trainerEmail = slot.email
+                const memberName = user?.displayName
+                const memberUid = user?.uid
+                const memberEmail = user?.email
+                axiosSecure.post('/addPayment', {transactionId, trainerName, trainerEmail, trainerUid, packageName, price, memberName, memberEmail, memberUid})
+                .then(()=>{
+                    toast.success('Payment Success')
+                })
+                .catch(()=>{
+                    toast.error('Something went wrong')
+                })
             }
         }
     }
@@ -96,6 +111,7 @@ const CheckOutForm = () => {
 
     return (
         <div>
+            <ToastContainer/>
            <form onSubmit={handlePayment}>
       <CardElement
         options={{

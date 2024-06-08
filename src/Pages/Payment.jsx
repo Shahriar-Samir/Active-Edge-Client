@@ -11,26 +11,9 @@ import CheckOutForm from './CheckOutForm';
 
 
 
-const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT);
+const stripePromise =  loadStripe(import.meta.env.VITE_PAYMENT);
 
 const Payment = () => {
-    
-    const [searchParams,setSearchParams] = useSearchParams()
-    const [slotId,setSlotId] = useState(searchParams.get('slotId'))
-    const [type,setType] = useState(searchParams.get('type'))
-    const axiosSecure = useAxiosSecure()
-    const {user} = useContext(AuthContext)
-
-    const {data:slot} = useQuery({
-        queryKey:["slot"],
-        queryFn: ()=>
-            axiosSecure.get(`/trainerSlot/${slotId}`)
-            .then(res=>{
-                return res.data
-            }),
-        enabled: !!user
-    })
-
 
     return (
         <div>
