@@ -25,6 +25,7 @@ import Payment from "../Pages/Payment";
 import ErrorPage from "../Pages/ErrorPage";
 import PrivateRoute from "../Providers/PrivateRoute";
 import AdminRoute from "./AdminRoute";
+import MemberRoute from "./MemberRoute";
 
 
 const routes = createBrowserRouter([
@@ -82,7 +83,7 @@ const routes = createBrowserRouter([
     children:[
         {
             path:'profile',
-            element: <Profile/>
+            element: <MemberRoute><Profile/></MemberRoute>
         },
         {
             path: 'recommendedClasses',
