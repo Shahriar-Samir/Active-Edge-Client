@@ -22,13 +22,14 @@ import TrainerApplication from "../Pages/TrainerApplication";
 import ManageSlots from "../Pages/Dashboard/Pages/ManageSlots";
 import TrainerBooking from "../Pages/TrainerBooking";
 import Payment from "../Pages/Payment";
-import Loading from "../Components/Loading";
+import ErrorPage from "../Pages/ErrorPage";
 
 
 const routes = createBrowserRouter([
 {
     path: '/',
     element: <App/>,
+    errorElement: <ErrorPage/>,
     children:[
         {
             path:'/',
