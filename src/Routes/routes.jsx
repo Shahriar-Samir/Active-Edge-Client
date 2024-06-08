@@ -23,6 +23,7 @@ import ManageSlots from "../Pages/Dashboard/Pages/ManageSlots";
 import TrainerBooking from "../Pages/TrainerBooking";
 import Payment from "../Pages/Payment";
 import ErrorPage from "../Pages/ErrorPage";
+import PrivateRoute from "../Providers/PrivateRoute";
 
 
 const routes = createBrowserRouter([
@@ -61,22 +62,22 @@ const routes = createBrowserRouter([
         },
         {
             path: '/trainerApplication',
-            element: <TrainerApplication/>
+            element: <PrivateRoute><TrainerApplication/></PrivateRoute>
         },
         {
             path: '/trainerBooking/:slotId',
-            element: <TrainerBooking/>
+            element: <PrivateRoute><TrainerBooking/></PrivateRoute>
         },
         {
             path: '/payment',
-            element: <Payment/>
+            element: <PrivateRoute><Payment/></PrivateRoute>
         },
     ],
 },
 
 {
     path: 'dashboard',
-    element: <Dashboard/>,
+    element: <PrivateRoute><Dashboard/></PrivateRoute>,
     children:[
         {
             path:'profile',
