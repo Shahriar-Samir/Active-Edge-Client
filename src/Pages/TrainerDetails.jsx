@@ -26,7 +26,7 @@ const TrainerDetails = () => {
           }),
       enabled: !!user
   })
-  console.log(slots)
+
 
 
     return (
