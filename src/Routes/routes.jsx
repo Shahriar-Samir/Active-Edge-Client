@@ -106,15 +106,15 @@ const routes = createBrowserRouter([
         },
         {
             path: 'allTrainers',
-            element: <AllTrainers/>
+            element: <AdminRoute><AllTrainers/></AdminRoute>
         },
         {
             path: 'appliedTrainers',
-            element: <AppliedTrainer/>
+            element: <AdminRoute><AppliedTrainer/></AdminRoute>
         },
         {
             path: 'balance',
-            element: <Balance/>
+            element: <AdminRoute><Balance/></AdminRoute>
         },
         {
             path: 'activityLog',
