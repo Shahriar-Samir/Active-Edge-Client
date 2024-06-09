@@ -22,7 +22,7 @@ const ActivityLog = () => {
     const {data:application} = useQuery({
         queryKey:["application"],
         queryFn: ()=>
-            axiosSecure.get(`/application`, {params:{uid:user?.uid}})
+            axiosSecure.get(`/application/${user?.uid}`)
             .then(res=>{
                 return res.data
             }),
