@@ -1,17 +1,17 @@
 import React, { useContext } from 'react';
-import useAxiosSecure from '../Hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import { Link, useParams } from 'react-router-dom';
 import { AuthContext } from '../Providers/AuthProvider';
+import useAxiosPublic from '../Hooks/useAxiosPublic';
 
 const TrainerDetails = () => {
     const {id} = useParams()
     const {user} = useContext(AuthContext)
-    const axiosSecure = useAxiosSecure()
+    const axiosPublic = useAxiosPublic()
     const {data} = useQuery({
         queryKey:["posts"],
         queryFn: ()=>
-            axiosSecure.get(`/trainerData/${id}`)
+            axiosPublic.get(`/trainerData/${id}`)
             .then(res=>{
                 return res.data
             })
@@ -20,7 +20,7 @@ const TrainerDetails = () => {
     const {data:slots} = useQuery({
       queryKey:["slots"],
       queryFn: ()=>
-          axiosSecure.get(`/trainerSlots/${id}`)
+          axiosPublic.get(`/trainerSlots/${id}`)
           .then(res=>{
               return res.data
           }),

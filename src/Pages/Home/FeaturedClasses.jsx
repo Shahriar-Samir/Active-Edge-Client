@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react';
 import Heading from '../../Components/Heading';
-import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import {useQuery} from '@tanstack/react-query'
+import useAxiosPublic from '../../Hooks/useAxiosPublic';
 
 const FeaturedClasses = () => {
-    const axiosSecure = useAxiosSecure()
+    const axiosPublic = useAxiosPublic()
 
     const {data} = useQuery({
         queryKey: ['featuredClasses'],
         queryFn: ()=>
-            axiosSecure.get('/featuredClasses')
+            axiosPublic.get('/featuredClasses')
             .then(res=>{
                 return  res.data
             })

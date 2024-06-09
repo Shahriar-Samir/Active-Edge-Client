@@ -1,18 +1,24 @@
 import React from 'react';
-import useAxiosSecure from '../Hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
+import useAxiosPublic from '../Hooks/useAxiosPublic';
+import Loading from '../Components/Loading';
 
 const AllClasses = () => {
-    const axiosSecure = useAxiosSecure()
+    const axiosPublic = useAxiosPublic()
 
-    const {data} = useQuery({
+    const {data,isFetching} = useQuery({
         queryKey: ['featuredClasses'],
+        initialData: [],
         queryFn: ()=>
-            axiosSecure.get('/allClasses')
+            axiosPublic.get('/allClasses')
             .then(res=>{
                 return  res.data
             })
+        
     })
+    if(isFetching){
+        return <Loading></Loading>
+    }
     return (
         <div className='mx-auto w-11/12 max-w-[1200px]'>
             <div className='grid grid-cols-2 gap-10'>

@@ -1,20 +1,25 @@
 import React, { useContext } from 'react';
-import useAxiosSecure from '../Hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import { AuthContext } from '../Providers/AuthProvider';
 import {Link} from 'react-router-dom'
+import Loading from '../Components/Loading';
+import useAxiosPublic from '../Hooks/useAxiosPublic';
 
 const AllTrainers = () => {
-    const axiosSecure = useAxiosSecure()
-    const {data} = useQuery({
-        queryKey:["posts"],
+    const axiosPublic = useAxiosPublic()
+    const {data,isFetching} = useQuery({
+        queryKey:["alltrainers"],
+        initialData: [],
         queryFn: ()=>
-            axiosSecure.get('/allTrainers')
+            axiosPublic.get('/allTrainers')
             .then(res=>{
                 return res.data
             })
     })
 
+    if(isFetching){
+        return <Loading/>
+    }
     return (
         <div className='grid grid-cols-4 gap-4 w-11/12 max-w-[1200px] mx-auto'>
             {data?.map(item=>{

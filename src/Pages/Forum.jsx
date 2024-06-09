@@ -7,25 +7,27 @@ import Loading from '../Components/Loading';
 
 const Forum = () => {
     const axiosPublic = useAxiosPublic()
-    const {data,isLoading} = useQuery({
+    const {data:posts,isFetching} = useQuery({
         queryKey:["posts"],
+        initialData: [],
         queryFn: ()=>
             axiosPublic.get('/forumPosts')
             .then(res=>{
+                console.log(res.data)
                 return res.data
             })
     })
 
-    if(isLoading){
-        return <Loading></Loading>
+    if(isFetching){
+        return <Loading/>
     }
     return (
         <div className='w-11/12 mx-auto max-w-[1200px]'>
 <div className='flex flex-col max-w-[700px] gap-5 mx-auto'>
-        {data?.map(item=>{
-            return <Post post={item}/>
+        {posts?.map(item=>{
+            return <Post key={item?._id} post={item}/>
         })}
-        </div>
+        </div>g
         </div>
     );
 };
