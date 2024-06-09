@@ -4,10 +4,13 @@ import Select from 'react-select'
 import { toast, ToastContainer } from 'react-toastify';
 import useAxiosSecure from '../Hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
+import Loading from '../Components/Loading';
 
 const TrainerApplication = () => {
     const {user} = useContext(AuthContext)
     const axiosSecure = useAxiosSecure()
+    const navigate = useNavigate()
 
     const daysOptions = [
         { value: 'Sun', label: 'Sunday' },
@@ -33,7 +36,7 @@ const TrainerApplication = () => {
         { "value": "facebook", "label": "Facebook" },
         { "value": "twitter", "label": "Twitter" },
         { "value": "whatsapp", "label": "Whatsapp" },
-        { "value": "Linkedin", "label": "Linkedin" },
+        { "value": "linkedin", "label": "Linkedin" },
         { "value": "instagram", "label": "Instagram" },
       ]
 
@@ -52,15 +55,9 @@ const TrainerApplication = () => {
    
                })
             }
-      const setMediaData = (e)=>{
-            const {checked,value} = e.target
-                setMedias(preMedias=>{
-                    if(checked){
-                       return [...preMedias, value]
-                    }
-                       return preMedias.filter((skill) => skill !== value)
-   
-               })
+      const setMediaData = (data)=>{
+        const newData = data.map(item=> item.value)
+        setMedias(newData)
             }
       const setDayData = (data)=>{
             const newData = data.map(item=> item.value)
@@ -71,7 +68,10 @@ const TrainerApplication = () => {
         setTime(data.value)
             }
 
+            const [button,setButton] = useState(false)
+
       const submitApplication = (e)=>{
+        setButton(true)
         e.preventDefault()
         const presentTime = new Date()
         const form = e.target
@@ -86,13 +86,16 @@ const TrainerApplication = () => {
 
         if(skills.length < 1 || time==='' || days.length < 1){
             toast.error('You need to fill up the form')
+            setButton(false)
         }
         else{
             axiosSecure.post('/trainerApply', {fullName, email, uid, image, age, skills, time, days,media, applyDate,status,xp})
             .then(()=>{
                 toast.success("Your application has been submitted successfully!")
+                navigate('/dashboard/activityLog')
             })
             .catch(()=>{
+              setButton(false)
                 toast.error('Something went wrong')
             })
         }
@@ -100,10 +103,10 @@ const TrainerApplication = () => {
 
 
 
-        const {data:application} = useQuery({
+        const {data:application,isFetching} = useQuery({
           queryKey: ['application'],
           queryFn: ()=>
-                    axiosSecure.get(`/application`, {params:user?.uid})
+                    axiosSecure.get(`/application/${user?.uid}`)
                     .then(res=>{
                         return res.data
                   }),
@@ -112,139 +115,138 @@ const TrainerApplication = () => {
       })
 
 
-      const [status,setStatus] = useState('')
 
-      useEffect(()=>{
-            if(application){
-              setStatus(true)
-            }
-      },[application])
-
-
-
-    return (
-        <div>
-            <ToastContainer/>
-       <div className="">
-  <div className="">
-
-    {status === true?
-    <div className='w-1/2'>
+     
+      if(isFetching){
+        return <Loading/>
+      }
+      if(application){
+          return  <div className='w-11/12 max-w-[1200px] mx-auto h-[100vh] flex justify-center items-center'>
           <div className='w-full flex justify-center items-center flex-col'>
-            <h1 className='text-xl font-semibold'>Your have already submitted an application</h1>
+            <h1 className='text-xl font-semibold text-center'>Your have already submitted an application</h1>
             <button className='bg-gray-300 p-3 font-semibold text-sm rounded-lg mt-5 cursor-default'>Application status : <span className='text-success'>Pending</span></button>
           </div>
     </div>
-     : 
-    <div className="mx-auto w-11/12 max-w-[800px] shrink-0 mt-16 pt-5 shadow-2xl bg-base-100">
-      <h1 className='text-3xl font-bold text-center'>Apply for trainer role</h1>
-     <form className="card-body grid md:grid-cols-2 lg:grid-cols-3 gap-5" onSubmit={submitApplication}>
-     <div className="form-control">
-       <label className="label">
-         <span className="label-text">Full Name</span>
-       </label>
-       <input type="text" placeholder="full name" name='fullName' className="input input-bordered" required />
-     </div>
-     <div className="form-control">
-       <label className="label">
-         <span className="label-text">Email</span>
-       </label>
-       <input type="email" disabled value={user?.email} className="input input-bordered" required />
-     </div>
-     <div className="form-control">
-       <label className="label">
-         <span className="label-text">Age</span>
-       </label>
-       <input type="number" placeholder="age" min='18' max='70' name='age' className="input input-bordered" required />
-     </div>
-     <div className="form-control">
-       <label className="label">
-         <span className="label-text">Years of experience</span>
-       </label>
-       <input type="number" placeholder="Years of experience" min='1'  name='xp' className="input input-bordered" required />
-     </div>
-     <div className="form-control">
-       <label className="label">
-         <span className="label-text">Profile Image</span>
-       </label>
-       <input type="text" placeholder="photo URL" defaultValue={user?.photoURL} className="input input-bordered" name='image' required />
-     </div>
-     <div className="form-control">
-       <label className="label">
-         <span className="label-text">Choose your social media</span>
-       </label>
-       <Select options={mediaOptions} onChange={setMediaData}></Select>
-     </div>
-     <div className="form-control lg:col-span-3">
-       <label className="label">
-         <span className="label-text">Skills</span>
-       </label>
-      <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-2'>
-      <div>
-       <input id='personalTraining'  type="checkbox" onChange={setSkillsData} name='skills' value='Personal Training'  />
-         <label htmlFor='personalTraining'> Personal Training</label>
+      }
+  
+      if(!application){
+        return (
+          <div>
+              <ToastContainer/>
+         <div className="">
+    <div className="">
+  
+      <div className="mx-auto w-11/12 max-w-[800px] shrink-0 mt-16 pt-5 shadow-2xl bg-base-100">
+        <h1 className='text-3xl font-bold text-center'>Apply for trainer role</h1>
+       <form className="card-body grid md:grid-cols-2 lg:grid-cols-3 gap-5" onSubmit={submitApplication}>
+       <div className="form-control">
+         <label className="label">
+           <span className=" font-bold">Full Name</span>
+         </label>
+         <input type="text" placeholder="full name" name='fullName' className="input input-bordered" required />
        </div>
-      <div>
-       <input id='groupFitnessInstruction' type="checkbox" onChange={setSkillsData} name='skills' value='Group Fitness Instruction'  />
-         <label htmlFor='groupFitnessInstruction'> Group Fitness Instruction</label>
+       <div className="form-control">
+         <label className="label">
+           <span className=" font-bold">Email</span>
+         </label>
+         <input type="email" disabled value={user?.email} className="input input-bordered" required />
        </div>
-       <div>
-       <input id='flexibilityTraining' type="checkbox" onChange={setSkillsData} name='skills' value='Flexibility Training' />
-         <label htmlFor='flexibilityTraining'> Flexibility Training</label>
+       <div className="form-control">
+         <label className="label">
+           <span className=" font-bold">Age</span>
+         </label>
+         <input type="number" placeholder="age" min='18' max='70' name='age' className="input input-bordered" required />
        </div>
-       <div>
-       <input id='nutritionCounseling' type="checkbox" onChange={setSkillsData} name='skills' value='Nutrition Counseling'  />
-         <label htmlFor='nutritionCounseling'> Nutrition Counseling</label>
+       <div className="form-control">
+         <label className="label">
+           <span className=" font-bold">Years of experience</span>
+         </label>
+         <input type="number" placeholder="Years of experience" min='1'  name='xp' className="input input-bordered" required />
        </div>
-       <div>
-       <input id='strengthTraining' type="checkbox" onChange={setSkillsData} name='skills' value='Strength Training' />
-         <label htmlFor='strengthTraining'> Strength Training</label>
+       <div className="form-control">
+         <label className="label">
+           <span className=" font-bold">Profile Image</span>
+         </label>
+         <input type="text" placeholder="photo URL" defaultValue={user?.photoURL} className="input input-bordered" name='image' required />
        </div>
-       <div>
-       <input id='cardiovascularTraining' type="checkbox" onChange={setSkillsData} name='skills' value='Cardiovascular Training' />
-         <label htmlFor='cardiovascularTraining'> Cardiovascular Training</label>
+       <div className="form-control">
+         <label className="label">
+           <span className=" font-bold">Choose your social media</span>
+         </label>
+         <Select  isMulti  className="basic-multi-select"
+     classNamePrefix="select"  options={mediaOptions} onChange={setMediaData}></Select>
        </div>
-       <div>
-       <input id='sportsCoaching' type="checkbox" onChange={setSkillsData} name='skills' value='Sports Coaching'  />
-         <label htmlFor='sportsCoaching'> Sports Coaching</label>
-       </div>
-       <div>
-       <input id='bodybuildingCoaching' type="checkbox" onChange={setSkillsData} name='skills' value='Bodybuilding Coaching' />
-         <label htmlFor='bodybuildingCoaching'> Bodybuilding Coaching</label>
-       </div>
-       <div>
-       <input id='cycling/SpinInstruction' type="checkbox" onChange={setSkillsData} name='skills' value='Cycling/Spin Instruction'  />
-         <label htmlFor='cycling/SpinInstruction'> Cycling/Spin Instruction</label>
-       </div>
-       <div>
-       <input id='boxingTraining' type="checkbox" onChange={setSkillsData} name='skill' value='Boxing Training' />
-         <label htmlFor='boxingTraining'> Boxing Training</label>
-       </div>
-      </div>
-     </div>
-
-     <div className="form-control">
-       <label className="label">
-         <span className="label-text">Available days a week</span>
-       </label>
-       <Select  isMulti  className="basic-multi-select"
-   classNamePrefix="select"  options={daysOptions} onChange={setDayData}></Select>
-     </div>
-     <div className="form-control">
-       <label className="label">
-         <span className="label-text">Available time in a day</span>
-       </label>
-       <Select options={timeOptions} onChange={setTimeData}></Select>
-     </div>
-     <div className="form-control mt-6">
-       <button className="btn btn-primary">Apply</button>
-     </div>
-   </form>
-    </div>}
-  </div>
-</div>
+       <div className="form-control lg:col-span-3">
+         <label className="label">
+           <span className=" font-bold">Skills</span>
+         </label>
+        <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-2'>
+        <div>
+         <input id='personalTraining'  type="checkbox" onChange={setSkillsData} name='skills' value='Personal Training'  />
+           <label htmlFor='personalTraining'> Personal Training</label>
+         </div>
+        <div>
+         <input id='groupFitnessInstruction' type="checkbox" onChange={setSkillsData} name='skills' value='Group Fitness Instruction'  />
+           <label htmlFor='groupFitnessInstruction'> Group Fitness Instruction</label>
+         </div>
+         <div>
+         <input id='flexibilityTraining' type="checkbox" onChange={setSkillsData} name='skills' value='Flexibility Training' />
+           <label htmlFor='flexibilityTraining'> Flexibility Training</label>
+         </div>
+         <div>
+         <input id='nutritionCounseling' type="checkbox" onChange={setSkillsData} name='skills' value='Nutrition Counseling'  />
+           <label htmlFor='nutritionCounseling'> Nutrition Counseling</label>
+         </div>
+         <div>
+         <input id='strengthTraining' type="checkbox" onChange={setSkillsData} name='skills' value='Strength Training' />
+           <label htmlFor='strengthTraining'> Strength Training</label>
+         </div>
+         <div>
+         <input id='cardiovascularTraining' type="checkbox" onChange={setSkillsData} name='skills' value='Cardiovascular Training' />
+           <label htmlFor='cardiovascularTraining'> Cardiovascular Training</label>
+         </div>
+         <div>
+         <input id='sportsCoaching' type="checkbox" onChange={setSkillsData} name='skills' value='Sports Coaching'  />
+           <label htmlFor='sportsCoaching'> Sports Coaching</label>
+         </div>
+         <div>
+         <input id='bodybuildingCoaching' type="checkbox" onChange={setSkillsData} name='skills' value='Bodybuilding Coaching' />
+           <label htmlFor='bodybuildingCoaching'> Bodybuilding Coaching</label>
+         </div>
+         <div>
+         <input id='cycling/SpinInstruction' type="checkbox" onChange={setSkillsData} name='skills' value='Cycling/Spin Instruction'  />
+           <label htmlFor='cycling/SpinInstruction'> Cycling/Spin Instruction</label>
+         </div>
+         <div>
+         <input id='boxingTraining' type="checkbox" onChange={setSkillsData} name='skill' value='Boxing Training' />
+           <label htmlFor='boxingTraining'> Boxing Training</label>
+         </div>
         </div>
-    );
+       </div>
+  
+       <div className="form-control">
+         <label className="label">
+           <span className=" font-bold">Available days a week</span>
+         </label>
+         <Select  isMulti  className="basic-multi-select"
+     classNamePrefix="select"  options={daysOptions} onChange={setDayData}></Select>
+       </div>
+       <div className="form-control">
+         <label className="label">
+           <span className=" font-bold">Available time in a day</span>
+         </label>
+         <Select options={timeOptions} onChange={setTimeData}></Select>
+       </div>
+       <div className="form-control mt-6">
+         <button className="btn bg-bgCommon hover:bg-bgHover text-white" disabled={button}>Apply</button>
+       </div>
+     </form>
+      </div>
+    </div>
+  </div>
+          </div>
+      );
+      }
 };
 
 export default TrainerApplication;
