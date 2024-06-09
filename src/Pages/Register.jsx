@@ -1,12 +1,12 @@
 import { useContext } from 'react';
 import {toast,ToastContainer} from 'react-toastify'
 import { AuthContext } from '../Providers/AuthProvider';
-import useAxiosSecure from '../Hooks/useAxiosSecure';
+import useAxiosPublic from '../Hooks/useAxiosPublic';
 
 
 const Register = () => {
     const {signup,setLoading,updateUser} = useContext(AuthContext)
-    const axiosSecure = useAxiosSecure()
+    const axiosPublic = useAxiosPublic()
     const submit = (e)=>{
       e.preventDefault()
       const form = e.target
@@ -25,7 +25,7 @@ const Register = () => {
             .then(()=>{
               const {uid,email,displayName,phoneNumber,photoURL} = res.user
               const userData = {uid, email, displayName, photoURL, phoneNumber, role}
-              axiosSecure.post('/addUser',userData)
+              axiosPublic.post('/addUser',userData)
                 .then(()=>{
                   setLoading(false)
                   toast.success('You have created a new account successfully')

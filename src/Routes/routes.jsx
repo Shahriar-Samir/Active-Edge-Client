@@ -74,7 +74,7 @@ const routes = createBrowserRouter([
         },
         {
             path: '/payment',
-            element: <PrivateRoute><MemberRoute><Payment/></MemberRoute></PrivateRoute>
+            element: <Payment/>
         },
     ],
 },
@@ -93,7 +93,7 @@ const routes = createBrowserRouter([
         },
         {
             path: 'addNewClass',
-            element: <AddNewClass/>
+            element: <AdminRoute><AddNewClass/></AdminRoute>
         },
         {
             path: 'addNewForum',

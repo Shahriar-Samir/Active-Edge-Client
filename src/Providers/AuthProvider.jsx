@@ -30,9 +30,10 @@ const AuthProvider = ({children}) => {
                         setLoading(false)
                         })
                         })
-                    .catch(err=> console.log(err))
+                    .catch(err=> console.log('loggedout1'))
                         }
                 else{
+                    console.log('loggedOut')
                     localStorage.removeItem('access-token')
                     setUser(null)
                     setLoading(false)

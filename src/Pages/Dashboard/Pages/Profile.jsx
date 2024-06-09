@@ -4,7 +4,6 @@ import { AuthContext } from '../../../Providers/AuthProvider';
 const Profile = () => {
     const {user} = useContext(AuthContext)
     const {displayName,email,photoURL} = user? user : ''
-    console.log(user)
     return (
         <div className='w-4/5 pt-10 pe-10'>
 <dialog id="my_modal_3" className="modal">

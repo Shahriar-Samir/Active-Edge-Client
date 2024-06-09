@@ -4,10 +4,10 @@ import { AuthContext } from '../Providers/AuthProvider';
 import { FcGoogle } from "react-icons/fc";
 import { GrFacebookOption } from "react-icons/gr";
 import { FaGithub } from "react-icons/fa";
-import useAxiosSecure from '../Hooks/useAxiosSecure';
+import useAxiosPublic from '../Hooks/useAxiosPublic';
 
 const Login = () => {
-    const axiosSecure = useAxiosSecure()
+    const axiosPublic = useAxiosPublic()
     const {signin,setLoading,googleAuth,facebookAuth,githubAuth} = useContext(AuthContext)
 
     const googleSignin = ()=>{
@@ -15,14 +15,14 @@ const Login = () => {
         .then(res=>{
           const {uid,email,displayName,phoneNumber,photoURL} = res.user
           const userData = {uid, email, displayName, photoURL, phoneNumber, role:'member'}
-          axiosSecure.get(`/user/${uid}`)
+          axiosPublic.get(`/user/${uid}`)
           .then(res=>{
               if(res.data){
                 setLoading(false)
                 toast.success('You have logged in successfully')
               }
               else{
-                axiosSecure.post('/addUser',userData)
+                axiosPublic.post('/addUser',userData)
                 .then(()=>{
                   setLoading(false)
                   toast.success('You have logged in successfully')
@@ -40,14 +40,14 @@ const Login = () => {
         .then(res=>{
           const {uid,email,displayName,phoneNumber,photoURL} = res.user
           const userData = {uid, email, displayName, photoURL, phoneNumber, role:'member'}
-          axiosSecure.get(`/user/${uid}`)
+          axiosPublic.get(`/user/${uid}`)
           .then(res=>{
               if(res.data){
                 setLoading(false)
                 toast.success('You have logged in successfully')
               }
               else{
-                axiosSecure.post('/addUser',userData)
+                axiosPublic.post('/addUser',userData)
                 .then(()=>{
                   setLoading(false)
                   toast.success('You have logged in successfully')
@@ -65,14 +65,14 @@ const Login = () => {
         .then(res=>{
           const {uid,email,displayName,phoneNumber,photoURL} = res.user
           const userData = {uid, email, displayName, photoURL, phoneNumber, role:'member'}
-          axiosSecure.get(`/user/${uid}`)
+          axiosPublic.get(`/user/${uid}`)
           .then(res=>{
               if(res.data){
                 setLoading(false)
                 toast.success('You have logged in successfully')
               }
               else{
-                axiosSecure.post('/addUser',userData)
+                axiosPublic.post('/addUser',userData)
                 .then(()=>{
                   setLoading(false)
                   toast.success('You have logged in successfully')

@@ -9,7 +9,7 @@ const AllTrainers = () => {
     const {data} = useQuery({
         queryKey:["posts"],
         queryFn: ()=>
-            axiosSecure.get('/trainers')
+            axiosSecure.get('/allTrainers')
             .then(res=>{
                 return res.data
             })
