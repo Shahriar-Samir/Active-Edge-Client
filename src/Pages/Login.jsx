@@ -15,7 +15,7 @@ const Login = () => {
         .then(res=>{
           const {uid,email,displayName,phoneNumber,photoURL} = res.user
           const userData = {uid, email, displayName, photoURL, phoneNumber, role:'member'}
-          axiosPublic.get(`/user/${uid}`)
+          axiosPublic.get(`/userRole/${uid}`)
           .then(res=>{
               if(res.data){
                 setLoading(false)
@@ -40,7 +40,7 @@ const Login = () => {
         .then(res=>{
           const {uid,email,displayName,phoneNumber,photoURL} = res.user
           const userData = {uid, email, displayName, photoURL, phoneNumber, role:'member'}
-          axiosPublic.get(`/user/${uid}`)
+          axiosPublic.get(`/userRole/${uid}`)
           .then(res=>{
               if(res.data){
                 setLoading(false)
@@ -65,7 +65,7 @@ const Login = () => {
         .then(res=>{
           const {uid,email,displayName,phoneNumber,photoURL} = res.user
           const userData = {uid, email, displayName, photoURL, phoneNumber, role:'member'}
-          axiosPublic.get(`/user/${uid}`)
+          axiosPublic.get(`/userRole/${uid}`)
           .then(res=>{
               if(res.data){
                 setLoading(false)

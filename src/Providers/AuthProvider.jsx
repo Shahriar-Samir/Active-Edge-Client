@@ -23,22 +23,29 @@ const AuthProvider = ({children}) => {
                         localStorage.setItem('access-token',res.data.token)
                         axiosPublic.get(`/userRole/${currentUser?.uid}`)
                         .then(res=>{
-                        const role = res.data
+                            if(res.data){
+                                const role = res.data
                         currentUser.role = role
                         console.log(currentUser)
                         setUser(currentUser)
                         setLoading(false)
-                        })
-                        })
-                    .catch(err=> console.log('loggedout1'))
                         }
-                else{
-                    console.log('loggedOut')
-                    localStorage.removeItem('access-token')
-                    setUser(null)
-                    setLoading(false)
-                }
-        })
+                        if(!res.data){
+                            currentUser.role = 'member'
+                            console.log(currentUser)
+                            setUser(currentUser)
+                            setLoading(false)
+                            }
+                        })
+                        .catch(err=> console.log(err))
+                    })}
+                        
+                    else{
+                        localStorage.removeItem('access-token')
+                        setUser(null)
+                        setLoading(false)
+                    }
+    })
     },[])
 
     const signup = (email,password)=>{
