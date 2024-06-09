@@ -1,20 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import {useQuery} from '@tanstack/react-query'
-import useAxiosSecure from '../Hooks/useAxiosSecure';
 import { formatDistanceToNow } from 'date-fns';
+import useAxiosPublic from '../Hooks/useAxiosPublic';
+import Loading from '../Components/Loading';
 
 
 const Forum = () => {
-    const axiosSecure = useAxiosSecure()
-    const {data} = useQuery({
+    const axiosPublic = useAxiosPublic()
+    const {data,isLoading} = useQuery({
         queryKey:["posts"],
         queryFn: ()=>
-            axiosSecure.get('/forumPosts')
+            axiosPublic.get('/forumPosts')
             .then(res=>{
                 return res.data
             })
     })
 
+    if(isLoading){
+        return <Loading></Loading>
+    }
     return (
         <div className='w-11/12 mx-auto max-w-[1200px]'>
 <div className='flex flex-col max-w-[700px] gap-5 mx-auto'>
@@ -30,13 +34,16 @@ export default Forum;
 
 const Post = ({post})=>{
     const {texts,title,date,displayName,photoURL,role} = post
-    const [timeAgo,setTimeAgo] = useState(formatDistanceToNow(new Date(date), { addSuffix: true }))
+    const [timeAgo,setTimeAgo] = useState('Loading...')
 
     useEffect(()=>{
-        setInterval(()=>{
+       
+        if(date){
+            setInterval(()=>{
                 setTimeAgo(formatDistanceToNow(new Date(date), { addSuffix: true }))
         },1000)
-    },[])
+        }
+    },[date])
 
     return(
         <article className="p-6 bg-white rounded-lg border border-gray-200 shadow-md">
