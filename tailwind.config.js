@@ -8,7 +8,7 @@ export default {
     extend: {
       colors: {
         'bgCommon': '#15D7F7',
-        'btnCommon': '#15D7F7',
+        'bgHover': '#47bcce',
       }
     },
   },

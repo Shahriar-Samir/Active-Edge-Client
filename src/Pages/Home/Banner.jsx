@@ -13,7 +13,7 @@ const Banner = () => {
             <div className='flex flex-col justify-center items-start w-1/2 gap-4 h-full'>
                 <h1 className='text-7xl font-bold'>Elevate Your Fitness Journey</h1>
                 <p className='text-start text-lg'>Join our cutting-edge platform to track progress, set goals, and connect with a vibrant fitness community. Start transforming your lifestyle today!</p>
-                <Link to='/allClasses'><button className='btn bg-bgCommon text-white font-bold '>Classes</button></Link>
+                <Link to='/allClasses'><button className='btn px-10 text-xl bg-bgCommon text-white font-bold hover:bg-bgHover'>Classes</button></Link>
             </div>
               <Swiper
         spaceBetween={30}
