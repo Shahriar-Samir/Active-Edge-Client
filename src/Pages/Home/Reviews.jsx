@@ -5,13 +5,14 @@ import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
 
 // import required modules
-import { EffectCoverflow, Pagination } from 'swiper/modules';
+import { EffectCoverflow, Pagination, Navigation } from 'swiper/modules';
+import Heading from '../../Components/Heading';
 
 
 const Reviews = () => {
     return (
-        <div>
-            <h1 className='text-center text-2xl font-bold'>Reviews </h1>
+        <div className='mt-28 w-11/12 mx-auto max-w-[1200px]'>
+ <Heading title={'Reviews'} details={'All the reviews given by our members'}/>
                  <Swiper
         effect={'coverflow'}
         grabCursor={true}
@@ -25,8 +26,9 @@ const Reviews = () => {
           slideShadows: true,
         }}
         pagination={true}
-        modules={[EffectCoverflow, Pagination]}
-        className="mySwiper"
+        navigation={true}
+        modules={[EffectCoverflow, Pagination, Navigation]}
+        className="mySwiper mt-12"
       >
         <SwiperSlide>
           <Slide/>
@@ -47,17 +49,24 @@ export default Reviews;
 
 const Slide = () => {
     return (
-        <div className='p-4 h-[300px]'>
+        <div className='p-4 bg-[skyblue] text-white'>
             <div>
-            <img src="https://swiperjs.com/demos/images/nature-1.jpg"  className='w-[50px] h-[50px]'/>
+           <div className='flex justify-center'>
+           <img src="https://swiperjs.com/demos/images/nature-1.jpg"  className='w-[60px] h-[60px] rounded-full'/>
+           </div>
             <div>
-            <h1>Emily R.</h1>
-            <p>Germany</p>
+            <h1 className='text-center mt-3 text-lg font-semibold'>Emily R.</h1>
+            <p className='text-center'>Germany@gmail.com</p>
             </div>
             </div>
-            <p>Rating: ★★★★★</p>
-            <h1>This is goood</h1>
+            <div className='mt-3'>
+            <h1 className='text-xl font-bold'>This is goood</h1>
             <p>This fitness tracker has completely transformed my workout routine! The personalized plans and real-time progress tracking keep me motivated every day. Highly recommend!</p>
+            </div>
+            <div className='mt-4 text-xl'>
+            <p>Rating: ★★★★★</p>
+            </div>
+            
         </div>
     );
 };
