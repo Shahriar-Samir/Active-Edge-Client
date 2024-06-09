@@ -74,7 +74,7 @@ const routes = createBrowserRouter([
         },
         {
             path: '/payment',
-            element: <Payment/>
+            element: <PrivateRoute><MemberRoute><Payment/></MemberRoute></PrivateRoute>
         },
     ],
 },
