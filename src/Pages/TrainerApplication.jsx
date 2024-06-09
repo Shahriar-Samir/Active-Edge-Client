@@ -29,9 +29,17 @@ const TrainerApplication = () => {
         { "value": "7:00 PM - 9:00 PM", "label": "7:00 PM - 9:00 PM" },
         { "value": "9:00 PM - 11:00 PM", "label": "9:00 PM - 11:00 PM" }
       ]
+    const mediaOptions =  [
+        { "value": "facebook", "label": "Facebook" },
+        { "value": "twitter", "label": "Twitter" },
+        { "value": "whatsapp", "label": "Whatsapp" },
+        { "value": "Linkedin", "label": "Linkedin" },
+        { "value": "instagram", "label": "Instagram" },
+      ]
 
       const [skills,setSkills] = useState([])
       const [days,setDays] = useState([])
+      const [media,setMedias] = useState([])
       const [time,setTime] = useState('')
 
       const setSkillsData = (e)=>{
@@ -41,6 +49,16 @@ const TrainerApplication = () => {
                        return [...preSkills, value]
                     }
                        return preSkills.filter((skill) => skill !== value)
+   
+               })
+            }
+      const setMediaData = (e)=>{
+            const {checked,value} = e.target
+                setMedias(preMedias=>{
+                    if(checked){
+                       return [...preMedias, value]
+                    }
+                       return preMedias.filter((skill) => skill !== value)
    
                })
             }
@@ -60,6 +78,7 @@ const TrainerApplication = () => {
         const fullName = form.fullName.value
         const image = form.image.value
         const age = form.age.value
+        const xp = form.xp.value
         const email = user?.email
         const uid = user?.uid
         const applyDate= presentTime.toLocaleString()
@@ -69,7 +88,7 @@ const TrainerApplication = () => {
             toast.error('You need to fill up the form')
         }
         else{
-            axiosSecure.post('/trainerApply', {fullName, email, uid, image, age, skills, time, days, applyDate,status})
+            axiosSecure.post('/trainerApply', {fullName, email, uid, image, age, skills, time, days,media, applyDate,status,xp})
             .then(()=>{
                 toast.success("Your application has been submitted successfully!")
             })
@@ -106,12 +125,9 @@ const TrainerApplication = () => {
     return (
         <div>
             <ToastContainer/>
-       <div className="hero min-h-screen bg-base-200">
-  <div className="hero-content flex-col lg:flex-row">
-    <div className="text-center lg:text-left">
-      <h1 className="text-5xl font-bold">Login now!</h1>
-      <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
-    </div>
+       <div className="">
+  <div className="">
+
     {status === true?
     <div className='w-1/2'>
           <div className='w-full flex justify-center items-center flex-col'>
@@ -120,8 +136,9 @@ const TrainerApplication = () => {
           </div>
     </div>
      : 
-    <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-     <form className="card-body" onSubmit={submitApplication}>
+    <div className="mx-auto w-11/12 max-w-[800px] shrink-0 mt-16 pt-5 shadow-2xl bg-base-100">
+      <h1 className='text-3xl font-bold text-center'>Apply for trainer role</h1>
+     <form className="card-body grid md:grid-cols-2 lg:grid-cols-3 gap-5" onSubmit={submitApplication}>
      <div className="form-control">
        <label className="label">
          <span className="label-text">Full Name</span>
@@ -142,15 +159,27 @@ const TrainerApplication = () => {
      </div>
      <div className="form-control">
        <label className="label">
+         <span className="label-text">Years of experience</span>
+       </label>
+       <input type="number" placeholder="Years of experience" min='1'  name='xp' className="input input-bordered" required />
+     </div>
+     <div className="form-control">
+       <label className="label">
          <span className="label-text">Profile Image</span>
        </label>
        <input type="text" placeholder="photo URL" defaultValue={user?.photoURL} className="input input-bordered" name='image' required />
      </div>
      <div className="form-control">
        <label className="label">
+         <span className="label-text">Choose your social media</span>
+       </label>
+       <Select options={mediaOptions} onChange={setMediaData}></Select>
+     </div>
+     <div className="form-control lg:col-span-3">
+       <label className="label">
          <span className="label-text">Skills</span>
        </label>
-      <div className='grid grid-cols-2 gap-2'>
+      <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-2'>
       <div>
        <input id='personalTraining'  type="checkbox" onChange={setSkillsData} name='skills' value='Personal Training'  />
          <label htmlFor='personalTraining'> Personal Training</label>

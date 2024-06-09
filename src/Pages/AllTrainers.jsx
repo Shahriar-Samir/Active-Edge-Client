@@ -21,10 +21,13 @@ const AllTrainers = () => {
         return <Loading/>
     }
     return (
-        <div className='grid grid-cols-4 gap-4 w-11/12 max-w-[1200px] mx-auto'>
+        <div className='w-11/12 mx-auto max-w-[1200px]'>
+            <h1 className='text-3xl text-center mt-10 font-bold'>All Trainers</h1>
+            <div className='mt-10 grid grid-cols-4 gap-4 w-11/12 max-w-[1200px] mx-auto'>
             {data?.map(item=>{
                 return <Trainer key={item._id} trainer={item}/>
             })}  
+        </div>
         </div>
     );
 };
@@ -39,7 +42,7 @@ const Trainer = ({trainer})=>{
   <figure><img src={photoURL}  /></figure>
   <div className="card-body">
     <h2 className="card-title">{displayName} {user?.uid === uid? '(You)' : ''}</h2>
-    <p>If a dog chews shoes whose shoes does he choose?</p>
+    <p></p>
     <div className="card-actions justify-end">
       <Link to={`/profile/${uid}`}><button className="btn btn-primary">Know more</button></Link>
     </div>
