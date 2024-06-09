@@ -62,7 +62,7 @@ console.log(slots)
     <p>Exp: {xp}years</p>
     </div>
     <div>
-        <p>Available Slots: {slots.length}</p>
+        <p>Available Slots: {slots?.length}</p>
     </div>
     <div className='flex justify-center items-center gap-4 mt-3'>
         {media?.map(item=>{

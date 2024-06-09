@@ -79,6 +79,7 @@ const TrainerApplication = () => {
         const image = form.image.value
         const age = form.age.value
         const xp = form.xp.value
+        const bio = form.bio.value
         const email = user?.email
         const uid = user?.uid
         const applyDate= presentTime.toLocaleString()
@@ -89,7 +90,7 @@ const TrainerApplication = () => {
             setButton(false)
         }
         else{
-            axiosSecure.post('/trainerApply', {fullName, email, uid, image, age, skills, time, days,media, applyDate,status,xp})
+            axiosSecure.post('/trainerApply', {fullName, email, uid, image, age, skills, time, days,media, applyDate,status,xp,bio})
             .then(()=>{
                 toast.success("Your application has been submitted successfully!")
                 navigate('/dashboard/activityLog')
@@ -236,6 +237,12 @@ const TrainerApplication = () => {
            <span className=" font-bold">Available time in a day</span>
          </label>
          <Select options={timeOptions} onChange={setTimeData}></Select>
+       </div>
+       <div className="form-control">
+         <label className="label">
+           <span className=" font-bold">Write About Yourself</span>
+         </label>
+         <textarea name='bio' className='min-h-[7vh] h-[7vh] max-h-[20vh] input input-bordered pt-2'></textarea>
        </div>
        <div className="form-control mt-6">
          <button className="btn bg-bgCommon hover:bg-bgHover text-white" disabled={button}>Apply</button>
