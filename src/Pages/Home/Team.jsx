@@ -39,7 +39,7 @@ export default Team;
 
 const Trainer = ({trainer})=>{
   const {user} = useContext(AuthContext)
-  const {photoURL,email,displayName,fullName,uid,skills} = trainer
+  const {photoURL,email,displayName,bio,fullName,uid,skills} = trainer
 
   return(
       <div className="card bg-base-100 shadow-xl p-5">
@@ -47,11 +47,15 @@ const Trainer = ({trainer})=>{
 <div className="p-4">
   <div className=''>
   <h2 className="card-title">{fullName} {user?.uid === uid? '(You)' : ''}</h2>
+  <p>{bio}</p>
   </div>
+    <div>
+      <h1 className='font-bold text-xl mt-5'>Skills</h1>
     <div className='grid grid-cols-3'>
       {skills.map(item=>{
         return <p key={item}>{item}</p>
       })}
+    </div>
     </div>
   <div className="card-actions justify-end mt-4 w-full">
     <Link to={`/profile/${uid}`} className='w-full'><button className="btn w-full bg-bgCommon hover:bg-bgHover">Know more</button></Link>

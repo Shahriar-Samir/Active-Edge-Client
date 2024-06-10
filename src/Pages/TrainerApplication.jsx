@@ -70,6 +70,7 @@ const TrainerApplication = () => {
 
             const [button,setButton] = useState(false)
 
+            console.log(skills)
       const submitApplication = (e)=>{
         setButton(true)
         e.preventDefault()
@@ -85,7 +86,7 @@ const TrainerApplication = () => {
         const applyDate= presentTime.toLocaleString()
         const status = 'pending'
 
-        if(skills.length < 1 || time==='' || days.length < 1){
+        if(skills.length < 1 || time==='' || days.length < 1 || media.length <1){
             toast.error('You need to fill up the form')
             setButton(false)
         }
@@ -115,6 +116,11 @@ const TrainerApplication = () => {
      
       })
 
+      useEffect(()=>{
+        setSkills([])
+        setDays([])
+        setMedias([])
+      },[isFetching])
 
 
      
@@ -242,7 +248,7 @@ const TrainerApplication = () => {
          <label className="label">
            <span className=" font-bold">Write About Yourself</span>
          </label>
-         <textarea name='bio' className='min-h-[7vh] h-[7vh] max-h-[20vh] input input-bordered pt-2'></textarea>
+         <textarea name='bio' placeholder='Write in 150 characters' required maxLength={150} className='min-h-[7vh] h-[7vh] max-h-[20vh] input input-bordered pt-2'></textarea>
        </div>
        <div className="form-control mt-6">
          <button className="btn bg-bgCommon hover:bg-bgHover text-white" disabled={button}>Apply</button>
