@@ -123,9 +123,9 @@ options={days} name="selectedDays" onChange={changeSelectedDays} ></Select>
         </div>
         <div className="form-control">
           <label className="label">
-            <span className="label-text">Slot Time</span>
+            <span className="label-text">Slot Time (hour)</span>
           </label>
-          <input type="text" placeholder="Slot time" name="slotTime" className="input input-bordered" required />
+          <input type="number" max={8} min={1} placeholder="Slot time(hour)" name="slotTime" className="input input-bordered" required />
         </div>
         
         <div className="form-control">

@@ -72,13 +72,14 @@ const TrainerDetails = () => {
   <div className='mt-4'>
     <h1 className='text-center text-3xl font-bold'>Available slots</h1>
 
-{     slots?.length > 0?  <div>
+{     slots?.length > 0?  <div className='grid grid-cols-3 mt-8 gap-5'>
      {
     slots?.map(item=>{
-          return <Link to={`/trainerBooking/${item._id}`} key={item._id} className="card w-96 bg-primary text-primary-content">
+          return <Link to={`/trainerBooking/${item._id}`} key={item._id} className="card bg-bgCommon hover:bg-bgHover">
           <div className="card-body">
-            <h2 className="card-title">{item.slotName}</h2>
-            <p>{item.slotTime}</p>
+            <h2 className="text-2xl font-bold">{item.slotName}</h2>
+            <p className='font-semibold'>Time: {item.slotTime} hours</p>
+            <p className='font-semibold'>Classes: {item.selectedClasses.length}</p>
           </div>
         </Link>
         })
