@@ -20,12 +20,16 @@ const ManageSlots = () => {
     const okay =false
 
 
-    const deleteSlot = (id)=>{
-        console.log(id)
-        axiosSecure.delete(`/deleteSlot/${id}`)
+    const deleteSlot = (item)=>{
+        const {displayName,uid,photoURL} = user
+        const {selectedClasses} = item
+        axiosSecure.delete(`/deleteSlot/${item._id}`)
         .then(res=>{
-            document.getElementById(id).style.display = 'none'
+            axiosSecure.put('/removeClassTrainer',{displayName,photoURL,uid,selectedClasses})
+            .then(()=>{
+              document.getElementById(item._id).style.display = 'none'
             toast.success("Slot deleted Successfully")
+            })
         })
         .catch(()=>{
             toast.error('Something went wrong')
@@ -65,7 +69,7 @@ const ManageSlots = () => {
     <h3 className="font-bold text-lg text-center">Are you sure you want to delete this slot ?</h3>
     <div className='flex gap-5 mt-7 justify-center'>
     <form method='dialog'>
-    <button className="btn  bg-red-500 text-white" onClick={()=>{deleteSlot(item._id)}}>Delete</button>
+    <button className="btn  bg-red-500 text-white" onClick={()=>{deleteSlot(item)}}>Delete</button>
     </form>
     <form method='dialog'>
     <button className="btn ">Cancel</button>
