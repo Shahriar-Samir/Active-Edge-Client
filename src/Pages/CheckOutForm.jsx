@@ -10,6 +10,7 @@ import {
   PaymentElement,
 } from '@stripe/react-stripe-js';
 import { toast, ToastContainer } from 'react-toastify';
+import Loading from '../Components/Loading';
 
 const CheckOutForm = () => {
     const [searchParams,setSearchParams] = useSearchParams()
@@ -20,9 +21,9 @@ const CheckOutForm = () => {
     const {user} = useContext(AuthContext)
     const [clientSecret,setClientSecret] = useState()
     const [transactionId, setTransactionId] = useState()
-    const price = 400
+    const price = type === 'basic'? 20 : type==='standard'? 50 : type==='premium'? 100 : 0
 
-    const {data:slot} = useQuery({
+    const {data:slot,isLoading} = useQuery({
         queryKey:["slot"],
         queryFn: ()=>
             axiosSecure.get(`/trainerSlot/${slotId}`)
@@ -31,7 +32,7 @@ const CheckOutForm = () => {
             }),
         enabled: !!slotId
     })
-    console.log(slot)
+
     useEffect(()=>{
         axiosSecure.post(`/createPaymentIntent`, {price})
         .then(res=>{
@@ -70,7 +71,6 @@ const CheckOutForm = () => {
             console.log(paymentMethod)
             setCardError('')
         }
-        console.log(clientSecret)
         const {paymentIntent,error:errorPayment} = await stripe.confirmCardPayment(clientSecret.clientSecret, {
             payment_method:{
                 card: card,
@@ -82,7 +82,7 @@ const CheckOutForm = () => {
         })
 
         if(errorPayment){
-            console.log(errorPayment.type)
+            toast.error(errorPayment.message)
         }
         else{
             if(paymentIntent.status === 'succeeded'){
@@ -106,36 +106,71 @@ const CheckOutForm = () => {
         }
     }
 
-
+    if(isLoading){
+        return <Loading/>
+    }
     
 
     return (
-        <div>
+       <div className='w-11/12 max-w-[1200px] mx-auto h-[100vh]'>
             <ToastContainer/>
-           <form onSubmit={handlePayment}>
-      <CardElement
-        options={{
-          style: {
-            base: {
-              fontSize: '16px',
-              color: '#424770',
-              '::placeholder': {
-                color: '#aab7c4',
-              },
-            },
-            invalid: {
-              color: '#9e2146',
+         <div className='flex justify-center items-center h-full'>
+         
+         <form onSubmit={handlePayment} className='w-11/12 max-w-[500px] bg-gray-100 p-10 mx-auto'>
+         <h1 className='text-4xl font-bold text-center'>Payment</h1>
+      <div className='mt-10  flex flex-col'>
+      <div className='flex justify-between border-b pb-1'>
+        <h1>Name:</h1>
+      <h1 className=''> {user?.displayName}</h1>
+      </div>
+      <div className='flex justify-between border-b pb-1'>
+        <h1>Email:</h1>
+      <h1 className=''> {user?.email}</h1>
+      </div>
+      <div className='flex justify-between border-b pb-1'>
+        <h1>Trainer Name:</h1>
+      <h1 className=''> {slot?.displayName}</h1>
+      </div>
+      <div className='flex justify-between border-b pb-1'>
+        <h1>Slot Name:</h1>
+        <h1>{slot?.slotName}</h1>
+      </div>
+      <div className='flex justify-between border-b pb-1'>
+        <h1>Package:</h1>
+        <h1>{type==='basic'? 'Basic': type===''}</h1>
+      </div>
+      <div className='flex justify-between border-b pb-1'>
+        <h1>Price:</h1>
+        <h1>Price: {price}$</h1>
+      </div>
+      </div>
+
+    <h1 className='mt-5 font-semibold'>Give us your card number</h1>
+    <CardElement
+    className='mt-4'
+      options={{
+        style: {
+          base: {
+            fontSize: '16px',
+            color: '#424770',
+            '::placeholder': {
+              color: '#aab7c4',
             },
           },
-        }}
-      />
-      <button type="submit" className='btn' disabled={!stripe || !clientSecret}>
-        Pay
-      </button>
-    </form>
-    <p className='text-error'>{cardError}</p>
-    {transactionId && <p className='text-success'>{transactionId}</p>}
-        </div>
+          invalid: {
+            color: '#9e2146',
+          },
+        },
+      }}
+    />
+    <button type="submit" className='btn mt-5 w-full bg-bgCommon text-white' disabled={!stripe || !clientSecret}>
+      Pay Now
+    </button>
+  </form>
+  <p className='text-error'>{cardError}</p>
+  {transactionId && <p className='text-success'>{transactionId}</p>}
+      </div>
+       </div>
 )
 }
 
