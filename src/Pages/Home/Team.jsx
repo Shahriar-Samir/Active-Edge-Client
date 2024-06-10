@@ -23,11 +23,14 @@ const Team = () => {
     }
     return (
         <div className='mt-28 w-11/12 mx-auto max-w-[1200px]'>
-            <Heading title={'Our Team'} details={''}/>
+            <Heading title={'Our Team'} details={'Meet Our Trainers'}/>
             <div className='grid grid-cols-3 gap-5'>
                     {data?.map((item,index)=>{
                       return <Trainer key={index} trainer={item}/>
                     })}
+            </div>
+            <div className='flex justify-center mt-7'>
+              <Link to='/allTrainers'><button className='btn bg-bgCommon text-white font-bold hover:bg-bgHover text-xl'>Our Trainers</button></Link>
             </div>
         </div>
     );

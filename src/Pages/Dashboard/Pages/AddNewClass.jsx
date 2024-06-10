@@ -12,7 +12,8 @@ const AddNewClass = () => {
         const image = form.imageURL.value
         const details = form.details.value
         const bookings = 0
-        axiosSecure.post('/addClass',{className,image,details,bookings})
+        const trainers = []
+        axiosSecure.post('/addClass',{className,image,details,bookings,trainers})
         .then(()=>{
             toast.success('New Class Created Successfully')
         })
@@ -41,7 +42,7 @@ const AddNewClass = () => {
           <label className="label">
             <span className="label-text">Details</span>
           </label>
-          <textarea type="email" placeholder="details" name='details' className="input input-bordered min-h-[30vh] max-h-[30vh]" required></textarea>
+          <textarea type="email" maxLength={200} placeholder="details" name='details' className="input input-bordered min-h-[30vh] max-h-[30vh]" required></textarea>
         </div>
         <div className="form-control mt-6">
           <button className="btn btn-primary">Add Class</button>

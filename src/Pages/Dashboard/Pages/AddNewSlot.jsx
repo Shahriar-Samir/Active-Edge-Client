@@ -4,11 +4,13 @@ import {toast, ToastContainer} from 'react-toastify'
 import { AuthContext } from '../../../Providers/AuthProvider';
 import { useQuery } from "@tanstack/react-query";
 import Select from 'react-select'
+import { useNavigate } from "react-router-dom";
 
 
 const AddNewSlot = () => {
       const axiosSecure = useAxiosSecure()
       const presentTime = new Date();
+      const navigate = useNavigate()
       const {user} = useContext(AuthContext)
 
       const {data:userInfo} = useQuery({
@@ -65,7 +67,7 @@ const AddNewSlot = () => {
     const form = e.target
     const slotName = form.slotName.value
     const slotTime = form.slotTime.value
-    const {uid, email,displayName} = user
+    const {uid, email,displayName,photoURL} = user
 
     if(selectedDays.length < 1 || selectedClasses.length < 1){
     toast.error('Please fill up the form')
@@ -73,7 +75,11 @@ const AddNewSlot = () => {
     else{
         axiosSecure.post('/addSlot',{date:presentTime.toLocaleString(),uid,displayName,email,selectedDays,slotName,slotTime,selectedClasses})
         .then(res=>{
-             toast.success('Added Slot Successfully!')
+          axiosSecure.put('/updateClasses', {selectedClasses,uid,displayName,photoURL,slotName})
+          .then(()=>{
+            toast.success('Added Slot Successfully!')
+            navigate(`/profile/${uid}`)
+          })
         })
         .catch(()=>{
              toast.error('Something went wrong')
