@@ -23,7 +23,7 @@ const AllTrainers = () => {
     return (
         <div className='w-11/12 mx-auto max-w-[1200px]'>
             <h1 className='text-3xl text-center mt-10 font-bold'>All Trainers</h1>
-            <div className='mt-10 grid grid-cols-4 gap-4 w-11/12 max-w-[1200px] mx-auto'>
+            <div className='mt-10 grid grid-cols-4 gap-10 w-11/12 max-w-[1200px] mx-auto'>
             {data?.map(item=>{
                 return <Trainer key={item._id} trainer={item}/>
             })}  

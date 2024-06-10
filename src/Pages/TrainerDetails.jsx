@@ -64,7 +64,7 @@ const TrainerDetails = () => {
 </div>
 <div className='flex justify-start item-center mt-5'>
 
-{user?.role === 'admin'? <Link to='/trainerApplication'><button className='btn bg-bgCommon hover:bg-bgHover text-white font-bold text-xl'>Become a trainer</button></Link>
+{user?.role === 'member'? <Link to='/trainerApplication'><button className='btn bg-bgCommon hover:bg-bgHover text-white font-bold text-xl'>Become a trainer</button></Link>
 :
 ''
 }
@@ -72,7 +72,7 @@ const TrainerDetails = () => {
   <div className='mt-4'>
     <h1 className='text-center text-3xl font-bold'>Available slots</h1>
 
-{     slots.length > 0?  <div>
+{     slots?.length > 0?  <div>
      {
     slots?.map(item=>{
           return <Link to={`/trainerBooking/${item._id}`} key={item._id} className="card w-96 bg-primary text-primary-content">
