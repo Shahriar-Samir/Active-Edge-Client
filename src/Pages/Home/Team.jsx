@@ -12,7 +12,7 @@ const Team = () => {
         queryKey:["alltrainers"],
         initialData: [],
         queryFn: ()=>
-            axiosPublic.get('/allTrainers')
+            axiosPublic.get('/trainersTeam')
             .then(res=>{
                 return res.data
             })
@@ -46,21 +46,19 @@ const Trainer = ({trainer})=>{
 <figure><img src={photoURL}  className='w-full h-[250px] object-cover'/></figure>
 <div className="p-4">
   <div className=''>
-  <h2 className="card-title">{fullName} {user?.uid === uid? '(You)' : ''}</h2>
+  <h2 className="text-2xl font-bold">{fullName} {user?.uid === uid? '(You)' : ''}</h2>
   <p>{bio}</p>
   </div>
     <div>
-      <h1 className='font-bold text-xl mt-5'>Skills</h1>
-    <div className='grid grid-cols-3'>
+      <h1 className='font-bold text-lg mt-3'>Skills</h1>
+    <div className='grid grid-cols-3 gap-3'>
       {skills.map(item=>{
-        return <p key={item}>{item}</p>
+        return <p key={item} className='p-3 border text-sm'>{item}</p>
       })}
     </div>
     </div>
-  <div className="card-actions justify-end mt-4 w-full">
-    <Link to={`/profile/${uid}`} className='w-full'><button className="btn w-full bg-bgCommon hover:bg-bgHover">Know more</button></Link>
-  </div>
 </div>
+
 </div>
   )
 }
