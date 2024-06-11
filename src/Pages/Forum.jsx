@@ -64,7 +64,7 @@ const Forum = () => {
                 setCurrentButtons(Math.floor((currentPage-1)/10))
             }
         }
-    console.log(currentButtons)
+
         return (
             <div className='w-11/12 mx-auto max-w-[1200px]'>
                            <ToastContainer/>

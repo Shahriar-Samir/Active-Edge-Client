@@ -1,32 +1,96 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosPublic from '../Hooks/useAxiosPublic';
 import Loading from '../Components/Loading';
 import { Link } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
 const AllClasses = () => {
     const axiosPublic = useAxiosPublic()
+    const classesPerPage = 6
+    const [currentPage,setCurrentPage] = useState(0)
+    const [currentButtons,setCurrentButtons]= useState(0)
 
     const {data,isFetching} = useQuery({
-        queryKey: ['allClasses'],
+        queryKey:[currentPage],
         initialData: [],
         queryFn: ()=>
-            axiosPublic.get('/allClasses')
+            axiosPublic.get(`/allClasses?page=${currentPage}&size=${classesPerPage}`)
             .then(res=>{
                 return  res.data
             })
         
     })
-    if(isFetching){
+
+    const {data:classesCount,isFetching:fetching2} = useQuery({
+        queryKey:["classesCount"],
+        initialData: {},
+        queryFn: ()=>
+            axiosPublic.get('/classesCount')
+            .then(res=>{
+                return res.data
+            })
+    })
+
+
+
+    if(isFetching || fetching2){
         return <Loading></Loading>
     }
+
+    const numberOfPages = Math.ceil(classesCount?.classesLength / classesPerPage)
+    const pages = [...Array(numberOfPages).keys()]
+
+    const changePage = (pageNumber)=>{
+            setCurrentPage(pageNumber)
+            setCurrentButtons(Math.floor(pageNumber/10))
+    }
+   
+    const nextPage = ()=>{
+        if(currentPage<(numberOfPages-1)){
+            setCurrentPage(currentPage+1)
+            setCurrentButtons(Math.floor((currentPage+1)/10))
+        }
+    }
+    const prePage = ()=>{
+        if(currentPage>0){
+            setCurrentPage(currentPage-1)
+            setCurrentButtons(Math.floor((currentPage-1)/10))
+        }
+    }
+
     return (
         <div className='mx-auto w-11/12 max-w-[1200px]'>
-            <h1 className='mt-10 text-center text-3xl font-bold'>Available Classes</h1>
-            <div className='grid grid-cols-2 gap-10 mt-10'>
-                {data?.map(item=>{
-                    return <Class key={item._id} ClassItem={item}/>
-                })}
+             <div className=''>
+                           <ToastContainer/>
+                <p className='mt-5 text-3xl font-bold text-center'>Forum Posts</p>
+    {data.length < 1? <div className='h-[80vh] flex justify-center items-center'>
+        <h1 className='text-center font-bold text-xl'>There are no post available</h1>
+    </div>:
+            <div>
+                <div className='grid grid-cols-2 gap-10 mx-auto mt-10'>
+            {data?.map(item=>{
+                return <Class key={item?._id} ClassItem={item}/>
+            })}
+            </div>
+            <div className='w-full flex justify-center items-center mt-16'><div className="join ">
+      <input onClick={prePage} className="join-item btn btn-square" type="radio" checked={false} name="options" aria-label="Prev" disabled={currentPage ===0? true : false} />
+      {
+        currentPage>9? <input checked={false} className="join-item btn btn-square" type="radio" name="options" aria-label="..." /> : ''
+     }
+        {
+            pages.slice(10*currentButtons,10*(currentButtons+1)).map(page=>{
+                return   <input onClick={()=>{ changePage(page)}} key={page} className="join-item btn btn-square" type="radio" name="options" checked={currentPage===page? true : false} aria-label={page+1} />
+            })
+        }
+     {
+     
+        currentPage<((Math.ceil(numberOfPages/10)*10)-10)? <input checked={false} className="join-item btn btn-square" type="radio" name="options" aria-label="..." /> : ''
+     }
+      <input onClick={nextPage} checked={false} className="join-item btn btn-square" type="radio" name="options" aria-label="Next" disabled={currentPage ===(numberOfPages-1) ? true : false} />
+    </div></div>
+    
+            </div>}
             </div>
         </div>
     );
@@ -47,15 +111,15 @@ const Class = ({ClassItem})=>{
     <div className="card-actions justify-between items-center mt-4">
     <p className='text-lg'><span className='font-bold'>Booking:</span> {bookings}</p>
     {trainers.length > 5? <div className='flex gap-2 items-center'>
-        {trainers?.slice(0,5).map(item=>{
-            return <Link key={item} to={`/profile/${item.trainerUid}`}><img src={item.trainerPhotoURL} className='w-[30px] h-[30px] rounded-full object-cover'/></Link>
+        {trainers?.slice(0,5).map((item,index)=>{
+            return <Link key={index} to={`/profile/${item.trainerUid}`}><img src={item.trainerPhotoURL} className='w-[30px] h-[30px] rounded-full object-cover'/></Link>
         })}
                 <Link to='/allTrainers'><p className='text-sm font-bold'>more+</p></Link>
     </div>
     :
     <div className='flex gap-2 items-center'>
-    {trainers?.map(item=>{
-        return <Link key={item} to={`/profile/${item.trainerUid}`}><img src={item.trainerPhotoURL} className='w-[30px] h-[30px] rounded-full object-cover'/></Link>
+    {trainers?.map((item,index)=>{
+        return <Link key={index} to={`/profile/${item.trainerUid}`}><img src={item.trainerPhotoURL} className='w-[30px] h-[30px] rounded-full object-cover'/></Link>
     })}
 </div>}
     </div>
