@@ -10,12 +10,13 @@ const AllClasses = () => {
     const classesPerPage = 6
     const [currentPage,setCurrentPage] = useState(0)
     const [currentButtons,setCurrentButtons]= useState(0)
+    const [searchValue,setSearchValue] = useState('')
 
     const {data,isFetching} = useQuery({
-        queryKey:[currentPage],
+        queryKey:[currentPage,searchValue],
         initialData: [],
         queryFn: ()=>
-            axiosPublic.get(`/allClasses?page=${currentPage}&size=${classesPerPage}`)
+            axiosPublic.get(`/allClasses?page=${currentPage}&size=${classesPerPage}&searchValue=${searchValue===''? 'false' : searchValue}`)
             .then(res=>{
                 return  res.data
             })
@@ -58,16 +59,33 @@ const AllClasses = () => {
             setCurrentButtons(Math.floor((currentPage-1)/10))
         }
     }
+    const searchClasses = (e)=>{
+            e.preventDefault()
+            const sv = e.target.search.value
+            setSearchValue(sv)
+    }
 
     return (
         <div className='mx-auto w-11/12 max-w-[1200px]'>
              <div className=''>
                            <ToastContainer/>
-                <p className='mt-5 text-3xl font-bold text-center'>Forum Posts</p>
+                <p className='mt-5 text-3xl font-bold text-center'>All Classes</p>
     {data.length < 1? <div className='h-[80vh] flex justify-center items-center'>
-        <h1 className='text-center font-bold text-xl'>There are no post available</h1>
+        <h1 className='text-center font-bold text-xl'>There are no class available</h1>
     </div>:
             <div>
+                     <form className="w-11/12 max-w-md mx-auto mt-5" onSubmit={searchClasses}>   
+                <label htmlFor="default-search" className="mb-2 text-sm font-medium text-white sr-only ">Search</label>
+                <div className="relative">
+                    <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                        <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                        </svg>
+                    </div>
+                    <input type="search" id="default-search" className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50" placeholder="Search classes" name='search' />
+                    <button type="submit" className="text-white absolute end-2.5 bottom-2.5 bg-bgCommon hover:bg-bgHover font-medium rounded-lg text-sm px-4 py-2" >Search</button>
+                </div>
+            </form>
                 <div className='grid grid-cols-2 gap-10 mx-auto mt-10'>
             {data?.map(item=>{
                 return <Class key={item?._id} ClassItem={item}/>
