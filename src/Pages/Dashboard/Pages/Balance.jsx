@@ -17,6 +17,16 @@ const Balance = () => {
           }),
       enabled: !!user
   })
+  const {data:paidMembers} = useQuery({
+      queryKey:["paidMember"],
+      queryFn: ()=>
+          axiosSecure.get(`/allPaidMember`)
+          .then(res=>{
+              return res.data
+          }),
+      enabled: !!user
+  })
+
   const {data:subscribers} = useQuery({
       queryKey:["subscribers"],
       queryFn: ()=>
@@ -60,7 +70,7 @@ const Balance = () => {
     {
       data: [
         { id: 0, value: subscribers?.length, label: 'Subscribers' },
-        { id: 1, value: payments?.length, label: 'Paid members' },
+        { id: 1, value: paidMembers?.length, label: 'Paid members' },
       ],
       innerRadius: 30,
       outerRadius: 90,

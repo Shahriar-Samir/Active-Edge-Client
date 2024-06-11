@@ -2,17 +2,19 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../../../Providers/AuthProvider';
 import { toast, ToastContainer } from 'react-toastify';
 import Loading from '../../../Components/Loading';
+import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 
 const Profile = () => {
-    const {user,updateUser} = useContext(AuthContext)
+    const {user} = useContext(AuthContext)
     const {displayName,email,photoURL} = user
+    const axiosSecure = useAxiosSecure()
 
   const updateProfile = (e)=>{
       e.preventDefault()
       const form = e.target 
       const displayName = form.displayName.value
       const photoURL = form.photoURL.value
-      updateUser({photoURL,displayName})
+      axiosSecure.put(`/updateUserData/${user?.uid}`,{photoURL,displayName})
       .then(()=>{
         toast.success("Profile updated")
       })

@@ -3,6 +3,7 @@ import { FaEye } from "react-icons/fa6";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import {toast, ToastContainer} from 'react-toastify'
 
+
 const AppliedTrainer = () => {
     const okay = false
     const axiosSecure = useAxiosSecure()
@@ -125,6 +126,7 @@ const AppliedTrainer = () => {
           </div>
         </h1>
         <h1 className="mt-2 flex gap-4 items-center"><span className="font-bold">Available time:</span><span className="text-sm font-semibold">{item?.time}</span></h1>
+        <h1 className="mt-2"><span className="font-bold">About the user:</span> {item?.bio}</h1>
     <div className="flex gap-5 mt-4 justify-end">
     <form method="dialog">
         <button className="btn"onClick={()=> confirmApplication(item)}>Confirm</button>

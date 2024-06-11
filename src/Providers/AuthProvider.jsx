@@ -24,20 +24,24 @@ const AuthProvider = ({children}) => {
                         axiosPublic.get(`/userRole/${currentUser?.uid}`)
                         .then(res=>{
                             if(res.data){
-                                const role = res.data
-                        currentUser.role = role
-                        console.log(currentUser)
-                        setUser(currentUser)
-                        setLoading(false)
+                                axiosPublic.get(`/userData/${currentUser?.uid}`)
+                                .then(userData=>{
+                                    updateProfile(auth.currentUser,userData.data)
+                                    .then(()=>{
+                                        const role = res.data
+                                        currentUser.role = role
+                                        setUser(currentUser)
+                                        setLoading(false)
+                                    })
+                                })
                         }
                         if(!res.data){
                             currentUser.role = 'member'
-                            console.log(currentUser)
                             setUser(currentUser)
                             setLoading(false)
                             }
                         })
-                        .catch(err=> console.log(err))
+                        .catch()
                     })}
                         
                     else{

@@ -27,7 +27,7 @@ const AddNewSlot = () => {
     const {data: allClasses} = useQuery({
         queryKey: ['allClasses'],
         queryFn: ()=>
-            axiosSecure.get('/allClasses')
+            axiosSecure.get('/allClassesName')
             .then(res=>{
                 return  res.data
             })
