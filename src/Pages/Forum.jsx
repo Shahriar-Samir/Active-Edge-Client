@@ -115,7 +115,7 @@ const Post = ({post})=>{
 
 
     useEffect(()=>{
-        axiosSecure.get(`/myVoteStatus`,{params:{uid,postId:_id}})
+        axiosSecure.get(`/myVoteStatus`,{params:{uid:user?.uid,postId:_id}})
         .then(res=>{
                 setVote(res.data)
         })
@@ -148,14 +148,14 @@ const Post = ({post})=>{
     const upVote = ()=>{
         const postId = _id
         if(vote === 'noVote' || vote === 'downVote'){
-                 axiosSecure.delete('/removeDownVote', {params:{uid,postId}})
-            axiosSecure.post('/addUpVote', {uid,displayName,email,postId,type:'upVote'})
+                 axiosSecure.delete('/removeDownVote', {params:{uid:user?.uid,postId}})
+            axiosSecure.post('/addUpVote', {uid:user?.uid,displayName:user?.displayName,email:user?.email,postId,type:'upVote'})
         .then(()=>{
                 setVote('upVote')
         })
         }
         if(vote === 'upVote'){
-            axiosSecure.delete('/removeUpVote', {params:{uid,postId}})
+            axiosSecure.delete('/removeUpVote', {params:{uid:user?.uid,postId}})
         .then(()=>{
                 setVote('noVote')
         })
@@ -167,14 +167,14 @@ const Post = ({post})=>{
     const downVote = ()=>{
         const postId = _id
         if(vote === 'noVote' || vote === 'upVote'){
-            axiosSecure.delete('/removeUpVote', {params:{uid,postId}})
-            axiosSecure.post('/addDownVote', {uid,displayName,email,postId,type:'downVote'})
+            axiosSecure.delete('/removeUpVote', {params:{uid:user?.uid,postId}})
+            axiosSecure.post('/addDownVote', {uid:user?.uid,displayName:user?.displayName,email:user?.email,postId,type:'downVote'})
         .then(()=>{
                 setVote('downVote')
         })
         }
         if(vote === 'downVote'){
-            axiosSecure.delete('/removeDownVote', {params:{uid,postId}})
+            axiosSecure.delete('/removeDownVote', {params:{uid:user?.uid,postId}})
         .then(()=>{
                 setVote('noVote')
         })
