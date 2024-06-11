@@ -193,10 +193,12 @@ const Post = ({post})=>{
         <div className="flex justify-between items-center">
             <div className="flex items-center space-x-4">
                 <img className="w-12 h-12 rounded-full object-cover" src={photoURL} alt={displayName} />
-                <span className="font-medium ">
+                <div className='flex flex-col'>
+                <span className="font-bold text-xl text-black">
                     {displayName}
                 </span>
-                <p>Role: {role}</p>
+                <span className={`${role==='admin'?'text-orange-500':'text-blue-500'} font-bold`}>{role === 'admin'? 'Admin' : 'Trainer'}</span>
+                </div>
             </div>
         </div>
             <span className="text-sm">{timeAgo}</span>
