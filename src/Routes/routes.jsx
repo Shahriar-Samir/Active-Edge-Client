@@ -28,6 +28,7 @@ import AdminRoute from "./AdminRoute";
 import MemberRoute from "./MemberRoute";
 import TrainerRoute from "./TrainerRoute";
 import CrossRoute from "./CrossRoute";
+import Post from "../Pages/Post";
 
 
 const routes = createBrowserRouter([
@@ -59,6 +60,10 @@ const routes = createBrowserRouter([
         {
             path: '/forum',
             element: <Forum/>
+        },
+        {
+            path: '/forum/post/:id',
+            element: <Post/>
         },
         {
             path: '/profile/:id',
@@ -127,6 +132,7 @@ const routes = createBrowserRouter([
             path: 'manageSlots',
             element: <TrainerRoute><ManageSlots/></TrainerRoute>
         },
+
     ]
 }
 

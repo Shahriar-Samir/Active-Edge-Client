@@ -207,11 +207,11 @@ const Post = ({post})=>{
         <p className="mb-5 font-light text-gray-500 dark:text-gray-400">{texts?.slice(0,150)}{texts.length > 150? '...' :''}</p>
         <div className='flex justify-between '>
             <div className='flex gap-5 items-center'>
-            <div className={`${vote === 'upVote'? 'bg-blue-500' : 'bg-bgCommon'} p-2 flex items-center gap-2 rounded-md cursor-pointer text-white font-bold`} onClick={()=> user? upVote() : navigate('/login')}>
+            <div className={`${vote === 'upVote'? 'bg-blue-500 hover:bg-blue-300' : 'bg-bgCommon hover:bg-bgHover'} p-2 flex items-center gap-2 rounded-md cursor-pointer text-white font-bold`} onClick={()=> user? upVote() : navigate('/login')}>
             <FaArrowUp className='text-xl ' />
                 <p>{upVotes?.allUpVotes}</p>
             </div>
-            <div className={`${vote === 'downVote'? 'bg-red-500' : 'bg-bgCommon'} p-2 flex items-center gap-2 rounded-md cursor-pointer text-white font-bold`}  onClick={()=> user? downVote() : navigate('/login')}>
+            <div className={`${vote === 'downVote'? 'bg-red-500 hover:bg-red-300' : 'bg-bgCommon hover:bg-bgHover'} p-2 flex items-center gap-2 rounded-md cursor-pointer text-white font-bold`}  onClick={()=> user? downVote() : navigate('/login')}>
             <FaArrowDown className='text-xl' />
             <p>{downVotes?.allDownVotes}</p>
             </div>
