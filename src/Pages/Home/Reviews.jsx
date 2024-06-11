@@ -7,10 +7,28 @@ import 'swiper/css/pagination';
 // import required modules
 import { EffectCoverflow, Pagination, Navigation } from 'swiper/modules';
 import Heading from '../../Components/Heading';
+import useAxiosPublic from '../../Hooks/useAxiosPublic';
+import { useQuery } from '@tanstack/react-query';
+import Loading from '../../Components/Loading';
 
 
 const Reviews = () => {
-    return (
+  const axiosPublic = useAxiosPublic()
+  const {data:reviews,isFetching} = useQuery({
+    queryKey: ['reviews'],
+    initialData: [],
+    queryFn: ()=>
+        axiosPublic.get('/allReviews')
+        .then(res=>{
+            return  res.data
+        })
+})
+
+  if(isFetching){
+    return <Loading/>
+  }
+
+  return (
         <div className='mt-28 w-11/12 mx-auto max-w-[1200px]'>
  <Heading title={'Reviews'} details={'All the reviews given by our members'}/>
                  <Swiper
@@ -30,15 +48,11 @@ const Reviews = () => {
         modules={[EffectCoverflow, Pagination, Navigation]}
         className="mySwiper mt-12"
       >
-        <SwiperSlide>
-          <Slide/>
-        </SwiperSlide>
-        <SwiperSlide>
-          <Slide/>
-        </SwiperSlide>
-        <SwiperSlide>
-            <Slide/>
-        </SwiperSlide>
+        {
+          reviews?.map(review=>{
+            return <SwiperSlide key={review._id}><Slide item={review}/></SwiperSlide>
+          })
+        }
       </Swiper>
         </div>
     );
@@ -47,24 +61,34 @@ const Reviews = () => {
 export default Reviews;
 
 
-const Slide = () => {
+const Slide = ({item}) => {
+
     return (
-        <div className='p-4 bg-[skyblue] text-white'>
+        <div className='p-4 bg-[skyblue] text-white h-[340px]'>
             <div>
            <div className='flex justify-center'>
-           <img src="https://swiperjs.com/demos/images/nature-1.jpg"  className='w-[60px] h-[60px] rounded-full'/>
+           <img src={item?.photoURL}  className='w-[60px] h-[60px] rounded-full'/>
+           </div>
+           <div className='flex justify-center items-center'>
+           <div className="rating mt-3">
+  <input type="radio" className="mask mask-star-2 bg-orange-400" checked={item?.rating === 1? true :false}/>
+  <input type="radio" className="mask mask-star-2 bg-orange-400" checked={item?.rating === 2? true :false}/>
+  <input type="radio" className="mask mask-star-2 bg-orange-400" checked={item?.rating === 3? true :false}/>
+  <input type="radio" className="mask mask-star-2 bg-orange-400" checked={item?.rating === 4? true :false}/>
+  <input type="radio" className="mask mask-star-2 bg-orange-400" checked={item?.rating === 5? true :false}/>
+</div>
            </div>
             <div>
-            <h1 className='text-center mt-3 text-lg font-semibold'>Emily R.</h1>
-            <p className='text-center'>Germany@gmail.com</p>
+            <h1 className='text-center mt-3 text-lg font-semibold'>{item?.displayName}</h1>
+            <p className='text-center'>{item?.email}</p>
             </div>
             </div>
             <div className='mt-3'>
-            <h1 className='text-xl font-bold'>This is goood</h1>
-            <p>This fitness tracker has completely transformed my workout routine! The personalized plans and real-time progress tracking keep me motivated every day. Highly recommend!</p>
+            <h1 className='text-xl font-bold'>{item?.title}</h1>
+            <p>{item?.texts}</p>
             </div>
             <div className='mt-4 text-xl'>
-            <p>Rating: ★★★★★</p>
+            
             </div>
             
         </div>

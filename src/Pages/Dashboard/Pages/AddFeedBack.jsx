@@ -40,7 +40,7 @@ const AddFeedBack = () => {
           <label className="label">
             <span className="label-text">Give us your feedback</span>
           </label>
-          <textarea placeholder="write your feedback in 200 characters" name="texts" className="input input-bordered min-h-[30vh] h-[35vh] max-h-[40vh] p-4" maxLength={200} required ></textarea>
+          <textarea placeholder="write your feedback in 200 characters" name="texts" className="input input-bordered min-h-[17vh] h-[17vh] max-h-[17vh] p-4" maxLength={200} required ></textarea>
         </div>
         <div className="form-control">
           <label className="label">
