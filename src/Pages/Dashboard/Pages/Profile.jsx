@@ -1,34 +1,52 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../../../Providers/AuthProvider';
+import { toast, ToastContainer } from 'react-toastify';
+import Loading from '../../../Components/Loading';
 
 const Profile = () => {
-    const {user} = useContext(AuthContext)
-    const {displayName,email,photoURL} = user? user : ''
+    const {user,updateUser} = useContext(AuthContext)
+    const {displayName,email,photoURL} = user
+
+  const updateProfile = (e)=>{
+      e.preventDefault()
+      const form = e.target 
+      const displayName = form.displayName.value
+      const photoURL = form.photoURL.value
+      updateUser({photoURL,displayName})
+      .then(()=>{
+        toast.success("Profile updated")
+      })
+      .catch(()=>{
+        toast.error('Something went wrong')
+      })
+  }
+  
+  if(user){
+
     return (
         <div className='w-4/5 pt-10 pe-10'>
-<dialog id="my_modal_3" className="modal">
+          <ToastContainer className='z-30'/>
+<dialog id="my_modal_3" className="modal z-20">
   <div className="modal-box">
     <form method="dialog">
       <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
     </form>
-    <form className="card-body">
+    <form className="card-body" onSubmit={updateProfile}>
+      <h1 className='text-center text-2xl font-bold'>Update Profile</h1>
         <div className="form-control">
           <label className="label">
-            <span className="label-text">Email</span>
+            <span className="label-text">Name</span>
           </label>
-          <input type="email" placeholder="email" className="input input-bordered" required />
+          <input type="text" name='displayName' placeholder="Name" defaultValue={displayName} className="input input-bordered" required />
         </div>
         <div className="form-control">
           <label className="label">
-            <span className="label-text">Password</span>
+            <span className="label-text">Photo URL</span>
           </label>
-          <input type="password" placeholder="password" className="input input-bordered" required />
-          <label className="label">
-            <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
-          </label>
+          <input type="text" name='photoURL' defaultValue={photoURL} placeholder="photo URL" className="input input-bordered" required />
         </div>
         <div className="form-control mt-6">
-          <button className="btn btn-primary">Login</button>
+          <button className="btn bg-bgCommon hover:bg-bgHover">Update Profile</button>
         </div>
       </form>
   </div>
@@ -68,6 +86,10 @@ const Profile = () => {
           </div>
         </div>
     );
+  }
+  
+  return <Loading/>
+
 };
 
 export default Profile;
