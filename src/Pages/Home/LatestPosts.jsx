@@ -11,7 +11,7 @@ const LatestPosts = () => {
         queryKey:["posts"],
         initialData: [],
         queryFn: ()=>
-            axiosPublic.get('/forumPosts')
+            axiosPublic.get('/latestPosts')
             .then(res=>{
                 console.log(res.data)
                 return res.data
@@ -37,7 +37,7 @@ const LatestPosts = () => {
                             </div>
                             </div>
                             <p className="w-full mt-3">{item.texts.slice(0,200)}...</p>
-                            <Link to={`post/${item._id}`}><button className="btn mt-3 bg-bgCommon text-white">Read More</button></Link>
+                            <Link to={`/forum/post/${item._id}`}><button className="btn mt-3 bg-bgCommon text-white">Read More</button></Link>
                    </div>
                 })}
             </div>

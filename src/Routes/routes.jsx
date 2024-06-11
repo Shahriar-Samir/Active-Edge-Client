@@ -29,6 +29,8 @@ import MemberRoute from "./MemberRoute";
 import TrainerRoute from "./TrainerRoute";
 import CrossRoute from "./CrossRoute";
 import Post from "../Pages/Post";
+import AddFeedBack from "../Pages/Dashboard/Pages/AddFeedBack";
+
 
 
 const routes = createBrowserRouter([
@@ -91,6 +93,10 @@ const routes = createBrowserRouter([
         {
             path:'profile',
             element: <MemberRoute><Profile/></MemberRoute>
+        },
+        {
+            path:'addFeedback',
+            element: <MemberRoute><AddFeedBack/></MemberRoute>
         },
         {
             path: 'recommendedClasses',

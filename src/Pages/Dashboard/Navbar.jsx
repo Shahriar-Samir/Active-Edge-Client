@@ -23,6 +23,7 @@ const Navbar = () => {
       <div className='w-1/4 h-[100vh]  bg-gray-200 fixed'>
         <div className='p-5'>
         <ul className="menu flex flex-col gap-5"> 
+          <li><NavLink to='/'>Home</NavLink></li>
         {navLinks()}
     </ul>
       </div>
@@ -60,6 +61,7 @@ const Member = ()=>{
        <li><NavLink to='/dashboard/profile'>Profile</NavLink></li>
       <li><NavLink to='/dashboard/activityLog'>Activity Log</NavLink></li>
       <li><NavLink to='/dashboard/recommendedClasses'>Recommended Classes</NavLink></li>
+      <li><NavLink to='/dashboard/addfeedback'>Add Feedback</NavLink></li>
       </>
     )
 }
