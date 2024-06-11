@@ -8,7 +8,7 @@ const AllClasses = () => {
     const axiosPublic = useAxiosPublic()
 
     const {data,isFetching} = useQuery({
-        queryKey: ['featuredClasses'],
+        queryKey: ['allClasses'],
         initialData: [],
         queryFn: ()=>
             axiosPublic.get('/allClasses')

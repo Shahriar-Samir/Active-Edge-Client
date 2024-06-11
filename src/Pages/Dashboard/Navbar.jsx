@@ -41,6 +41,7 @@ const Admin = ()=>{
       <li><NavLink to='/dashboard/appliedTrainers'>Applied Trainer</NavLink></li>
       <li><NavLink to='/dashboard/balance'>Balance</NavLink></li>
       <li><NavLink to='/dashboard/addNewClass'>Add new Class</NavLink></li>
+      <li><NavLink to='/dashboard/addNewForum'>Add new Forum</NavLink></li>
       </>
     )
 }
