@@ -137,7 +137,7 @@ const CheckOutForm = () => {
       </div>
       <div className='flex justify-between border-b pb-1'>
         <h1>Package:</h1>
-        <h1>{type==='basic'? 'Basic': type===''}</h1>
+        <h1>{type==='basic'? 'Basic': type==='standard'? 'Standard' : type==='premium'? 'Premium' : ''}</h1>
       </div>
       <div className='flex justify-between border-b pb-1'>
         <h1>Price:</h1>

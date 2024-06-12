@@ -91,7 +91,7 @@ const AllClasses = () => {
                     <button type="submit" className="text-white absolute end-2.5 bottom-2.5 bg-bgCommon hover:bg-bgHover font-medium rounded-lg text-sm px-4 py-2" >Search</button>
                 </div>
             </form>
-                <div className='grid grid-cols-2 gap-10 mx-auto mt-10'>
+                <div className='grid grid-cols-1 md:grid-cols-2 gap-10 mx-auto mt-10'>
             {data?.map(item=>{
                 return <Class key={item?._id} ClassItem={item}/>
             })}
@@ -125,14 +125,14 @@ const Class = ({ClassItem})=>{
     const {className,details,bookings,image,trainers} = ClassItem
     return (
         <div className="flex bg-base-100 shadow-xl rounded-xl">
-  <figure className='w-1/3'><img src={image} className='w-full h-full object-cover rounded-s-xl'/></figure>
+  <figure className='w-1/2  md:w-1/3'><img src={image} className='w-full h-full object-cover rounded-s-xl'/></figure>
   <div className="w-2/3 p-5 flex flex-col justify-between">
     <div>
-    <h2 className="text-2xl font-bold">{className}</h2>
-    <p>{details}</p>  
+    <h2 className="md:text-2xl font-bold">{className}</h2>
+    <p className='text-sm md:text-base'>{details}</p>  
     </div>
-    <div className="card-actions justify-between items-center mt-4">
-    <p className='text-lg'><span className='font-bold'>Booking:</span> {bookings}</p>
+    <div className="card-actions flex-col md:flex-row justify-between md:items-center mt-4">
+    <p className='text-sm md:text-lg'><span className='font-bold'>Booking:</span> {bookings}</p>
     {trainers.length > 5? <div className='flex gap-2 items-center'>
         {trainers?.slice(0,5).map((item,index)=>{
             return <Link key={index} to={`/profile/${item.trainerUid}`}><img src={item.trainerPhotoURL} className='w-[30px] h-[30px] rounded-full object-cover'/></Link>
@@ -142,7 +142,7 @@ const Class = ({ClassItem})=>{
     :
     <div className='flex gap-2 items-center'>
     {trainers?.map((item,index)=>{
-        return <Link key={index} to={`/profile/${item.trainerUid}`}><img src={item.trainerPhotoURL} className='w-[30px] h-[30px] rounded-full object-cover'/></Link>
+        return <Link key={index} to={`/profile/${item.trainerUid}`}><img src={item.trainerPhotoURL} className='w-[20px] h-[20px] md:w-[30px] md:h-[30px] rounded-full object-cover'/></Link>
     })}
 </div>}
     </div>
