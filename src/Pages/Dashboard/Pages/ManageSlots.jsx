@@ -93,11 +93,6 @@ const ManageSlots = () => {
                     <tr key={item._id} id={item._id} >
                       <td>
                         <div className="flex items-center gap-3">
-                          <div className="avatar">
-                            <div className="mask mask-squircle w-12 h-12">
-                              <img src={item.photoURL} />
-                            </div>
-                          </div>
                           <div>
                             <div className="font-bold">{item.slotName}</div>
                             <div className="text-sm opacity-50 font-semibold">{item.email}</div>
