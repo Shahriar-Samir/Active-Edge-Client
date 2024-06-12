@@ -99,42 +99,42 @@ const AddNewSlot = () => {
           <ToastContainer/>
            <h1 className='text-xl text-center font-bold mt-5'>Add New Slot</h1>
            <form className="card-body w-11/12 max-w-[600px] mx-auto " onSubmit={postSubmit}>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="form-control">
           <label className="label">
-            <span className="label-text">Name</span>
+            <span className="label-text font-semibold">Name</span>
           </label>
           <input type="text" name="name" defaultValue={user?.displayName} disabled className="input input-bordered" required />
         </div>
         <div className="form-control">
           <label className="label">
-            <span className="label-text">Email</span>
+            <span className="label-text font-semibold">Email</span>
           </label>
           <input type="text"  name="email" defaultValue={user?.email} disabled className="input input-bordered" required />
         </div>
         <div className="form-control">
           <label className="label">
-            <span className="label-text">Select Days</span>
+            <span className="label-text font-semibold">Select Days</span>
           </label>
           <Select  isMulti  className=""
 options={days} name="selectedDays" onChange={changeSelectedDays} ></Select>
         </div>
         <div className="form-control">
           <label className="label">
-            <span className="label-text">Slot Name</span>
+            <span className="label-text font-semibold">Slot Name</span>
           </label>
           <input type="text" placeholder="Slot name" name="slotName" className="input input-bordered" required />
         </div>
         <div className="form-control">
           <label className="label">
-            <span className="label-text">Slot Time (hour)</span>
+            <span className="label-text font-semibold">Slot Time (hour)</span>
           </label>
           <input type="number" max={8} min={1} placeholder="Slot time(hour)" name="slotTime" className="input input-bordered" required />
         </div>
         
         <div className="form-control">
           <label className="label">
-            <span className="label-text">Select Class</span>
+            <span className="label-text font-semibold">Select Class</span>
           </label>
           <Select  isMulti  className=""
 options={classes} name="selectedClasses" onChange={changeSelectedClasses}></Select>
@@ -142,7 +142,7 @@ options={classes} name="selectedClasses" onChange={changeSelectedClasses}></Sele
         
         </div>
         <div className="form-control mt-6">
-          <button className="btn btn-primary">Post</button>
+          <button className="btn bg-bgCommon text-white font-semibold hover:bg-bgHover">Add Slot</button>
         </div>
       </form>
         </div>
