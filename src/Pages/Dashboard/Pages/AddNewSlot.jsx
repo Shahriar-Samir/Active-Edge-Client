@@ -5,6 +5,7 @@ import { AuthContext } from '../../../Providers/AuthProvider';
 import { useQuery } from "@tanstack/react-query";
 import Select from 'react-select'
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 
 const AddNewSlot = () => {
@@ -92,6 +93,9 @@ const AddNewSlot = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>Active Edge | Add Slot</title>
+            </Helmet>
           <ToastContainer/>
            <h1 className='text-xl text-center font-bold mt-5'>Add New Slot</h1>
            <form className="card-body w-11/12 max-w-[600px] mx-auto " onSubmit={postSubmit}>

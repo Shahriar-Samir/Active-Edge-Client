@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import Loading from '../Components/Loading';
 import useAxiosPublic from '../Hooks/useAxiosPublic';
 import Trainer from './TrainerCard';
+import { Helmet } from 'react-helmet-async';
 
 
 const AllTrainers = () => {
@@ -22,6 +23,9 @@ const AllTrainers = () => {
     }
     return (
         <div className='w-11/12 mx-auto max-w-[1200px]'>
+            <Helmet>
+                <title>Active Edge || All Trainers</title>
+            </Helmet>
             <h1 className='text-3xl text-center mt-10 font-bold'>All Trainers</h1>
             <div className='mt-10 grid grid-cols-4 gap-10 w-11/12 max-w-[1200px] mx-auto'>
             {data?.map(item=>{

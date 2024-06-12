@@ -8,6 +8,7 @@ import { formatDistanceToNow } from 'date-fns';
 import { toast, ToastContainer } from 'react-toastify';
 import Loading from '../Components/Loading';
 import { useQuery } from '@tanstack/react-query';
+import { Helmet } from 'react-helmet-async';
 
 const Post = () => {
     const {id} = useParams()
@@ -118,6 +119,9 @@ const {texts,title,date,displayName,photoURL,role} = post
 
     return(
         <div className='flex justify-center min-h-[80vh]'>
+               <Helmet>
+                <title>Active Edge | Post</title>
+            </Helmet>
           <article className="p-6 bg-white rounded-lg border border-gray-200 shadow-md mt-10 w-11/12 max-w-[600px] h-fit">
              <ToastContainer/>
          <div className="flex justify-between items-center mb-5 text-gray-500">

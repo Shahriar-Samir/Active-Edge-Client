@@ -8,6 +8,7 @@ import {
   Elements,
 } from '@stripe/react-stripe-js';
 import CheckOutForm from './CheckOutForm';
+import { Helmet } from 'react-helmet-async';
 
 
 
@@ -17,6 +18,9 @@ const Payment = () => {
 
     return (
         <div>
+              <Helmet>
+                <title>Active Edge | Payment</title>
+            </Helmet>
             <Elements stripe={stripePromise}>
                 <CheckOutForm/>
             </Elements>

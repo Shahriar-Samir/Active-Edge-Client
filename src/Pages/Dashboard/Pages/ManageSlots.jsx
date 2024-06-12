@@ -3,6 +3,7 @@ import { AuthContext } from '../../../Providers/AuthProvider';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import { toast, ToastContainer } from 'react-toastify';
+import { Helmet } from 'react-helmet-async';
 
 const ManageSlots = () => {
     const {user} = useContext(AuthContext)
@@ -39,6 +40,9 @@ const ManageSlots = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>Active Edge | Manage Slots</title>
+            </Helmet>
             <ToastContainer/>
              {
                 okay === true? 

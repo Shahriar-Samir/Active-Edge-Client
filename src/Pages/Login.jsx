@@ -5,6 +5,7 @@ import { FcGoogle } from "react-icons/fc";
 import { GrFacebookOption } from "react-icons/gr";
 import { FaGithub } from "react-icons/fa";
 import useAxiosPublic from '../Hooks/useAxiosPublic';
+import { Helmet } from 'react-helmet-async';
 
 const Login = () => {
     const axiosPublic = useAxiosPublic()
@@ -109,6 +110,9 @@ const Login = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>Active Edge | Login</title>
+            </Helmet>
           <ToastContainer/>
             <div className="hero min-h-screen bg-base-200">
   <div className="hero-content flex-col lg:flex-row-reverse">

@@ -3,6 +3,7 @@ import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Loading from '../Components/Loading';
 import useAxiosSecure from '../Hooks/useAxiosSecure';
+import { Helmet } from 'react-helmet-async';
 
 const TrainerBooking = () => {
     const {slotId} = useParams() 
@@ -25,6 +26,9 @@ const TrainerBooking = () => {
 
     return (
         <div className='w-11/12 max-w-[1200px] mx-auto'>
+             <Helmet>
+                <title>Active Edge | Trainer Booking</title>
+            </Helmet>
           <h1 className='mt-10 text-3xl font-semibold text-center'>Book Trainer</h1>
             <div className='mt-10'>
             <h1 className='text-2xl text-center font-bold'>{slot?.slotName}</h1>

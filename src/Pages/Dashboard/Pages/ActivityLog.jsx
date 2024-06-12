@@ -5,6 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import { FaEye, FaWpforms } from "react-icons/fa6";
 import { MdOutlinePendingActions } from "react-icons/md";
 import Loading from '../../../Components/Loading';
+import { Helmet } from 'react-helmet-async';
 
 const ActivityLog = () => {
     const {user} = useContext(AuthContext)
@@ -38,6 +39,9 @@ const ActivityLog = () => {
 
     return (
         <div className='w-full'>
+                   <Helmet>
+                <title>Active Edge | Activity Log</title>
+            </Helmet>
             {    applications?  
                 <div className=''>
                     <h1 className='text-2xl text-center mt-5 font-bold'>Activity Log</h1>

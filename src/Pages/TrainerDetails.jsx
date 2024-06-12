@@ -4,6 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import { AuthContext } from '../Providers/AuthProvider';
 import useAxiosPublic from '../Hooks/useAxiosPublic';
 import Loading from '../Components/Loading';
+import { Helmet } from 'react-helmet-async';
 
 const TrainerDetails = () => {
     const {id} = useParams()
@@ -35,6 +36,9 @@ const TrainerDetails = () => {
 
     return (
         <div className="w-11/12 mx-auto mt-20 max-w-[1200px]">
+             <Helmet>
+                <title>Active Edge | Trainer Details</title>
+            </Helmet>
             <div className='mt-10'>
   <div className="flex justify-between gap-10">
     <img src={trainerData?.photoURL} className="w-2/5 object-cover h-[500px]" />

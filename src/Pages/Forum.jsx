@@ -8,6 +8,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FaArrowDown, FaArrowUp } from "react-icons/fa6";
 import { AuthContext } from '../Providers/AuthProvider';
 import {toast,ToastContainer} from 'react-toastify'
+import { Helmet } from 'react-helmet-async';
 
 
 
@@ -67,6 +68,9 @@ const Forum = () => {
 
         return (
             <div className='w-11/12 mx-auto max-w-[1200px]'>
+                   <Helmet>
+                <title>Active Edge | Forum</title>
+            </Helmet>
                            <ToastContainer/>
                 <p className='mt-5 text-3xl font-bold text-center'>Forum Posts</p>
     {posts.length < 1? <div className='h-[80vh] flex justify-center items-center'>
@@ -188,7 +192,6 @@ const Post = ({post})=>{
 
     return(
         <article className="p-6 bg-white rounded-lg border border-gray-200 shadow-md">
-
         <div className="flex justify-between items-center mb-5 text-gray-500">
         <div className="flex justify-between items-center">
             <div className="flex items-center space-x-4">
@@ -221,5 +224,11 @@ const Post = ({post})=>{
     </article>
     )}
 
-    return   <div className="skeleton h-32 w-full"></div>
+    return (
+        <div>
+           
+            <div className="skeleton h-32 w-full"></div>
+        </div>
+    )  
+    
 }

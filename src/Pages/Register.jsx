@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import {toast,ToastContainer} from 'react-toastify'
 import { AuthContext } from '../Providers/AuthProvider';
 import useAxiosPublic from '../Hooks/useAxiosPublic';
+import { Helmet } from 'react-helmet-async';
 
 
 const Register = () => {
@@ -44,6 +45,9 @@ const Register = () => {
     return (
         <div>
           <ToastContainer/>
+          <Helmet>
+                <title>Active Edge | Sign Up</title>
+            </Helmet>
             <div className="hero min-h-screen bg-base-200">
   <div className="hero-content flex-col lg:flex-row-reverse">
     <div className="text-center lg:text-left">

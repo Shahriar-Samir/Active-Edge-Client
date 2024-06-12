@@ -6,6 +6,7 @@ import useAxiosSecure from '../Hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import Loading from '../Components/Loading';
+import { Helmet } from 'react-helmet-async';
 
 const TrainerApplication = () => {
     const {user} = useContext(AuthContext)
@@ -139,6 +140,9 @@ const TrainerApplication = () => {
       if(!application){
         return (
           <div>
+               <Helmet>
+                <title>Active Edge | Trainer Application</title>
+            </Helmet>
               <ToastContainer/>
          <div className="">
     <div className="">

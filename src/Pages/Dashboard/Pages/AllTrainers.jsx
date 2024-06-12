@@ -2,6 +2,7 @@ import React from 'react';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import { toast, ToastContainer } from 'react-toastify';
+import { Helmet } from 'react-helmet-async';
 
 const AllTrainers = () => {
     const okay = false
@@ -30,6 +31,9 @@ const AllTrainers = () => {
 
     return (
         <div className='w-full'>
+            <Helmet>
+                <title>Active Edge | All Trainers</title>
+            </Helmet>
           <ToastContainer/>
             <h1 className='text-2xl font-bold text-center border-b pb-3'>All the Trainers</h1>
             {

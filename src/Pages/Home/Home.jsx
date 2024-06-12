@@ -7,12 +7,16 @@ import LatestPosts from "./LatestPosts";
 import Newsletter from "./Newsletter";
 import Reviews from "./Reviews";
 import Team from "./Team";
+import { Helmet } from "react-helmet-async";
 
 
 
 const Home = () => {
     return (
         <div>
+            <Helmet>
+                <title>Active Edge || Home</title>
+            </Helmet>
             <ToastContainer/>
             <Banner/>
             <Featured/>

@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { FaEye } from "react-icons/fa6";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import {toast, ToastContainer} from 'react-toastify'
+import { Helmet } from "react-helmet-async";
 
 
 const AppliedTrainer = () => {
@@ -51,6 +52,9 @@ const AppliedTrainer = () => {
 
     return (
         <div className='w-full'>
+            <Helmet>
+                <title>Active Edge | Applied Trainers</title>
+            </Helmet>
             <ToastContainer/>
               <h1 className='text-2xl font-bold text-center border-b pb-3'>All the applications</h1>
               {

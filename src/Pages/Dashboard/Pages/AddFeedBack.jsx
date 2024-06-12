@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import { AuthContext } from '../../../Providers/AuthProvider';
 import { toast, ToastContainer } from 'react-toastify';
+import { Helmet } from 'react-helmet-async';
 
 const AddFeedBack = () => {
     const axiosSecure = useAxiosSecure()
@@ -27,6 +28,9 @@ const AddFeedBack = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>Active Edge | Add Feedback</title>
+            </Helmet>
           <ToastContainer/>
            <h1 className='text-xl text-center font-bold mt-5'>Your Review</h1>
            <form className="card-body w-11/12 max-w-[600px] mx-auto" onSubmit={postSubmit}>

@@ -1,6 +1,7 @@
 import React from 'react';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure'
 import {toast,ToastContainer} from 'react-toastify'
+import { Helmet } from 'react-helmet-async';
 
 const AddNewClass = () => {
   const axiosSecure = useAxiosSecure()
@@ -23,6 +24,9 @@ const AddNewClass = () => {
   }
     return (
         <div>
+            <Helmet>
+                <title>Active Edge | Add Class</title>
+            </Helmet>
           <ToastContainer/>
            <h1 className='text-xl text-center font-bold mt-5'>Add New Class</h1>
            <form className="card-body w-11/12 max-w-[400px] mx-auto" onSubmit={addNewClass}>

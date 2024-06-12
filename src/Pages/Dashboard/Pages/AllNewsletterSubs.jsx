@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
+import { Helmet } from 'react-helmet-async';
 
 const AllNewsletterSubs = () => {
   const axiosSecure = useAxiosSecure()
@@ -15,6 +16,9 @@ const AllNewsletterSubs = () => {
 
     return (
         <div className='w-full'>
+            <Helmet>
+                <title>Active Edge | All Newsletter Subscribers</title>
+            </Helmet>
             <h1 className='text-2xl font-bold text-center border-b pb-3'>All the new letter subscribers</h1>
             {
                 data?.length < 1? 

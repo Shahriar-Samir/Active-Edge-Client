@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import { useContext } from 'react';
 import { AuthContext } from '../../../Providers/AuthProvider';
+import { Helmet } from 'react-helmet-async';
 
 
 const Balance = () => {
@@ -49,6 +50,9 @@ const Balance = () => {
   
     return (
         <div>
+              <Helmet>
+                <title>Active Edge | Balance</title>
+            </Helmet>
             <h1 className='text-center mt-5 text-4xl font-bold'>Admin's Balance</h1>
                 <h1 className='text-2xl font-bold text-center mt-3'>Balance {totalBalance?.totalBalance}$</h1>
             <div className='mt-10'>

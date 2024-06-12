@@ -4,6 +4,7 @@ import useAxiosPublic from '../Hooks/useAxiosPublic';
 import Loading from '../Components/Loading';
 import { Link } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
+import { Helmet } from 'react-helmet-async';
 
 const AllClasses = () => {
     const axiosPublic = useAxiosPublic()
@@ -67,6 +68,9 @@ const AllClasses = () => {
 
     return (
         <div className='mx-auto w-11/12 max-w-[1200px]'>
+            <Helmet>
+                <title>Active Edge || All Classes</title>
+            </Helmet>
              <div className=''>
                            <ToastContainer/>
                 <p className='mt-5 text-3xl font-bold text-center'>All Classes</p>

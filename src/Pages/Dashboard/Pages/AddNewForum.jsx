@@ -2,6 +2,7 @@ import { useContext } from "react";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import {toast, ToastContainer} from 'react-toastify'
 import { AuthContext } from '../../../Providers/AuthProvider';
+import { Helmet } from "react-helmet-async";
 
 
 const AddNewForum = () => {
@@ -27,6 +28,9 @@ const AddNewForum = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>Active Edge | Add New Post</title>
+            </Helmet>
           <ToastContainer/>
            <h1 className='text-xl text-center font-bold mt-5'>Add New Forum</h1>
            <form className="card-body w-11/12 max-w-[600px] mx-auto" onSubmit={postSubmit}>

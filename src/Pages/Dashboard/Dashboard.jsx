@@ -3,6 +3,7 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 
 const Dashboard = () => {
@@ -25,7 +26,9 @@ const Dashboard = () => {
       }, [location, navigate, user]);
 
     return (
+      <HelmetProvider>
         <div className="w-full relative">
+   
             <div className="flex">
                 <div className="w-1/4">
                 <Navbar/>
@@ -36,6 +39,7 @@ const Dashboard = () => {
             </div>
             <Footer/>
         </div>
+        </HelmetProvider>
     );
 };
 

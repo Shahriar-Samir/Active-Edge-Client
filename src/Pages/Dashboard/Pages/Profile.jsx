@@ -3,6 +3,7 @@ import { AuthContext } from '../../../Providers/AuthProvider';
 import { toast, ToastContainer } from 'react-toastify';
 import Loading from '../../../Components/Loading';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
+import { Helmet } from 'react-helmet-async';
 
 const Profile = () => {
     const {user} = useContext(AuthContext)
@@ -27,6 +28,9 @@ const Profile = () => {
 
     return (
         <div className='w-4/5 pt-10 pe-10'>
+            <Helmet>
+                <title>Active Edge | Profile</title>
+            </Helmet>
           <ToastContainer className='z-30'/>
 <dialog id="my_modal_3" className="modal z-20">
   <div className="modal-box">
