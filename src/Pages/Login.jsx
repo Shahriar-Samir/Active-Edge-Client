@@ -109,24 +109,36 @@ const Login = () => {
     }
 
     return (
-        <div>
+        <div className=''>
             <Helmet>
                 <title>Active Edge | Login</title>
             </Helmet>
           <ToastContainer/>
-            <div className="hero min-h-screen bg-base-200">
-  <div className="hero-content flex-col lg:flex-row-reverse">
-    <div className="text-center lg:text-left">
-      <h1 className="text-5xl font-bold">Login now!</h1>
-      <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
+            <div className="hero min-h-screen">
+  <div className="hero-content flex-col lg:flex-row-reverse md:gap-20 mt-20 md:mt-0">
+    <div className="text-center lg:text-left md:w-1/2">
+      <h1 className="text-5xl font-bold">Welcome Back to ActiveEdge</h1>
+      <p className="py-6">Enter your credentials to unlock your personalized fitness dashboard, schedule training sessions, and stay on top of your fitness goals. We're excited to have you back!</p>
     </div>
-    <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-      <div className='flex justify-center items-center gap-4'>
-      <FcGoogle className='text-2xl' role='button' onClick={googleSignin}/>
-      <FaGithub className='text-2xl' role='button' onClick={githubSignin}/>
-        <GrFacebookOption className='text-2xl text-[#0866FF] bg-white' role='button' onClick={facebookSignin}/>
+    <div className="card shrink-0 md:w-1/2 max-w-sm shadow-2xl bg-base-100">
+    
+      <form className="card-body w-full"  onSubmit={submit}>
+        <h1 className='text-2xl text-center'>Login With</h1>
+        <div className=' mt-7 flex justify-center items-center gap-2 text-sm flex-wrap'>
+      <div onClick={googleSignin} role='button' className='flex justify-center bg-black text-white p-2 rounded-xl gap-2'>
+        <h1>Google</h1>
+        <FcGoogle className='text-2xl'  />
       </div>
-      <form className="card-body" onSubmit={submit}>
+      <div role='button' onClick={githubSignin}className='flex justify-center bg-black text-white p-2 rounded-xl gap-2'>
+        <h1>Github</h1>
+        <FaGithub className='text-2xl' />
+      </div>
+      <div role='button' onClick={facebookSignin} className='flex justify-center bg-black text-white p-2 rounded-xl gap-2'>
+        <h1>Facebook</h1>
+        <GrFacebookOption className='text-2xl text-[#0866FF] bg-white'/>
+      </div>
+      </div>
+      <div className="divider font-bold">Or</div>
         <div className="form-control">
           <label className="label">
             <span className="label-text">User Email</span>
@@ -140,7 +152,7 @@ const Login = () => {
           <input type="password" placeholder="password" name='password' className="input input-bordered" required />
         </div>
         <div className="form-control mt-6">
-          <button className="btn btn-primary">Login</button>
+          <button className="btn bg-bgCommon text-white  hover:bg-bgHover">Login</button>
         </div>
       </form>
     </div>

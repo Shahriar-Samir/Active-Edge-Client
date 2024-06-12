@@ -11,9 +11,9 @@ const Footer = () => {
         <nav className=''>
     <h6 className="text-lg font-bold">Navigation</h6> 
  <div className='flex gap-4 items-center'>
- <Link className="link link-hover">All Trainer</Link>
- <Link className="link link-hover">All Classes</Link>
- <Link className="link link-hover">Forum</Link>
+ <Link className="link link-hover" to='/allTrainers'>All Trainer</Link>
+ <Link className="link link-hover" to='/allClasses'>All Classes</Link>
+ <Link className="link link-hover" to='/forum'>Forum</Link>
  </div>
   </nav> 
         <nav>
