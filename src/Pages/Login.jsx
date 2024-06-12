@@ -64,32 +64,7 @@ const Login = () => {
             toast.error('Something went wrong')
         })
     }
-    const facebookSignin = ()=>{
-        facebookAuth()
-        .then(res=>{
-          const {uid,email,displayName,phoneNumber,photoURL} = res.user
-          const userData = {uid, email, displayName, photoURL, phoneNumber, role:'member'}
-          axiosPublic.get(`/userRole/${uid}`)
-          .then(res=>{
-              if(res.data){
-                setLoading(false)
-                toast.success('You have logged in successfully')
-              }
-              else{
-                axiosPublic.post('/addUser',userData)
-                .then(()=>{
-                  setLoading(false)
-                  toast.success('You have logged in successfully')
-                })
-              }
-          })
-        })
-        .catch(()=>{
-          setLoading(false)
-            toast.error('Something went wrong')
-        })
-    }
-
+ 
     const submit = (e)=>{
       e.preventDefault()
       const form = e.target
@@ -138,10 +113,7 @@ const Login = () => {
         <h1>Github</h1>
         <FaGithub className='text-2xl' />
       </div>
-      <div role='button' onClick={facebookSignin} className='flex justify-center bg-black text-white p-2 rounded-xl gap-2'>
-        <h1>Facebook</h1>
-        <GrFacebookOption className='text-2xl text-[#0866FF] bg-white'/>
-      </div>
+
       </div>
       <div className="divider font-bold">Or</div>
         <div className="form-control">
