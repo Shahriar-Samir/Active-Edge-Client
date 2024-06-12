@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext, useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { AuthContext } from '../Providers/AuthProvider';
 import useAxiosSecure from '../Hooks/useAxiosSecure';
 import {
@@ -23,10 +23,10 @@ const CheckOutForm = () => {
     const [transactionId, setTransactionId] = useState()
     const price = type === 'basic'? 20 : type==='standard'? 50 : type==='premium'? 100 : 0
 
-    const {data:slot,isLoading} = useQuery({
+    const {data:slot,isFetching} = useQuery({
         queryKey:["slot"],
         queryFn: ()=>
-            axiosSecure.get(`/trainerSlot/${slotId}`)
+            axiosSecure.get(`/availableTrainerSlot/${slotId}`)
             .then(res=>{
                 return res.data
             }),
@@ -95,7 +95,8 @@ const CheckOutForm = () => {
                 const memberName = user?.displayName
                 const memberUid = user?.uid
                 const memberEmail = user?.email
-                axiosSecure.post('/addPayment', {transactionId, trainerName, trainerEmail, trainerUid, packageName, price, memberName, memberEmail, memberUid})
+                const slotName = slot?.slotName
+                axiosSecure.post('/addPayment', {transactionId, trainerName, trainerEmail, trainerUid, packageName, price, memberName, memberEmail, memberUid, slotName,slotId})
                 .then(()=>{
                     toast.success('Payment Success')
                 })
@@ -106,11 +107,11 @@ const CheckOutForm = () => {
         }
     }
 
-    if(isLoading){
+    if(isFetching){
         return <Loading/>
     }
     
-
+ if(slot){
     return (
        <div className='w-11/12 max-w-[1200px] mx-auto h-[100vh]'>
             <ToastContainer/>
@@ -174,7 +175,12 @@ const CheckOutForm = () => {
     </div>}
       </div>
        </div>
-)
+)}
+
+return <div className='w-full h-[80vh] flex justify-center items-center flex-col'>
+<p>Unavailable Slot</p>
+<Link to='/'><button className='btn bg-bgCommon hover:bg-bgHover mt-5 text-white'>Go Home</button></Link>
+</div>
 }
 
 export default CheckOutForm;

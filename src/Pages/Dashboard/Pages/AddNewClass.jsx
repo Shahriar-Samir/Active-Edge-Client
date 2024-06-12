@@ -46,10 +46,10 @@ const AddNewClass = () => {
           <label className="label">
             <span className="label-text">Details</span>
           </label>
-          <textarea type="email" maxLength={200} placeholder="details" name='details' className="input input-bordered min-h-[30vh] max-h-[30vh]" required></textarea>
+          <textarea type="email" maxLength={200} placeholder="write details in 200 characters" name='details' className="input input-bordered min-h-[30vh] max-h-[30vh]" required></textarea>
         </div>
         <div className="form-control mt-6">
-          <button className="btn btn-primary">Add Class</button>
+          <button className="btn bg-bgCommon hover:bg-bgHover text-white">Add Class</button>
         </div>
       </form>
         </div>

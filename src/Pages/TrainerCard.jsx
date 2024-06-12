@@ -20,7 +20,7 @@ const Trainer = ({trainer})=>{
     const {photoURL,email,displayName,fullName,uid,xp,media} = trainer
     const axiosPublic = useAxiosPublic()
     useEffect(()=>{
-        axiosPublic.get(`/trainerSlots/${trainer?.uid}`)
+        axiosPublic.get(`/availableSlots/${trainer?.uid}`)
                 .then(res=>{
                     setSlots(res.data)
                 })

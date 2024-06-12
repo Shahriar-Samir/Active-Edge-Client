@@ -56,11 +56,12 @@ const Balance = () => {
             <h1 className='text-center mt-5 text-4xl font-bold'>Admin's Balance</h1>
                 <h1 className='text-2xl font-bold text-center mt-3'>Balance {totalBalance?.totalBalance}$</h1>
             <div className='mt-10'>
-                    <h1 className='text-center text-2xl '>Last six transactions</h1>
-                   <div className='flex items-center '>
-                   <div className='grid grid-cols-1 gap-5 mt-4 w-1/2'>
+                  <div className='flex items-center flex-col'>
+                   <div className=''>
+                  <h1 className='text-center text-2xl '>Last six transactions</h1>
+                   <div className='grid grid-cols-1 gap-5 mt-4 '>
                    {payments?.map(item=>{
-                        return <div key={item} className="card card-side bg-base-100 shadow-xl w-10/12 mx-auto gap-4">
+                        return <div key={item} className="w-full bg-base-100 shadow-xl mx-auto gap-4 p-4">
                         <div className="">
                           <h2 className="card-title">{item.slotName}</h2>
                           <p>Txd Id: {item.transactionId}</p>
@@ -68,6 +69,7 @@ const Balance = () => {
                       </div>
                     })}
                    </div>
+                  </div>
                     <div className='w-1/2'>
                     <PieChart
   series={[

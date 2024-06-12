@@ -12,19 +12,20 @@ const TrainerBooking = () => {
     const {data:slot,isFetching} = useQuery({
       queryKey:["slots"],
       queryFn: ()=>
-          axiosSecure.get(`/trainerSlot/${slotId}`)
+          axiosSecure.get(`/availableTrainerSlot/${slotId}`)
           .then(res=>{
               return res.data
           }),
       enabled: !!slotId
   })
-  console.log(slot)
+
 
     if(isFetching){
       return <Loading/>
     }
 
-    return (
+    if(slot){
+      return (
         <div className='w-11/12 max-w-[1200px] mx-auto'>
              <Helmet>
                 <title>Active Edge | Trainer Booking</title>
@@ -99,6 +100,11 @@ const TrainerBooking = () => {
             </div>
         </div>
     );
+    }
+    return <div className='w-full h-[80vh] flex justify-center items-center flex-col'>
+         <p>Unavailable Slot</p>
+         <Link to='/'><button className='btn bg-bgCommon hover:bg-bgHover mt-5 text-white'>Go Home</button></Link>
+    </div>
 };
 
 export default TrainerBooking;

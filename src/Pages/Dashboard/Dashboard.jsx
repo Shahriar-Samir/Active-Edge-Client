@@ -4,6 +4,7 @@ import Footer from "./Footer";
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { Helmet, HelmetProvider } from "react-helmet-async";
+import { ToastContainer } from "react-toastify";
 
 
 const Dashboard = () => {
@@ -28,7 +29,7 @@ const Dashboard = () => {
     return (
       <HelmetProvider>
         <div className="w-full relative">
-   
+            <ToastContainer/>
             <div className="flex flex-col lg:flex-row">
                 <div className="lg:w-1/4">
                 <Navbar/>

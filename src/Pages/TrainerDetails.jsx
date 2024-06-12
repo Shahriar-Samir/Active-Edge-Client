@@ -19,17 +19,17 @@ const TrainerDetails = () => {
             })
     })
 
-    const {data:slots} = useQuery({
+    const {data:slots,isFetching:slotsFetching} = useQuery({
       queryKey:["slots"],
       queryFn: ()=>
-          axiosPublic.get(`/trainerSlots/${id}`)
+          axiosPublic.get(`/availableSlots/${id}`)
           .then(res=>{
               return res.data
           }),
-      enabled: !!user
+  
   })
 
-  if(isFetching){
+  if(isFetching || slotsFetching){
     return <Loading/>
   }
 
@@ -79,13 +79,15 @@ const TrainerDetails = () => {
 {     slots?.length > 0?  <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-8 gap-5'>
      {
     slots?.map(item=>{
-          return <Link to={`/trainerBooking/${item._id}`} key={item._id} className="card bg-bgCommon hover:bg-bgHover">
-          <div className="card-body">
-            <h2 className="text-2xl font-bold">{item.slotName}</h2>
-            <p className='font-semibold'>Time: {item.slotTime} hours</p>
-            <p className='font-semibold'>Classes: {item.selectedClasses.length}</p>
-          </div>
-        </Link>
+
+        return <Link to={`/trainerBooking/${item._id}`} key={item._id} className="card bg-bgCommon hover:bg-bgHover">
+      <div className="card-body">
+        <h2 className="text-2xl font-bold">{item.slotName}</h2>
+        <p className='font-semibold'>Time: {item.slotTime} hours</p>
+        <p className='font-semibold'>Classes: {item.selectedClasses.length}</p>
+      </div>
+    </Link>
+
         })
     }
    </div> : <div className='mt-5'>

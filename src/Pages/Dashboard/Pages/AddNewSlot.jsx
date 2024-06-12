@@ -69,17 +69,18 @@ const AddNewSlot = () => {
     const slotName = form.slotName.value
     const slotTime = form.slotTime.value
     const {uid, email,displayName,photoURL} = user
+    const status = 'unselected'
 
     if(selectedDays.length < 1 || selectedClasses.length < 1){
     toast.error('Please fill up the form')
     }
     else{
-        axiosSecure.post('/addSlot',{date:presentTime.toLocaleString(),uid,displayName,email,selectedDays,slotName,slotTime,selectedClasses})
+        axiosSecure.post('/addSlot',{date:presentTime.toLocaleString(),uid,displayName,email,selectedDays,slotName,slotTime,selectedClasses,status})
         .then(res=>{
           axiosSecure.put('/updateClasses', {selectedClasses,uid,displayName,photoURL,slotName})
           .then(()=>{
             toast.success('Added Slot Successfully!')
-            navigate(`/profile/${uid}`)
+            navigate(`/dashboard/manageSlots`)
           })
         })
         .catch(()=>{

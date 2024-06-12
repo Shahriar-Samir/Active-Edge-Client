@@ -4,11 +4,12 @@ import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import { toast, ToastContainer } from 'react-toastify';
 import { Helmet } from 'react-helmet-async';
+import Loading from '../../../Components/Loading';
 
 const ManageSlots = () => {
     const {user} = useContext(AuthContext)
     const axiosSecure = useAxiosSecure()
-    const {data:slots} = useQuery({
+    const {data:slots, isFetching} = useQuery({
         queryKey:["slots"],
         queryFn: ()=>
             axiosSecure.get(`/trainerSlots/${user?.uid}`)
@@ -37,6 +38,9 @@ const ManageSlots = () => {
         })
     }
 
+    if(isFetching){
+      return <Loading/>
+    }
 
     return (
         <div>
@@ -45,18 +49,23 @@ const ManageSlots = () => {
             </Helmet>
             <ToastContainer/>
              {
-                okay === true? 
+                slots?.length < 1? 
                 <div className='text-center text-lg mt-4'>
-                    <h1>There are no trainers available</h1>
+                  <h1 className='text-center text-3xl font-bold'>Manage Slots</h1>
+                    <h1 className='text-center mt-5'>There are no slots available</h1>
                 </div> 
                 : 
                 <div className="overflow-x-auto">
-                <table className="table">
+                   <div className='text-center text-lg mt-4'>
+                  <h1 className='text-center text-3xl font-bold'>Manage Slots</h1>
+                </div> 
+                <table className="table mt-6">
                   {/* head */}
                   <thead>
                     <tr>
                       <th>Name</th>
                       <th>Skills and available days</th>
+                      <th>Booking Status</th>
                       <th></th>
                     </tr>
                   </thead>
@@ -97,17 +106,30 @@ const ManageSlots = () => {
                         </div>
                       </td>
                       <td>
-                        <div className='grid grid-cols-5 gap-2'>
+                        <div className='grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-2'>
                         {item?.selectedClasses?.map(skill=>{
                           return <button className='text-xs cursor-text py-[2px] px-[3px] rounded-lg bg-gray-100' key={skill}>{skill}</button>
                         })}
                         </div>
-                        <div className='grid grid-cols-7 gap-2 mt-3'>
+                        <div className='grid grid-cols-3 md:grid-cols-7 gap-2 mt-3'>
                         {item?.selectedDays?.map(day=>{
                           return <button className='text-xs cursor-text py-[2px] px-[3px] rounded-lg bg-gray-100 font-semibold' key={day}>{day}</button>
                         })}
                         </div>
                       </td>
+                        <td>
+                          <div>{
+                            item.status === 'unselected'? <p className='font-bold'>Unselected</p>
+                            : 
+                            <>
+                            <p>Status: <span className='text-green-500 font-bold'>{item.status}</span></p>
+                            <p>Booked By: <span className='font-bold'>{item.memberName}</span> </p>
+                          
+                            <p>Type: <span className='font-bold'>{item.type}</span>
+                            </p>                           
+                             </>  
+                          }</div>
+                        </td>
                       <td className=''>
                       <button className="btn p-2 text-xs bg-red-500 text-white" onClick={()=>document.getElementById('modal'+item._id).showModal()}>Remove</button>
                       </td>

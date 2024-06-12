@@ -72,12 +72,12 @@ const AllTrainers = () => {
                         </div>
                       </td>
                       <td>
-                        <div className='grid grid-cols-5 gap-2'>
+                        <div className='grid grid-cols-2 md:grid-cols-5 gap-2'>
                         {item?.skills?.map(skill=>{
                           return <button className='text-xs cursor-text py-[2px] px-[3px] rounded-lg bg-gray-100' key={skill}>{skill}</button>
                         })}
                         </div>
-                        <div className='grid grid-cols-7 gap-2 mt-3'>
+                        <div className='grid grid-cols-3 md:grid-cols-7 gap-2 mt-3'>
                         {item?.days?.map(day=>{
                           return <button className='text-xs cursor-text py-[2px] px-[3px] rounded-lg bg-gray-100 font-semibold' key={day}>{day}</button>
                         })}
