@@ -60,7 +60,7 @@ const AddFeedBack = () => {
         </div>
         
         <div className="form-control mt-6">
-          <button className="btn btn-primary">Submit</button>
+          <button className="btn bg-bgCommon hover:bg-bgHover text-white">Submit</button>
         </div>
       </form>
         </div>

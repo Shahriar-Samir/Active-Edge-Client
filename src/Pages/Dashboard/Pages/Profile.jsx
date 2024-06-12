@@ -27,11 +27,12 @@ const Profile = () => {
   if(user){
 
     return (
-        <div className='w-4/5 pt-10 pe-10'>
+        <div className='w-full mt-10'>
             <Helmet>
                 <title>Active Edge | Profile</title>
             </Helmet>
           <ToastContainer className='z-30'/>
+
 <dialog id="my_modal_3" className="modal z-20">
   <div className="modal-box">
     <form method="dialog">
@@ -57,15 +58,15 @@ const Profile = () => {
       </form>
   </div>
 </dialog>
-          <div className='w-full max-w-[600px]'>
-          <div className='flex justify-between items-center w-full'>
+          <div className='max-w-[600px] w-11/12 mx-auto border-2 p-5 border-bgCommon'>
+          <h1 className='text-3xl font-bold text-center'>Your Profile</h1>
+          <div className='flex justify-between flex-col mt-10 gap-5 items-center w-full'>
             <div className='flex gap-2'>
             <img src={photoURL} className='w-[150px] h-[150px] object-cover rounded-full'/>
             <div>
-            <h1 className='font-bold'>Member</h1>
             </div>
             </div>
-            <button className='btn' onClick={()=>document.getElementById('my_modal_3').showModal()}>Edit Profile</button>
+            <button className='btn bg-bgCommon text-white' onClick={()=>document.getElementById('my_modal_3').showModal()}>Edit Profile</button>
             </div>
             <div className="mt-6 w-full max-w-[600px] overflow-auto">
   <table className="table">
