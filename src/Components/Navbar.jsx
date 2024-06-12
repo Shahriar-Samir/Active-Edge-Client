@@ -25,7 +25,7 @@ const Navbar = () => {
       loading? 
       <span className="loading loading-spinner loading-md me-5"></span> 
       :
-      <div className="dropdown">
+      <div className="dropdown z-20">
       <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
       </div>
@@ -40,7 +40,7 @@ const Navbar = () => {
     </div>
     }
 
-    <Link to='/' className="text-xl md:text-4xl font-bold">Active Edge</Link>
+    <Link to='/' className=" flex flex-row-reverse md:flex-row items-center gap-2 md:gap-3"><span className='text-xl md:text-2xl  xl:text-4xl font-bold w-[150px] md:w-fit'>Active Edge</span> <img src='/Icons/logo2.png' className='w-[35px] h-[35px] object-cover lg:w-[40px] lg:h-[40px]'/></Link>
   </div>
   <div className="navbar-center hidden lg:flex">
     {loading? 
@@ -81,7 +81,7 @@ const Profile = ()=>{
     const {photoURL} = user
     return (
       <div className='flex items-center gap-5'>
-        <img src={photoURL} className='w-[50px] h-[50px] rounded-full object-cover'/>
+        <img src={photoURL} className='w-[35px] h-[35px] md:w-[50px] md:h-[50px] rounded-full object-cover'/>
         <button className='btn hidden md:inline' onClick={logOut}>Logout</button>
       </div>
     )

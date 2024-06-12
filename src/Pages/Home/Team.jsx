@@ -24,7 +24,7 @@ const Team = () => {
     return (
         <div className='mt-28 w-11/12 mx-auto max-w-[1200px]'>
             <Heading title={'Our Team'} details={'Meet Our Trainers'}/>
-            <div className='grid grid-cols-3 gap-5'>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
                     {data?.map((item,index)=>{
                       return <Trainer key={index} trainer={item}/>
                     })}
@@ -56,7 +56,7 @@ const Trainer = ({trainer})=>{
       <h1 className='font-bold text-lg mt-3'>Skills</h1>
     <div className='grid grid-cols-3 gap-3'>
       {skills.map(item=>{
-        return <p key={item} className='p-3 border text-sm'>{item}</p>
+        return <p key={item} className='md:p-3 md:border text-sm '>{item}</p>
       })}
     </div>
     </div>

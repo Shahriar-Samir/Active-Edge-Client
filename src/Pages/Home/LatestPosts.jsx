@@ -23,14 +23,14 @@ const LatestPosts = () => {
     return (
         <div className="w-11/12 mx-auto max-w-[1200px] mt-28">
             <Heading title={'Latest Posts'} details={'Six latest forum posts'}/>
-            <div className="grid grid-cols-2 gap-7 mt-10">
+            <div className="grid lg:grid-cols-2 gap-7 mt-10 w-11/12 mx-auto">
                 {posts?.map((item,index)=>{
                    return <div key={index} className="col-span-1">
       <div className="flex items-center gap-4">
                             <img src={item.photoURL} className="w-[60px] h-[60px] rounded-full object-cover"/>
                             <div className="w-full">
                             <h1 className="font-bold text-xl ">{item.title}</h1>
-                            <div className="flex gap-2 items-center justify-between w-full">
+                            <div className="flex gap-2 flex-col md:items-center md:justify-between w-full md:flex-row">
                             <h1 className="font-bold"><span className="text-sm font-medium">by</span> {item.displayName} ({item.role})</h1>
                             <h1>{item.date}</h1>
                             </div>

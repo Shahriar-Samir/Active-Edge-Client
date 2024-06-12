@@ -10,9 +10,14 @@ import Heading from '../../Components/Heading';
 import useAxiosPublic from '../../Hooks/useAxiosPublic';
 import { useQuery } from '@tanstack/react-query';
 import Loading from '../../Components/Loading';
+import  useMediaQuery  from '@mui/material/useMediaQuery';
 
 
 const Reviews = () => {
+
+  const min800 = useMediaQuery('(min-width:800px)');
+  const min600 = useMediaQuery('(min-width:600px)');
+  
   const axiosPublic = useAxiosPublic()
   const {data:reviews,isFetching} = useQuery({
     queryKey: ['reviews'],
@@ -23,6 +28,7 @@ const Reviews = () => {
             return  res.data
         })
 })
+
 
   if(isFetching){
     return <Loading/>
@@ -35,7 +41,7 @@ const Reviews = () => {
         effect={'coverflow'}
         grabCursor={true}
         centeredSlides={true}
-        slidesPerView={3}
+        slidesPerView={min800? 3 : min600? 2 : 1}
         coverflowEffect={{
           rotate: 50,
           stretch: 0,
@@ -46,7 +52,7 @@ const Reviews = () => {
         pagination={true}
         navigation={true}
         modules={[EffectCoverflow, Pagination, Navigation]}
-        className="mySwiper mt-12"
+        className="mySwiper mt-12 w-11/12 mx-auto"
       >
         {
           reviews?.map(review=>{

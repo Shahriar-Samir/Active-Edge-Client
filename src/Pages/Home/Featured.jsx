@@ -52,7 +52,7 @@ const Featured = () => {
         
         <div className='w-11/12 max-w-[1200px] mx-auto mt-28'>
           <Heading title={'Our Features'} details={'Here are the key features'}/>
-          <div className='grid grid-cols-4 gap-5 mt-12'>
+          <div className='grid grid-cols-1 max-w-[330px] md:max-w-[650px] lg:max-w-full mx-auto md:grid-cols-2 lg:grid-cols-4 gap-5 mt-12'>
             {features.map((item,index)=>{
                 return <Card key={index} item={item}/>
             })}
