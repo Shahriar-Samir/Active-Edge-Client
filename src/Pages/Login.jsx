@@ -6,11 +6,13 @@ import { GrFacebookOption } from "react-icons/gr";
 import { FaGithub } from "react-icons/fa";
 import useAxiosPublic from '../Hooks/useAxiosPublic';
 import { Helmet } from 'react-helmet-async';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const axiosPublic = useAxiosPublic()
     const {signin,setLoading,googleAuth,facebookAuth,githubAuth} = useContext(AuthContext)
+    const navigate = useNavigate()
+
 
     const googleSignin = ()=>{
         googleAuth()
@@ -101,9 +103,11 @@ const Login = () => {
           .catch(err=>{
             setLoading(false)
             if(err.message === 'Firebase: Error (auth/invalid-credential).'){
+              setLoading(false)
               toast.error('Invalid email or password')
             }
             else{
+              setLoading(false)
               toast.error('Something went wrong')
             }
           })

@@ -41,7 +41,9 @@ const AuthProvider = ({children}) => {
                             setLoading(false)
                             }
                         })
-                        .catch()
+                        .catch(()=>{
+                            setLoading(false)
+                        })
                     })}
                         
                     else{
@@ -53,25 +55,32 @@ const AuthProvider = ({children}) => {
     },[])
 
     const signup = (email,password)=>{
+        setLoading(true)
         return createUserWithEmailAndPassword(auth,email,password)
     }
     const signin = (email,password)=>{
+        setLoading(true)
         return signInWithEmailAndPassword(auth,email,password)
     }
     const updateUser = (data)=>{
+        setLoading(true)
         return updateProfile(auth.currentUser,data)
     }
     const signout = ()=>{
+        setLoading(true)
         setUser(null)
         return signOut(auth)
     }
     const googleAuth = ()=>{
+        setLoading(true)
         return signInWithPopup(auth,googleProvider)
     }
     const githubAuth = ()=>{
+        setLoading(true)
         return signInWithPopup(auth,githubProvider)
     }
     const facebookAuth = ()=>{
+        setLoading(true)
         return signInWithPopup(auth,facebookProvider)
     }
 

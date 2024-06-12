@@ -5,7 +5,7 @@ import useAuth from './useAuth';
 
 
 const axiosSecure = axios.create({
-    baseURL: 'http://localhost:5000'
+    baseURL: 'https://active-edge-backend.vercel.app'
 })
 const useAxiosSecure = () => {
     const navigate = useNavigate()

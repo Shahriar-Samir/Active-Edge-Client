@@ -55,7 +55,7 @@ const Navbar = () => {
     </ul>}
   </div>
   <div className="navbar-end">
-    {loading? <Lottie animationData={profileLoading} loop={true} className='h-[50px] h-[50px]'/>  : user? <Profile/> : <Link to='/login' className='btn'>Login</Link>}
+    {loading? <Lottie animationData={profileLoading} loop={true} className='h-[50px] w-[50px]'/>  : user? <Profile/> : <Link to='/login' className='btn'>Login</Link>}
   </div>
 </div>
        </div>
