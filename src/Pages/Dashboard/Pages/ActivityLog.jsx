@@ -35,22 +35,23 @@ const ActivityLog = () => {
         return <Loading/>
     }
   
-
+    console.log(applications)
 
     return (
         <div className='w-full'>
                    <Helmet>
                 <title>Active Edge | Activity Log</title>
             </Helmet>
-            {    applications?  
+            {    applications.length > 0 || application?  
                 <div className=''>
                     <h1 className='text-2xl text-center mt-5 font-bold'>Activity Log</h1>
-                    <div className='grid grid-cols-1 gap-3 mt-4'>
+                    <h1 className='text-center mt-3'>Your previous application status</h1>
+                    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-3 mt-4 md:w-11/12 mx-auto'>
 
                     {
-                       application? <div key={application._id} className=" bg-base-100 shadow-xl ps-4 w-10/12 mx-auto flex items-center justify-between p-3">
+                       application? <div key={application._id} className=" bg-base-100 shadow-xl ps-4 w-11/12 max-w-[300px] md:w-full md:max-w-[700px] mx-auto flex flex-col lg:flex-row items-center justify-between p-3 rounded-lg border-2 border-warning">
                        <div className='flex items-center gap-4'>
-                       <img src={application.image} className='w-[80px] h-[80px] object-cover'/>
+                       <img src={application.image} className='w-[80px] h-[80px] object-cover rounded-full'/>
                        <div>
                        <h1 className=''><span className='font-bold'>Full Name</span>: {application.fullName}</h1>
                        <h1 className='text-sm mt-2'><span className='font-bold'>ApplicationID:</span> {application._id}</h1>
@@ -74,9 +75,9 @@ const ActivityLog = () => {
 
                     {
                         applications.map(item=>{
-                            return <div key={item._id} className=" bg-base-100 shadow-xl ps-4 w-10/12 mx-auto flex items-center justify-between p-3">
+                            return <div key={item._id} className=" bg-base-100 shadow-xl ps-4 w-11/12 max-w-[300px] md:w-full md:max-w-[700px] flex flex-col lg:flex-row mx-auto items-center justify-between p-3 rounded-lg border-2 border-red-600">
                             <div className='flex items-center gap-4'>
-                            <img src={item.image} className='w-[80px] h-[80px]'/>
+                            <img src={item.image} className='w-[80px] h-[80px] rounded-full'/>
                             <div>
                             <h1 className=''><span className='font-bold'>Full Name</span>: {item.fullName}</h1>
                             <h1 className='text-sm mt-2'><span className='font-bold'>ApplicationID:</span> {item._id}</h1>
@@ -114,6 +115,7 @@ const ActivityLog = () => {
                 </div>
                     :
                     <div>
+                               <h1 className='text-2xl text-center mt-5 font-bold'>Activity Log</h1>
                         <h1 className='text-center mt-5'>There are no applications you have applied</h1>
                     </div>
                 }
