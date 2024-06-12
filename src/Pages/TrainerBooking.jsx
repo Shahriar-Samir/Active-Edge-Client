@@ -43,7 +43,7 @@ const TrainerBooking = () => {
             </div>
             </div>
 
-            <div className='grid grid-cols-3 gap-5 mt-20'>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-20'>
             <div className="bg-base-200 shadow-xl p-5 h-[500px] border-2 border-green-500 ">
     <div className="flex flex-col justify-between h-full">
       <div>
