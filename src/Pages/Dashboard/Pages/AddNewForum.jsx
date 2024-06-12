@@ -32,7 +32,7 @@ const AddNewForum = () => {
                 <title>Active Edge | Add New Post</title>
             </Helmet>
           <ToastContainer/>
-           <h1 className='text-xl text-center font-bold mt-5'>Add New Forum</h1>
+           <h1 className='text-xl text-center font-bold mt-5'>Add New Forum Post</h1>
            <form className="card-body w-11/12 max-w-[600px] mx-auto" onSubmit={postSubmit}>
         <div className="form-control">
           <label className="label">
@@ -47,7 +47,7 @@ const AddNewForum = () => {
           <textarea placeholder="write something" name="texts" className="input input-bordered min-h-[30vh] h-[35vh] max-h-[40vh] p-4" required ></textarea>
         </div>
         <div className="form-control mt-6">
-          <button className="btn btn-primary">Post</button>
+          <button className="btn bg-bgCommon text-white font-semibold hover:bg-bgHover">Submit Post</button>
         </div>
       </form>
         </div>
