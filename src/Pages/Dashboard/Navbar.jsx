@@ -20,10 +20,10 @@ const Navbar = () => {
   }
 
     return (
-      <div className='w-1/4 h-[100vh]  bg-gray-200 fixed'>
+      <div className='w-1/4 h-[100vh]  bg-bgCommon text-white fixed'>
         <div className='p-5'>
-        <ul className="menu flex flex-col gap-5"> 
-          <li><NavLink to='/'>Home</NavLink></li>
+        <ul className="pt-5 flex flex-col gap-5"> 
+          <NavLink to='/'  className={({isActive})=> isActive? 'bg-white text-black rounded-md w-full text-center py-2' : 'rounded-md w-full text-center p-2'}>Home</NavLink>
         {navLinks()}
     </ul>
       </div>
@@ -37,31 +37,31 @@ export default Navbar;
 const Admin = ()=>{
     return(
       <>
-       <li><NavLink to='/dashboard/newsletterSubscribers'>All Newsletter Subscribers</NavLink></li>
-      <li><NavLink to='/dashboard/allTrainers'>All Trainers</NavLink></li>
-      <li><NavLink to='/dashboard/appliedTrainers'>Applied Trainer</NavLink></li>
-      <li><NavLink to='/dashboard/balance'>Balance</NavLink></li>
-      <li><NavLink to='/dashboard/addNewClass'>Add new Class</NavLink></li>
-      <li><NavLink to='/dashboard/addNewForum'>Add new Forum</NavLink></li>
+       <NavLink to='/dashboard/newsletterSubscribers' className={({isActive})=> isActive? 'bg-white text-black rounded-md w-full text-center py-2' : 'rounded-md w-full text-center p-2'}>All Newsletter Subscribers</NavLink>
+      <NavLink to='/dashboard/allTrainers' className={({isActive})=> isActive? 'bg-white text-black rounded-md w-full text-center py-2' : 'rounded-md w-full text-center p-2'}>All Trainers</NavLink>
+      <NavLink to='/dashboard/appliedTrainers' className={({isActive})=> isActive? 'bg-white text-black rounded-md w-full text-center py-2' : 'rounded-md w-full text-center p-2'}>Applied Trainer</NavLink>
+      <NavLink to='/dashboard/balance' className={({isActive})=> isActive? 'bg-white text-black rounded-md w-full text-center py-2' : 'rounded-md w-full text-center p-2'}>Balance</NavLink>
+      <NavLink to='/dashboard/addNewClass' className={({isActive})=> isActive? 'bg-white text-black rounded-md w-full text-center py-2' : 'rounded-md w-full text-center p-2'}>Add new Class</NavLink>
+      <NavLink to='/dashboard/addNewForum' className={({isActive})=> isActive? 'bg-white text-black rounded-md w-full text-center py-2' : 'rounded-md w-full text-center p-2'}>Add new Forum</NavLink>
       </>
     )
 }
 const Trainer = ()=>{
     return(
       <>
-       <li><NavLink to='/dashboard/manageSlots'>Manage Slots</NavLink></li>
-      <li><NavLink to='/dashboard/addNewSlot'>Add New Slot</NavLink></li>
-      <li><NavLink to='/dashboard/addNewForum'>Add new Forum</NavLink></li>
+       <NavLink to='/dashboard/manageSlots' className={({isActive})=> isActive? 'bg-white text-black rounded-md w-full text-center py-2' : 'rounded-md w-full text-center p-2'}>Manage Slots</NavLink>
+      <NavLink to='/dashboard/addNewSlot' className={({isActive})=> isActive? 'bg-white text-black rounded-md w-full text-center py-2' : 'rounded-md w-full text-center p-2'}>Add New Slot</NavLink>
+      <NavLink to='/dashboard/addNewForum' className={({isActive})=> isActive? 'bg-white text-black rounded-md w-full text-center py-2' : 'rounded-md w-full text-center p-2'}>Add new Forum</NavLink>
       </>
     )
 }
 const Member = ()=>{
     return(
       <>
-       <li><NavLink to='/dashboard/profile'>Profile</NavLink></li>
-      <li><NavLink to='/dashboard/activityLog'>Activity Log</NavLink></li>
-      <li><NavLink to='/dashboard/recommendedClasses'>Recommended Classes</NavLink></li>
-      <li><NavLink to='/dashboard/addfeedback'>Add Feedback</NavLink></li>
+<NavLink to='/dashboard/profile'  className={({isActive})=> isActive? 'bg-white text-black rounded-md w-full text-center py-2' : 'rounded-md w-full text-center p-2'}>Profile</NavLink>
+<NavLink to='/dashboard/activityLog'  className={({isActive})=> isActive? 'bg-white text-black rounded-md w-full text-center py-2' : 'rounded-md w-full text-center p-2'}>Activity Log</NavLink>
+<NavLink to='/dashboard/recommendedClasses' className={({isActive})=> isActive? 'bg-white text-black rounded-md w-full text-center py-2' : 'rounded-md w-full text-center p-2'}>Recommended Classes</NavLink>
+  <NavLink to='/dashboard/addfeedback' className={({isActive})=> isActive? 'bg-white text-black rounded-md w-full text-center py-2' : 'rounded-md w-full text-center p-2'}>Add Feedback</NavLink>
       </>
     )
 }
