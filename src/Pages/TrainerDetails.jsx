@@ -40,23 +40,23 @@ const TrainerDetails = () => {
                 <title>Active Edge | Trainer Details</title>
             </Helmet>
             <div className='mt-10'>
-  <div className="flex justify-between gap-10">
-    <img src={trainerData?.photoURL} className="w-2/5 object-cover h-[500px]" />
+  <div className="flex flex-col md:flex-row justify-between gap-10">
+    <img src={trainerData?.photoURL} className="w-1/2 md:w-2/5 mx-auto md:mx-0 object-cover md:h-[500px]" />
     <div className='3/5 flex flex-col gap-3'>
-      <h1 className="text-5xl font-bold ">{trainerData.fullName}</h1>
-      <p className="text-xl"><span className='font-bold'>Biography:</span> {trainerData?.bio}</p>
+      <h1 className="text-4xl text-center md:text-start md:text-5xl font-bold ">{trainerData.fullName}</h1>
+      <p className="text-xl mt-4 md:mt-0"><span className='font-bold'>Biography:</span> {trainerData?.bio}</p>
       <p className="text-xl"><span className='font-bold'>Age:</span> {trainerData?.age} years</p>
       <p className="text-xl"><span className='font-bold'>Experience:</span> {trainerData?.xp} years</p>
       <p className="text-xl"><span className='font-bold'>Time:</span> {trainerData.time}</p>
       <div className='flex gap-2 flex-col'>
       <p className='text-xl font-bold'>Skills:</p>
-      <div className='grid grid-cols-5 gap-4 text-sm '>
+      <div className='grid grid-cols-3 md:grid-cols-5 gap-4 text-sm '>
         {trainerData?.skills.map(item=>{
           return <button key={item} className='bg-[#f4d941] rounded-lg py-2 cursor-auto font-bold'>{item}</button>
         })}
     </div>
       <p className='text-xl font-bold mt-2'>Available Days:</p>
-      <div className='grid grid-cols-7 gap-4 text-sm '>
+      <div className='grid grid-cols-3 md:grid-cols-7 gap-4 text-sm '>
         {trainerData?.days.map(item=>{
           return <button key={item} className='bg-green-700 text-white rounded-lg py-2 cursor-auto font-bold'>{item}</button>
         })}
@@ -76,7 +76,7 @@ const TrainerDetails = () => {
   <div className='mt-4'>
     <h1 className='text-center text-3xl font-bold'>Available slots</h1>
 
-{     slots?.length > 0?  <div className='grid grid-cols-3 mt-8 gap-5'>
+{     slots?.length > 0?  <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-8 gap-5'>
      {
     slots?.map(item=>{
           return <Link to={`/trainerBooking/${item._id}`} key={item._id} className="card bg-bgCommon hover:bg-bgHover">
