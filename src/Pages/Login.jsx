@@ -6,6 +6,7 @@ import { GrFacebookOption } from "react-icons/gr";
 import { FaGithub } from "react-icons/fa";
 import useAxiosPublic from '../Hooks/useAxiosPublic';
 import { Helmet } from 'react-helmet-async';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
     const axiosPublic = useAxiosPublic()
@@ -151,7 +152,8 @@ const Login = () => {
           </label>
           <input type="password" placeholder="password" name='password' className="input input-bordered" required />
         </div>
-        <div className="form-control mt-6">
+        <p className='text-sm mt-2'>Don't have a account ? <Link to='/signup' className='font-semibold hover:underline'>Create an account</Link></p>
+        <div className="form-control mt-2">
           <button className="btn bg-bgCommon text-white  hover:bg-bgHover">Login</button>
         </div>
       </form>
