@@ -63,17 +63,20 @@ const AppliedTrainer = () => {
 
                 </div>
                 :
-                <div className='grid grid-cols-2 gap-5 px-10 mt-5'>
+                <div className='grid lg:grid-cols-2 gap-5 px-10 mt-5'>
                         {data?.map((item,index)=>{
                             if(item.status === 'pending'){
-                              return <div id={item._id} key={item._id} className="flex justify-between items-center bg-base-100 shadow-xl gap-5 p-4">
+                              return <div id={item._id} key={item._id} className="flex justify-between items-center flex-col  bg-base-100 shadow-xl gap-5 p-4 border-2 rounded-lg border-bgCommon w-full max-w-[450px]">
                                 <img src={item.image} className='w-[50px] h-[50px]'/>
                               <div>
                               <p><span className="font-bold">Full name:</span> {item.fullName}</p>
                               <p><span className="font-bold">Email:</span> {item.email}</p>
                               </div>
-                              <div className="card-actions justify-end">
+                              <div className="card-actions justify-center ">
+                                <div className="flex gap-4 items-center">
+                                  <h1 className="text-lg font-bold">See Details</h1>
                                 <button className="btn" onClick={()=>document.getElementById("modal_"+item._id).showModal()}><FaEye/></button>
+                                </div>
                                 <dialog id={'reject_'+item.id} className="modal">
   <div className="modal-box">
     <form method="dialog">

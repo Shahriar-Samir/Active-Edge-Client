@@ -61,16 +61,19 @@ const Balance = () => {
                   <h1 className='text-center text-2xl '>Last six transactions</h1>
                    <div className='grid grid-cols-1 gap-5 mt-4 '>
                    {payments?.map(item=>{
-                        return <div key={item} className="w-full bg-base-100 shadow-xl mx-auto gap-4 p-4">
+                        return <div key={item} className="border border-black rounded-xl w-full bg-base-100 shadow-xl mx-auto gap-4 p-4">
                         <div className="">
-                          <h2 className="card-title">{item.slotName}</h2>
+                          <h2 className="">Slot Name: {item.slotName}</h2>
+                          <h2 className="">Trainer Name: {item.trainerName}</h2>
+                          <h2 className="">Booked By: {item.memberName}</h2>
                           <p>Txd Id: {item.transactionId}</p>
                         </div>
                       </div>
                     })}
                    </div>
                   </div>
-                    <div className='w-1/2'>
+                    <div className='w-full mt-20 flex justify-center items-center flex-col'>
+                    <h1 className='text-lg font-bold text-center'>Graph of total subscribers and total paid members</h1>
                     <PieChart
   series={[
     {
@@ -79,11 +82,11 @@ const Balance = () => {
         { id: 1, value: paidMembers?.length, label: 'Paid members' },
       ],
       innerRadius: 30,
-      outerRadius: 90,
+      outerRadius: 60,
       paddingAngle: 2,
     },
   ]}
-  width={450}
+  width={350}
   height={200}
 />
                     </div>
