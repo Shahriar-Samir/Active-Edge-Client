@@ -29,11 +29,11 @@ const Dashboard = () => {
       <HelmetProvider>
         <div className="w-full relative">
    
-            <div className="flex">
-                <div className="w-1/4">
+            <div className="flex flex-col lg:flex-row">
+                <div className="lg:w-1/4">
                 <Navbar/>
                 </div>
-                <div className="w-3/4">
+                <div className="lg:w-3/4">
                 <Outlet/>
                 </div>
             </div>

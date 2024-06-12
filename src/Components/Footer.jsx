@@ -6,9 +6,9 @@ const Footer = () => {
          <div className='w-11/12 max-w-[1200px] mx-auto'>
           <footer className="footer px-10 py-4 border-t text-base-content border-base-300">
   <aside className="items-center grid-flow-col">
-      <img src='/Icons/logo.png' className='w-[70px] h-[70px] object-cover'/>
+      <img src='/Icons/logo.png' className='h-[50px] w-[50px] md:w-[70px] md:h-[70px] object-cover'/>
     <div>
-    <p className='text-4xl font-bold'>Active Edge</p> 
+    <p className='text-xl md:text-4xl font-bold'>Active Edge</p> 
     <p>Stay Fit With Us</p>
     </div>
   </aside> 
