@@ -33,11 +33,13 @@ const Dashboard = () => {
                 <div className="lg:w-1/4">
                 <Navbar/>
                 </div>
-                <div className="lg:w-3/4">
+                <div className="lg:w-3/4 h-[100vh]">
+                <div className="h-full flex flex-col justify-between">
                 <Outlet/>
+                <Footer/>
+                </div>
                 </div>
             </div>
-            <Footer/>
         </div>
         </HelmetProvider>
     );
