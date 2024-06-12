@@ -114,7 +114,7 @@ const CheckOutForm = () => {
     return (
        <div className='w-11/12 max-w-[1200px] mx-auto h-[100vh]'>
             <ToastContainer/>
-         <div className='flex justify-center items-center h-full'>
+         <div className='flex flex-col justify-center items-center h-full'>
          
          <form onSubmit={handlePayment} className='w-11/12 max-w-[500px] bg-gray-100 p-10 mx-auto'>
          <h1 className='text-4xl font-bold text-center'>Payment</h1>
@@ -167,8 +167,11 @@ const CheckOutForm = () => {
       Pay Now
     </button>
   </form>
-  <p className='text-error'>{cardError}</p>
-  {transactionId && <p className='text-success'>{transactionId}</p>}
+ {cardError &&<p className='text-error mt-3'>{cardError}</p>}
+  {transactionId && <div className='flex items-center flex-col mt-4'>
+    <span className='font-bold'>Transaction Id</span>
+    <p className='text-success text-center overflow-auto'>{transactionId}</p>
+    </div>}
       </div>
        </div>
 )
