@@ -9,9 +9,12 @@ import { IoLogoWhatsapp } from "react-icons/io";
 import { FaLinkedin } from "react-icons/fa";
 import { FaInstagramSquare } from "react-icons/fa";
 import { useContext, useEffect, useState } from 'react';
+import { useMediaQuery } from '@mui/material';
 
 
 const Trainer = ({trainer})=>{
+  const min4 = useMediaQuery('(min-width:400px)');
+  const min6 = useMediaQuery('(min-width:600px)');
     const {user} = useContext(AuthContext)
     const [slots,setSlots] = useState([])
     const {photoURL,email,displayName,fullName,uid,xp,media} = trainer
@@ -24,7 +27,7 @@ const Trainer = ({trainer})=>{
     },[])
 
     return(
-        <div className="card bg-base-100 shadow-xl">
+        <div className={`card bg-base-100 w-${min4 && min6? 'full' :  min4 && !min6? '2/3' : 'full' } mx-auto md:w-full shadow-xl`}>
   <figure><img src={photoURL}  className='w-full h-[200px] object-cover'/></figure>
   <div className="p-4">
     <div className=''>

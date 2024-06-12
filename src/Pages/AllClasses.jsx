@@ -14,6 +14,7 @@ const AllClasses = () => {
     const [searchValue,setSearchValue] = useState('')
 
     const {data,isFetching} = useQuery({
+        
         queryKey:[currentPage,searchValue],
         initialData: [],
         queryFn: ()=>
