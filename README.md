@@ -1,4 +1,4 @@
-Active Edge is a full stack web project based on fitness related services where any can get fitness training from expert trainers.
+Active Edge is a full stack web project based on fitness-related services where any can get fitness training from expert trainers.
 
 # Key Features
 - Visitors can access public routes such as homepage, all classes page, trainers page, forum page, specific post page, login and signup page of the website.
@@ -23,3 +23,10 @@ Active Edge is a full stack web project based on fitness related services where 
 - Express JS
 - MongoDB
 - JSON Web Token
+
+# If you want to test it on your local machine
+- Then clone the git repo and where you want to clone the project open the terminal in that directory.
+- Give the command "git clone 'your repo clone link"'.
+- Go to the project directory and open the terminal.
+- In your terminal write 'npm i' for installing dependencies.
+- At last give the command 'npm run dev' and go to the link 'http://localhost:5173', then you should see this web project running on your local machine.
