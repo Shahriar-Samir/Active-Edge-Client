@@ -1,4 +1,4 @@
-Active Edge is a full stack web project based on fitness-related services where any can get fitness training from expert trainers.
+Active Edge is a full stack web project based on fitness-related services where any can get fitness training from expert trainers. When I was working with the project I faced forum post upvote and downvote related issues and user role related problem which I have solved by finding out codes from coding websites.
 
 # Key Features
 - Visitors can access public routes such as homepage, all classes page, trainers page, forum page, specific post page, login and signup page of the website. Anyone can subscribe newsletter.
