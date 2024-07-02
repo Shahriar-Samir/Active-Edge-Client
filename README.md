@@ -1,11 +1,8 @@
 Active Edge is a full stack web project based on fitness-related services where any can get fitness training from expert trainers.
 
 # Key Features
-- Visitors can access public routes such as homepage, all classes page, trainers page, forum page, specific post page, login and signup page of the website.
-- There are three types of signed in user roles on this website. These roles are admin, trainer, and member. Each has its own dashboard features and access routes.
-- An admin user can add or remove a trainer, approve or reject trainer applications from members, create a forum post, add a new class, see all the newsletter subscribers, and see the balance with the last six transactions and a Pie chart which compares between newsletter subscribers and paid members.
-- A Trainer user can add and remove service booking slots, and create new forum posts.
-- A member user can update his profile, apply to become a trainer, see previous trainer applications, book trainers, and give feedback.
+- Visitors can access public routes such as homepage, all classes page, trainers page, forum page, specific post page, login and signup page of the website. Anyone can subscribe newsletter.
+- There are three types of signed-in user roles on this website. These roles are admin, trainer, and member. Each has its own dashboard features and access routes. For example, Admin can accept, reject, remove a trainer see balance, etc. Trainer can add slots etc. A member can update their profile apply for trainer etc.
 - Server side and private routes have been secured with JWT Token.
 
 # Technologies used in this project 
@@ -15,17 +12,13 @@ Active Edge is a full stack web project based on fitness-related services where 
 - React JS
 - Tailwind CSS
 - Firebase Authentication
-- DaisyUI
-- React Router DOM
-- Swiper Js
-- MUI X Charts
-- Node JS
 - Express JS
 - MongoDB
 - JSON Web Token
 
 # If you want to test it on your local machine
-- Then clone the git repo and where you want to clone the project open the terminal in that directory.
+- At first, you have to clone the client repo, and open the terminal in the directory where you want to clone the project.
+- Then you have to clone the server-side repo of this and just like before clone it in that directory where the client repo has been cloned.
 - Give the command "git clone 'your repo clone link"'.
 - Go to the project directory and open the terminal.
 - In your terminal write 'npm i' for installing dependencies.
