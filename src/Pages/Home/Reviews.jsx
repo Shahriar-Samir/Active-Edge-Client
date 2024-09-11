@@ -70,7 +70,7 @@ export default Reviews;
 const Slide = ({item}) => {
 
     return (
-        <div className='p-4 bg-[skyblue] text-white h-[340px]'>
+        <div className='p-4 bg-transparent text-black border-2 border-[#15D7F7] h-[340px]'>
             <div>
            <div className='flex justify-center'>
            <img src={item?.photoURL}  className='w-[60px] h-[60px] rounded-full'/>

@@ -64,7 +64,7 @@ const TrainerBooking = () => {
             <div className="bg-base-200 shadow-xl border-2 border-yellow-500 p-5 h-[500px] ">
     <div className="flex flex-col justify-between h-full">
 <div>
-<h2 className="text-4xl font-bold text-yellow-500 text-center">Basic</h2>
+<h2 className="text-4xl font-bold text-yellow-500 text-center">Standard</h2>
 <h2 className="text-5xl font-bold text-black text-center mt-10">50$</h2>
 </div>
       <ul className='list-disc px-5'>
